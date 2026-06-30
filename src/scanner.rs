@@ -297,9 +297,12 @@ impl Scanner {
                                 if let Some(caps) = self.tag_regex.captures(k_line) {
                                     let full_match = &caps["full"];
                                     let k_trimmed = k_line.trim();
-                                    let k_is_def = (k_trimmed.starts_with("<!--") && k_trimmed.contains(full_match))
-                                        || (k_trimmed.starts_with("//") && k_trimmed.contains(full_match))
-                                        || (k_trimmed.starts_with("/*") && k_trimmed.contains(full_match));
+                                    let k_is_def = (k_trimmed.starts_with("<!--")
+                                        && k_trimmed.contains(full_match))
+                                        || (k_trimmed.starts_with("//")
+                                            && k_trimmed.contains(full_match))
+                                        || (k_trimmed.starts_with("/*")
+                                            && k_trimmed.contains(full_match));
                                     if k_is_def {
                                         break;
                                     }
