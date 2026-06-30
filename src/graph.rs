@@ -1,5 +1,5 @@
 use crate::config::Config;
-use crate::scanner::RawItem;
+use crate::scanner::{LineRange, RawItem};
 use std::collections::HashMap;
 
 // @ARC1.1@ (FROM: @REQ1.1@)
@@ -10,7 +10,7 @@ pub struct TraceItem {
     pub requirement_type: Option<String>,
     pub title: String,
     pub file_path: std::path::PathBuf,
-    pub line_number: usize,
+    pub line_range: LineRange,
     pub derived_from: Vec<String>,
 }
 
@@ -64,7 +64,7 @@ impl Graph {
                     requirement_type,
                     title: raw.title,
                     file_path: raw.file_path,
-                    line_number: raw.line_number,
+                    line_range: raw.line_range,
                     derived_from: raw.derived_from,
                 },
             );
@@ -115,14 +115,14 @@ mod tests {
             RawItem {
                 id: "ARCH-1".into(),
                 file_path: PathBuf::from("arch.md"),
-                line_number: 1,
+                line_range: LineRange { start: 1, end: 1 },
                 title: "Arch 1".into(),
                 derived_from: vec!["REQ-1".into()], // Broken link
             },
             RawItem {
                 id: "ARCH-2".into(),
                 file_path: PathBuf::from("arch.md"),
-                line_number: 10,
+                line_range: LineRange { start: 10, end: 10 },
                 title: "Arch 2".into(),
                 derived_from: vec![], // Orphan
             },
