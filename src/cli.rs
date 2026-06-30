@@ -1,9 +1,9 @@
-use clap::{Parser, Subcommand};
 use crate::config::Config;
-use crate::scanner::Scanner;
-use crate::graph::Graph;
 use crate::db::Serializer;
+use crate::graph::Graph;
+use crate::scanner::Scanner;
 use anyhow::Result;
+use clap::{Parser, Subcommand};
 
 // @ARC4.1@ (FROM: @REQ5.1@)
 #[derive(Parser)]

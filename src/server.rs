@@ -1,15 +1,15 @@
+use crate::config::Config;
+use crate::graph::Graph;
+use crate::scanner::Scanner;
+use anyhow::Result;
 use axum::{
+    Router,
     extract::State,
     response::sse::{Event, Sse},
     routing::get,
-    Router,
 };
-use crate::graph::Graph;
-use crate::scanner::Scanner;
-use crate::config::Config;
-use std::sync::{Arc, RwLock};
-use anyhow::Result;
 use std::convert::Infallible;
+use std::sync::{Arc, RwLock};
 
 pub struct AppState {
     pub graph: RwLock<Graph>,
@@ -41,6 +41,8 @@ async fn mcp_handler(
     State(_state): State<Arc<AppState>>,
 ) -> Sse<impl tokio_stream::Stream<Item = Result<Event, Infallible>>> {
     // Basic SSE implementation for MCP
-    let stream = tokio_stream::iter(std::iter::once(Ok(Event::default().data("Welcome to reqtrace MCP"))));
+    let stream = tokio_stream::iter(std::iter::once(Ok(
+        Event::default().data("Welcome to reqtrace MCP")
+    )));
     Sse::new(stream)
 }

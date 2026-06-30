@@ -64,7 +64,11 @@ impl Scanner {
 
                 // Simplified title extraction: next line
                 let title = if i + 1 < lines.len() {
-                    lines[i + 1].trim().trim_start_matches('#').trim().to_string()
+                    lines[i + 1]
+                        .trim()
+                        .trim_start_matches('#')
+                        .trim()
+                        .to_string()
                 } else {
                     "".to_string()
                 };
@@ -103,13 +107,11 @@ mod tests {
                 ignore: None,
                 db: PathBuf::from("db.json"),
             },
-            types: vec![
-                TypeMapping {
-                    prefix: "REQ".into(),
-                    item_type: "Requirement".into(),
-                    requirement_type: Some("Functional".into()),
-                },
-            ],
+            types: vec![TypeMapping {
+                prefix: "REQ".into(),
+                item_type: "Requirement".into(),
+                requirement_type: Some("Functional".into()),
+            }],
         }
     }
 
