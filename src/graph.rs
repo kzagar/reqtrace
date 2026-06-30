@@ -27,6 +27,12 @@ pub enum ValidationIssue {
     DuplicateId(String),
 }
 
+impl Default for Graph {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Graph {
     pub fn new() -> Self {
         Self {
@@ -77,7 +83,10 @@ impl Graph {
             for target_id in &item.derived_from {
                 child_ids.insert(item.id.clone());
                 if !self.items.contains_key(target_id) {
-                    issues.push(ValidationIssue::BrokenLink(item.id.clone(), target_id.clone()));
+                    issues.push(ValidationIssue::BrokenLink(
+                        item.id.clone(),
+                        target_id.clone(),
+                    ));
                 }
             }
         }
@@ -141,7 +150,10 @@ mod tests {
 
         let (_, issues) = Graph::build(raw_items, &config);
 
-        assert!(issues.contains(&ValidationIssue::BrokenLink("ARCH-1".into(), "REQ-1".into())));
+        assert!(issues.contains(&ValidationIssue::BrokenLink(
+            "ARCH-1".into(),
+            "REQ-1".into()
+        )));
         assert!(issues.contains(&ValidationIssue::Orphan("ARCH-2".into())));
     }
 }

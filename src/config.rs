@@ -1,6 +1,6 @@
+use anyhow::Result;
 use serde::Deserialize;
 use std::path::PathBuf;
-use anyhow::Result;
 
 // @ARC1.3@ (FROM: @REQ5.2@)
 #[derive(Debug, Deserialize, Clone)]
