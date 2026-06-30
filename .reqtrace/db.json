@@ -1,0 +1,453 @@
+{
+  "items": {
+    "REQ1": {
+      "id": "REQ1",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "",
+      "file_path": "docs/requirements.md",
+      "line_number": 17,
+      "derived_from": []
+    },
+    "ARC4.5": {
+      "id": "ARC4.5",
+      "item_type": "Unknown",
+      "requirement_type": null,
+      "title": "LSP Client Integration",
+      "file_path": "docs/architecture.md",
+      "line_number": 72,
+      "derived_from": [
+        "REQ7.1"
+      ]
+    },
+    "ARC4.2": {
+      "id": "ARC4.2",
+      "item_type": "Unknown",
+      "requirement_type": null,
+      "title": "File Watcher",
+      "file_path": "docs/architecture.md",
+      "line_number": 60,
+      "derived_from": [
+        "REQ4.1"
+      ]
+    },
+    "ARC2": {
+      "id": "ARC2",
+      "item_type": "Unknown",
+      "requirement_type": null,
+      "title": "Extraction & Transformation",
+      "file_path": "docs/architecture.md",
+      "line_number": 28,
+      "derived_from": [
+        "REQ1.3",
+        "REQ3"
+      ]
+    },
+    "ARC2.1": {
+      "id": "ARC2.1",
+      "item_type": "Unknown",
+      "requirement_type": null,
+      "title": "[derive(Debug, Clone, serde::Serialize, serde::Deserialize, PartialEq)]",
+      "file_path": "src/scanner.rs",
+      "line_number": 7,
+      "derived_from": [
+        "REQ1.3"
+      ]
+    },
+    "REQ4.2": {
+      "id": "REQ4.2",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "",
+      "file_path": "docs/requirements.md",
+      "line_number": 180,
+      "derived_from": [
+        "REQ4"
+      ]
+    },
+    "REQ1.3": {
+      "id": "REQ1.3",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "",
+      "file_path": "docs/requirements.md",
+      "line_number": 57,
+      "derived_from": [
+        "REQ1"
+      ]
+    },
+    "REQ7": {
+      "id": "REQ7",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "",
+      "file_path": "docs/requirements.md",
+      "line_number": 348,
+      "derived_from": []
+    },
+    "REQ4.1": {
+      "id": "REQ4.1",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "",
+      "file_path": "docs/requirements.md",
+      "line_number": 163,
+      "derived_from": [
+        "REQ4"
+      ]
+    },
+    "ARC2.2": {
+      "id": "ARC2.2",
+      "item_type": "Unknown",
+      "requirement_type": null,
+      "title": "Comment Formatter",
+      "file_path": "docs/architecture.md",
+      "line_number": 36,
+      "derived_from": [
+        "REQ3.1"
+      ]
+    },
+    "REQ4.3": {
+      "id": "REQ4.3",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "",
+      "file_path": "docs/requirements.md",
+      "line_number": 201,
+      "derived_from": [
+        "REQ4"
+      ]
+    },
+    "REQ5.3": {
+      "id": "REQ5.3",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "",
+      "file_path": "docs/requirements.md",
+      "line_number": 282,
+      "derived_from": [
+        "REQ5"
+      ]
+    },
+    "REQ4": {
+      "id": "REQ4",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "",
+      "file_path": "docs/requirements.md",
+      "line_number": 156,
+      "derived_from": []
+    },
+    "ARC3.1": {
+      "id": "ARC3.1",
+      "item_type": "Unknown",
+      "requirement_type": null,
+      "title": "[derive(Debug, PartialEq)]",
+      "file_path": "src/graph.rs",
+      "line_number": 22,
+      "derived_from": [
+        "REQ2.1"
+      ]
+    },
+    "ARC4": {
+      "id": "ARC4",
+      "item_type": "Unknown",
+      "requirement_type": null,
+      "title": "Interfaces & Integration",
+      "file_path": "docs/architecture.md",
+      "line_number": 52,
+      "derived_from": [
+        "REQ4",
+        "REQ5",
+        "REQ7"
+      ]
+    },
+    "UT3": {
+      "id": "UT3",
+      "item_type": "Unknown",
+      "requirement_type": null,
+      "title": "[test]",
+      "file_path": "src/graph.rs",
+      "line_number": 102,
+      "derived_from": [
+        "REQ2.1"
+      ]
+    },
+    "ARC1.3": {
+      "id": "ARC1.3",
+      "item_type": "Unknown",
+      "requirement_type": null,
+      "title": "[derive(Debug, Deserialize, Clone)]",
+      "file_path": "src/config.rs",
+      "line_number": 5,
+      "derived_from": [
+        "REQ5.2"
+      ]
+    },
+    "UT2": {
+      "id": "UT2",
+      "item_type": "Unknown",
+      "requirement_type": null,
+      "title": "[test]",
+      "file_path": "src/scanner.rs",
+      "line_number": 116,
+      "derived_from": [
+        "REQ1.3"
+      ]
+    },
+    "REQ1.2": {
+      "id": "REQ1.2",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "Password hashing",
+      "file_path": "src/scanner.rs",
+      "line_number": 124,
+      "derived_from": [
+        "REQ1.1"
+      ]
+    },
+    "REQ3.1": {
+      "id": "REQ3.1",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "",
+      "file_path": "docs/requirements.md",
+      "line_number": 134,
+      "derived_from": [
+        "REQ3"
+      ]
+    },
+    "REQ6.2": {
+      "id": "REQ6.2",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "",
+      "file_path": "docs/requirements.md",
+      "line_number": 327,
+      "derived_from": [
+        "REQ6"
+      ]
+    },
+    "ARC4.4": {
+      "id": "ARC4.4",
+      "item_type": "Unknown",
+      "requirement_type": null,
+      "title": "MCP SSE Server",
+      "file_path": "docs/architecture.md",
+      "line_number": 68,
+      "derived_from": [
+        "REQ4.3",
+        "REQ4.3.1"
+      ]
+    },
+    "UT1": {
+      "id": "UT1",
+      "item_type": "Unknown",
+      "requirement_type": null,
+      "title": "[test]",
+      "file_path": "src/config.rs",
+      "line_number": 41,
+      "derived_from": [
+        "REQ5.2"
+      ]
+    },
+    "REQ1.1": {
+      "id": "REQ1.1",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "Login feature",
+      "file_path": "src/scanner.rs",
+      "line_number": 120,
+      "derived_from": []
+    },
+    "REQ3": {
+      "id": "REQ3",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "",
+      "file_path": "docs/requirements.md",
+      "line_number": 128,
+      "derived_from": []
+    },
+    "REQ2.1": {
+      "id": "REQ2.1",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "",
+      "file_path": "docs/requirements.md",
+      "line_number": 86,
+      "derived_from": [
+        "REQ2"
+      ]
+    },
+    "REQ6": {
+      "id": "REQ6",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "",
+      "file_path": "docs/requirements.md",
+      "line_number": 305,
+      "derived_from": []
+    },
+    "ARC3": {
+      "id": "ARC3",
+      "item_type": "Unknown",
+      "requirement_type": null,
+      "title": "Analysis & Verification",
+      "file_path": "docs/architecture.md",
+      "line_number": 42,
+      "derived_from": [
+        "REQ2"
+      ]
+    },
+    "ARC1.1": {
+      "id": "ARC1.1",
+      "item_type": "Unknown",
+      "requirement_type": null,
+      "title": "[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]",
+      "file_path": "src/graph.rs",
+      "line_number": 5,
+      "derived_from": [
+        "REQ1.1"
+      ]
+    },
+    "ARC1.2": {
+      "id": "ARC1.2",
+      "item_type": "Unknown",
+      "requirement_type": null,
+      "title": "pub struct Serializer;",
+      "file_path": "src/db.rs",
+      "line_number": 6,
+      "derived_from": [
+        "REQ1.2"
+      ]
+    },
+    "REQ5": {
+      "id": "REQ5",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "",
+      "file_path": "docs/requirements.md",
+      "line_number": 243,
+      "derived_from": []
+    },
+    "ARC4.3": {
+      "id": "ARC4.3",
+      "item_type": "Unknown",
+      "requirement_type": null,
+      "title": "Visualization Engine",
+      "file_path": "docs/architecture.md",
+      "line_number": 64,
+      "derived_from": [
+        "REQ4.2",
+        "REQ5.3"
+      ]
+    },
+    "REQ2.2": {
+      "id": "REQ2.2",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "",
+      "file_path": "docs/requirements.md",
+      "line_number": 108,
+      "derived_from": [
+        "REQ2"
+      ]
+    },
+    "UT4": {
+      "id": "UT4",
+      "item_type": "Unknown",
+      "requirement_type": null,
+      "title": "[test]",
+      "file_path": "src/db.rs",
+      "line_number": 30,
+      "derived_from": [
+        "REQ1.2"
+      ]
+    },
+    "ARC4.1": {
+      "id": "ARC4.1",
+      "item_type": "Unknown",
+      "requirement_type": null,
+      "title": "[derive(Parser)]",
+      "file_path": "src/cli.rs",
+      "line_number": 8,
+      "derived_from": [
+        "REQ5.1"
+      ]
+    },
+    "ARC1": {
+      "id": "ARC1",
+      "item_type": "Unknown",
+      "requirement_type": null,
+      "title": "Core Graph & Data Management",
+      "file_path": "docs/architecture.md",
+      "line_number": 10,
+      "derived_from": [
+        "REQ1"
+      ]
+    },
+    "REQ2": {
+      "id": "REQ2",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "",
+      "file_path": "docs/requirements.md",
+      "line_number": 79,
+      "derived_from": []
+    },
+    "REQ7.1": {
+      "id": "REQ7.1",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "- Acceptance:",
+      "file_path": "docs/requirements.md",
+      "line_number": 229,
+      "derived_from": []
+    },
+    "REQ5.2": {
+      "id": "REQ5.2",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "",
+      "file_path": "docs/requirements.md",
+      "line_number": 266,
+      "derived_from": [
+        "REQ5"
+      ]
+    },
+    "REQ6.1": {
+      "id": "REQ6.1",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "",
+      "file_path": "docs/requirements.md",
+      "line_number": 312,
+      "derived_from": [
+        "REQ6"
+      ]
+    },
+    "REQ5.1": {
+      "id": "REQ5.1",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "",
+      "file_path": "docs/requirements.md",
+      "line_number": 250,
+      "derived_from": [
+        "REQ5"
+      ]
+    },
+    "REQ4.3.1": {
+      "id": "REQ4.3.1",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "",
+      "file_path": "docs/requirements.md",
+      "line_number": 218,
+      "derived_from": [
+        "REQ4.3"
+      ]
+    }
+  }
+}
