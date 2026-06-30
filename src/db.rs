@@ -39,7 +39,7 @@ mod tests {
                 requirement_type: Some("Functional".into()),
                 title: "Req 1".into(),
                 file_path: PathBuf::from("req.md"),
-                line_number: 1,
+                line_range: crate::scanner::LineRange { start: 1, end: 1 },
                 derived_from: vec![],
             },
         );
