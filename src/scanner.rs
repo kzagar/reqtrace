@@ -179,9 +179,11 @@ impl Scanner {
                     }
                 }
 
+                let portable_path = PathBuf::from(path.to_string_lossy().replace('\\', "/"));
+
                 file_items.push(RawItem {
                     id: id.to_string(),
-                    file_path: path.to_path_buf(),
+                    file_path: portable_path,
                     line_range,
                     title,
                     derived_from,
