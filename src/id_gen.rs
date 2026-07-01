@@ -5,7 +5,11 @@ pub fn get_project_name() -> String {
     // 1. Cargo.toml
     if let Ok(content) = std::fs::read_to_string("Cargo.toml") {
         if let Ok(toml) = content.parse::<toml::Value>() {
-            if let Some(name) = toml.get("package").and_then(|p| p.get("name")).and_then(|n| n.as_str()) {
+            if let Some(name) = toml
+                .get("package")
+                .and_then(|p| p.get("name"))
+                .and_then(|n| n.as_str())
+            {
                 return name.to_string();
             }
         }
@@ -13,7 +17,11 @@ pub fn get_project_name() -> String {
     // 2. pyproject.toml
     if let Ok(content) = std::fs::read_to_string("pyproject.toml") {
         if let Ok(toml) = content.parse::<toml::Value>() {
-            if let Some(name) = toml.get("project").and_then(|p| p.get("name")).and_then(|n| n.as_str()) {
+            if let Some(name) = toml
+                .get("project")
+                .and_then(|p| p.get("name"))
+                .and_then(|n| n.as_str())
+            {
                 return name.to_string();
             }
         }
@@ -95,7 +103,7 @@ pub fn generate_next_id(prefix: &str, existing_ids: &HashSet<String>) -> anyhow:
 
         next_idx = next_idx.wrapping_add(1);
         if next_idx == (if has_any { max_idx } else { 65535 }) {
-             break;
+            break;
         }
     }
 
