@@ -2,8 +2,6 @@ use crate::config::Config;
 use anyhow::Result;
 use regex::Regex;
 use std::path::{Path, PathBuf};
-use syn::spanned::Spanned;
-use syn::visit::{self, Visit};
 use walkdir::WalkDir;
 
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize, PartialEq)]
@@ -12,7 +10,7 @@ pub struct LineRange {
     pub end: usize,
 }
 
-// @IMP2.1@ (FROM: ARC2.1)
+// @IMP2.1@ (FROM: @REQ1.3@)
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize, PartialEq)]
 pub struct RawItem {
     pub id: String,
@@ -27,147 +25,6 @@ pub struct Scanner {
     tag_regex: Regex,
     from_regex: Regex,
     id_regex: Regex,
-}
-
-struct RustItem {
-    name: String,
-    start_line: usize,
-    end_line: usize,
-}
-
-struct RustVisitor {
-    items: Vec<RustItem>,
-    path_stack: Vec<String>,
-}
-
-impl RustVisitor {
-    fn new() -> Self {
-        Self {
-            items: Vec::new(),
-            path_stack: Vec::new(),
-        }
-    }
-
-    fn current_path(&self) -> String {
-        self.path_stack.join("::")
-    }
-
-    fn push_path(&mut self, name: String) {
-        self.path_stack.push(name);
-    }
-
-    fn pop_path(&mut self) {
-        self.path_stack.pop();
-    }
-}
-
-impl<'ast> Visit<'ast> for RustVisitor {
-    fn visit_item_mod(&mut self, i: &'ast syn::ItemMod) {
-        let name = i.ident.to_string();
-        let start = i.span().start().line;
-        let end = i.span().end().line;
-        self.push_path(name.clone());
-        if i.content.is_some() {
-            self.items.push(RustItem {
-                name: self.current_path(),
-                start_line: start,
-                end_line: end,
-            });
-        }
-        visit::visit_item_mod(self, i);
-        self.pop_path();
-    }
-
-    fn visit_item_fn(&mut self, i: &'ast syn::ItemFn) {
-        let name = i.sig.ident.to_string();
-        let start = i.span().start().line;
-        let end = i.span().end().line;
-        let full_name = if self.path_stack.is_empty() {
-            name
-        } else {
-            format!("{}::{}", self.current_path(), name)
-        };
-        self.items.push(RustItem {
-            name: full_name,
-            start_line: start,
-            end_line: end,
-        });
-    }
-
-    fn visit_item_struct(&mut self, i: &'ast syn::ItemStruct) {
-        let name = i.ident.to_string();
-        let start = i.span().start().line;
-        let end = i.span().end().line;
-        let full_name = if self.path_stack.is_empty() {
-            name
-        } else {
-            format!("{}::{}", self.current_path(), name)
-        };
-        self.items.push(RustItem {
-            name: full_name,
-            start_line: start,
-            end_line: end,
-        });
-    }
-
-    fn visit_item_enum(&mut self, i: &'ast syn::ItemEnum) {
-        let name = i.ident.to_string();
-        let start = i.span().start().line;
-        let end = i.span().end().line;
-        let full_name = if self.path_stack.is_empty() {
-            name
-        } else {
-            format!("{}::{}", self.current_path(), name)
-        };
-        self.items.push(RustItem {
-            name: full_name,
-            start_line: start,
-            end_line: end,
-        });
-    }
-
-    fn visit_item_trait(&mut self, i: &'ast syn::ItemTrait) {
-        let name = i.ident.to_string();
-        let start = i.span().start().line;
-        let end = i.span().end().line;
-        let full_name = if self.path_stack.is_empty() {
-            name
-        } else {
-            format!("{}::{}", self.current_path(), name)
-        };
-        self.items.push(RustItem {
-            name: full_name,
-            start_line: start,
-            end_line: end,
-        });
-    }
-
-    fn visit_item_impl(&mut self, i: &'ast syn::ItemImpl) {
-        let self_ty = &i.self_ty;
-        let type_name = quote::quote!(#self_ty).to_string().replace(" ", "");
-        self.push_path(type_name.clone());
-        let start = i.span().start().line;
-        let end = i.span().end().line;
-        self.items.push(RustItem {
-            name: self.current_path(),
-            start_line: start,
-            end_line: end,
-        });
-        visit::visit_item_impl(self, i);
-        self.pop_path();
-    }
-
-    fn visit_impl_item_fn(&mut self, i: &'ast syn::ImplItemFn) {
-        let name = i.sig.ident.to_string();
-        let start = i.span().start().line;
-        let end = i.span().end().line;
-        let full_name = format!("{}::{}", self.current_path(), name);
-        self.items.push(RustItem {
-            name: full_name,
-            start_line: start,
-            end_line: end,
-        });
-    }
 }
 
 impl Scanner {
@@ -207,24 +64,22 @@ impl Scanner {
         false
     }
 
-    fn scan_file(&self, path: &Path) -> Result<Vec<RawItem>> {
+    pub fn scan_file(&self, path: &Path) -> Result<Vec<RawItem>> {
         let content = std::fs::read_to_string(path)?;
         let mut file_items = Vec::new();
         let lines: Vec<&str> = content.lines().collect();
-        let is_rust = path.extension().is_some_and(|ext| ext == "rs");
-        let mut in_raw_string = false;
 
-        let rust_items = if is_rust {
-            if let Ok(file) = syn::parse_file(&content) {
-                let mut visitor = RustVisitor::new();
-                visitor.visit_file(&file);
-                visitor.items
-            } else {
-                Vec::new()
-            }
+        let ext = path.extension().and_then(|e| e.to_str()).unwrap_or("");
+        let parser = crate::languages::get_parser(ext);
+        let has_parser = parser.is_some();
+
+        let parsed_items = if let Some(ref p) = parser {
+            p.parse(&content).unwrap_or_default()
         } else {
             Vec::new()
         };
+
+        let mut in_raw_string = false;
 
         for (i, line) in lines.iter().enumerate() {
             let trimmed = line.trim();
@@ -248,7 +103,8 @@ impl Scanner {
                 let is_def = (trimmed.starts_with("<!--") && trimmed.contains(full_match))
                     || (trimmed.starts_with("//") && trimmed.contains(full_match))
                     || (trimmed.starts_with("/*") && trimmed.contains(full_match))
-                    || (!is_rust && trimmed.starts_with(full_match));
+                    || (trimmed.starts_with('#') && trimmed.contains(full_match))
+                    || (!has_parser && trimmed.starts_with(full_match));
 
                 if !is_def {
                     continue;
@@ -260,8 +116,8 @@ impl Scanner {
                     end: line_num,
                 };
 
-                if is_rust {
-                    let best_item = rust_items
+                if has_parser {
+                    let best_item = parsed_items
                         .iter()
                         .filter(|it| it.start_line > line_num || it.end_line >= line_num)
                         .min_by_key(|it| {
@@ -357,7 +213,7 @@ mod tests {
         }
     }
 
-    // @UT2@ (FROM: REQ1.3)
+    // @UT2@ (FROM: @REQ1.3@)
     #[test]
     fn test_scan_markdown() {
         let content = r#"
@@ -380,6 +236,28 @@ Passwords must be hashed.
         assert_eq!(items[0].title, "Login feature");
         assert_eq!(items[1].id, "REQ1.2");
         assert_eq!(items[1].derived_from, vec!["REQ1.1"]);
+
+        std::fs::remove_file(temp_file).unwrap();
+    }
+
+    // @UT19@ (FROM: @REQ1.4@)
+    #[test]
+    fn test_scan_python() {
+        let content = r#"
+# @REQ1.1@
+class Parent:
+    def method_1(self):
+        pass
+"#;
+        let temp_file = "test_scan.py";
+        std::fs::write(temp_file, content).unwrap();
+
+        let scanner = Scanner::new(mock_config()).unwrap();
+        let items = scanner.scan_file(Path::new(temp_file)).unwrap();
+
+        assert_eq!(items.len(), 1);
+        assert_eq!(items[0].id, "REQ1.1");
+        assert_eq!(items[0].title, "Parent");
 
         std::fs::remove_file(temp_file).unwrap();
     }

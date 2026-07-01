@@ -47,3 +47,24 @@ It achieves this by:
 - `action/` — Custom composite GitHub Action.
 
 - `src/` — Rust source code.
+
+## Cargo Features & Binary Size
+
+`reqtrace` supports conditional compilation using Cargo feature flags to reduce dependencies and binary size. The following measurements are for the release Windows build (`x86_64-pc-windows-msvc` built with `cargo build --release`):
+
+| Feature Set | Enabled Features | Binary Size (Windows 64-bit Release) | Description |
+| ----------- | ---------------- | ------------------------------------ | ----------- |
+| **None** (Stub) | None | 1.50 MB | Pure stub binary. Excludes CLI, Server, MCP, and all language support. |
+| **CLI Only (Rust + Python)** | `cli`, `rust`, `python` | 5.76 MB | Standard CLI commands (`validate`, `update`, `export`) with Rust & Python AST parsing. |
+| **CLI + Server (Rust + Python)** | `cli`, `rust`, `python`, `server` | 5.73 MB | Adds the background server and file watcher (`server` subcommand). |
+| **All Features** (Default) | `cli`, `rust`, `python`, `server`, `mcp` | 5.79 MB | Full capabilities including Model Context Protocol (MCP) server endpoints. |
+
+To compile a custom feature set:
+
+```bash
+# Build CLI + language support (no server/mcp)
+cargo build --release --no-default-features --features "cli rust python"
+
+# Build CLI + Server without MCP
+cargo build --release --no-default-features --features "cli rust python server"
+```

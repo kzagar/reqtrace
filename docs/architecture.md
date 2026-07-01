@@ -33,6 +33,10 @@ Logic for discovering tags in source files and keeping them in sync.
 ### Multi-Language File Scanner
 Recursively walks configured paths and uses regex-based parsers to extract tags and metadata (file, line, title) from Rust, Markdown, and other configured file types.
 
+<!-- @ARC2.3@ (FROM: @REQ1.4@) -->
+### Language Support Registry & Parsers
+An isolated plugin/registry architecture for parsing source code files. Each supported language (e.g. Rust, Python) implements a common parser interface to return structured symbol scopes and line ranges.
+
 <!-- @ARC2.2@ (FROM: @REQ3.1@) -->
 ### Comment Formatter
 Rewrites source file comments to synchronize referenced item titles with the current state of the graph.
@@ -73,6 +77,10 @@ Exposes the Traceability Graph via Model Context Protocol over HTTP/SSE, allowin
 ### LSP Client Integration
 Optional component that connects to a local Language Server to resolve exact source ranges and code snippets for architectural items.
 
+<!-- @ARC4.6@ (FROM: @REQ4.4@) -->
+### Feature Gating Configuration
+Cargo feature flags (`cli`, `server`, `mcp`) that compile modules conditionally, excluding parser/web server/CLI dependencies to minimize compilation time and binary size when those environments are not needed.
+
 ## Requirement coverage
 
 | Requirement | Covered by | Notes |
@@ -80,6 +88,7 @@ Optional component that connects to a local Language Server to resolve exact sou
 | @REQ1.1@    | @ARC1.1@   |       |
 | @REQ1.2@    | @ARC1.2@   |       |
 | @REQ1.3@    | @ARC2.1@   |       |
+| @REQ1.4@    | @ARC2.3@   |       |
 | @REQ2.1@    | @ARC3.1@   |       |
 | @REQ2.2@    | @ARC4.1@   |       |
 | @REQ3.1@    | @ARC2.2@   |       |
@@ -87,6 +96,7 @@ Optional component that connects to a local Language Server to resolve exact sou
 | @REQ4.2@    | @ARC4.3@   |       |
 | @REQ4.3@    | @ARC4.4@   |       |
 | @REQ4.3.1@  | @ARC4.4@   |       |
+| @REQ4.4@    | @ARC4.6@   |       |
 | @REQ5.1@    | @ARC4.1@   |       |
 | @REQ5.2@    | @ARC1.3@   |       |
 | @REQ5.3@    | @ARC4.3@   |       |

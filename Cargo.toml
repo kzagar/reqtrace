@@ -7,15 +7,24 @@ edition = "2024"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 toml = "0.8"
-clap = { version = "4.4", features = ["derive"] }
+clap = { version = "4.4", features = ["derive"], optional = true }
 tokio = { version = "1.35", features = ["full"] }
 tokio-stream = "0.1"
-axum = "0.7"
-tower-http = { version = "0.5", features = ["cors", "fs"] }
-notify = "6.1"
+axum = { version = "0.7", optional = true }
+tower-http = { version = "0.5", features = ["cors", "fs"], optional = true }
+notify = { version = "6.1", optional = true }
 walkdir = "2.4"
 regex = "1.10"
 anyhow = "1.0"
-syn = { version = "2.0", features = ["full", "visit", "extra-traits", "printing"] }
-proc-macro2 = { version = "1.0", features = ["span-locations"] }
-quote = "1.0"
+syn = { version = "2.0", features = ["full", "visit", "extra-traits", "printing"], optional = true }
+proc-macro2 = { version = "1.0", features = ["span-locations"], optional = true }
+quote = { version = "1.0", optional = true }
+
+[features]
+default = ["cli", "server", "mcp", "rust", "python"]
+cli = ["dep:clap"]
+server = ["dep:axum", "dep:tower-http", "dep:notify"]
+mcp = ["server"]
+rust = ["dep:syn", "dep:proc-macro2", "dep:quote"]
+python = []
+

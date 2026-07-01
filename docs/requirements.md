@@ -72,6 +72,24 @@ annotations.
     - THEN it finds all tagged items and adds them to the graph with their file
       paths and line numbers
 
+<!-- @REQ1.4@ (FROM: @REQ1.3@) -->
+
+### Python Language Support
+
+The system SHALL support Python (`.py`) files, parsing class, function, and
+method declarations to determine their structural names, start lines, and end
+lines.
+
+- Priority: MUST
+- Rationale: Extends traceability validation to Python codebases.
+- Acceptance:
+  - Scenario: Scanning Python files
+    - GIVEN a Python file containing a class and def method with tag comments
+      (e.g., `# @IMP1.1@`)
+    - WHEN the scanner is run
+    - THEN it resolves the tag to the class/method scope and correctly sets
+      the start and end line ranges.
+
 ---
 
 ## 2. Validation & Checking
@@ -235,6 +253,22 @@ corresponding source code implementations resolved via the Language Server.
     - AND it returns its linked architecture and test items
     - AND it returns the source code snippets implementing those
       architectural/test items resolved via the Language Server
+
+<!-- @REQ4.4@ (FROM: @REQ4@) -->
+
+### Feature Gating
+
+The system SHALL support conditional compilation of major features—CLI,
+Server Mode, and MCP Server—using Cargo feature flags.
+
+- Priority: MUST
+- Rationale: Minimizes binary size and dependency footprint for specialized
+  environments (e.g. CI runner vs active daemon).
+- Acceptance:
+  - Scenario: Compiling without server features
+    - WHEN reqtrace is built with `--no-default-features --features cli`
+    - THEN the compiler builds the binary without axum or notify dependencies
+    - AND the resulting binary is smaller in size than the full-featured binary
 
 ---
 

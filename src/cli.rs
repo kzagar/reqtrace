@@ -17,6 +17,7 @@ pub struct Cli {
 #[derive(Subcommand)]
 pub enum Commands {
     /// Start the background server
+    #[cfg(feature = "server")]
     Server,
     /// Sync database and rewrite comments
     Update,
@@ -81,6 +82,7 @@ pub async fn run() -> Result<()> {
             Serializer::save(&graph, &config.paths.db)?;
             println!("Database updated at {:?}", config.paths.db);
         }
+        #[cfg(feature = "server")]
         Commands::Server => {
             crate::server::start_server(config).await?;
         }

@@ -1,13 +1,22 @@
+#[cfg(feature = "cli")]
 pub mod cli;
 pub mod config;
 pub mod db;
 pub mod graph;
+pub mod languages;
 pub mod scanner;
+#[cfg(feature = "server")]
 pub mod server;
 
+#[cfg(feature = "cli")]
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     cli::run().await
+}
+
+#[cfg(not(feature = "cli"))]
+fn main() {
+    println!("reqtrace CLI is disabled. Enable the 'cli' feature to use it.");
 }
 
 #[cfg(test)]
