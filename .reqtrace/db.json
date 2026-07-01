@@ -763,8 +763,8 @@
       "title": "tests",
       "file_path": "src/graph.rs",
       "line_range": {
-        "start": 148,
-        "end": 256
+        "start": 144,
+        "end": 252
       },
       "derived_from": [
         "REQ2.1"
@@ -791,8 +791,8 @@
       "title": "tests",
       "file_path": "src/graph.rs",
       "line_range": {
-        "start": 148,
-        "end": 256
+        "start": 144,
+        "end": 252
       },
       "derived_from": [
         "REQ2.1"

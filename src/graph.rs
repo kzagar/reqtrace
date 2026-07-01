@@ -115,11 +115,7 @@ impl Graph {
         issues
     }
 
-    fn has_test_transitive(
-        &self,
-        id: &str,
-        children_map: &BTreeMap<String, Vec<String>>,
-    ) -> bool {
+    fn has_test_transitive(&self, id: &str, children_map: &BTreeMap<String, Vec<String>>) -> bool {
         let mut visited = std::collections::HashSet::new();
         let mut stack = vec![id.to_string()];
 
