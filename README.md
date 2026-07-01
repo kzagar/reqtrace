@@ -43,7 +43,7 @@ It achieves this by:
   - [requirements.md](docs/requirements.md) — System requirements with
     Gherkin-style scenarios.
   - [decisions/](docs/decisions/) — Architecture Decision Records (ADRs).
-- `shtracer/` — Traceability configuration (to be replaced with `reqtrace` itself, once mature enough).
+- `.reqtrace/` — Traceability configuration and database.
 - `action/` — Custom composite GitHub Action.
 
 - `src/` — Rust source code.

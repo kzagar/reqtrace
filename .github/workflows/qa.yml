@@ -32,3 +32,14 @@ jobs:
 
       - name: Run tests
         run: cargo test
+
+      - name: Build reqtrace
+        run: cargo build
+
+      - name: Validate traceability
+        run: ./target/debug/reqtrace validate
+
+      - name: Check if database is up to date
+        run: |
+          ./target/debug/reqtrace update
+          git diff --exit-code .reqtrace/db.json

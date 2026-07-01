@@ -3,7 +3,7 @@ use anyhow::Result;
 use std::fs::File;
 use std::path::Path;
 
-// @ARC1.2@ (FROM: @REQ1.2@)
+// @IMP1.2@ (FROM: ARC1.2)
 pub struct Serializer;
 
 impl Serializer {
@@ -24,13 +24,13 @@ impl Serializer {
 mod tests {
     use super::*;
     use crate::graph::TraceItem;
-    use std::collections::HashMap;
+    use std::collections::BTreeMap;
     use std::path::PathBuf;
 
-    // @UT4@ (FROM: @REQ1.2@)
+    // @UT4@ (FROM: REQ1.2)
     #[test]
     fn test_serialization() {
-        let mut items = HashMap::new();
+        let mut items = BTreeMap::new();
         items.insert(
             "REQ1".into(),
             TraceItem {

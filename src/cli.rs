@@ -5,7 +5,7 @@ use crate::scanner::Scanner;
 use anyhow::Result;
 use clap::{Parser, Subcommand};
 
-// @ARC4.1@ (FROM: @REQ5.1@)
+// @IMP4.1@ (FROM: ARC4.1)
 #[derive(Parser)]
 #[command(name = "reqtrace")]
 #[command(about = "Systems and software engineering tooling for establishing traceability to requirements", long_about = None)]

@@ -12,7 +12,7 @@ pub struct LineRange {
     pub end: usize,
 }
 
-// @ARC2.1@ (FROM: @REQ1.3@)
+// @IMP2.1@ (FROM: ARC2.1)
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize, PartialEq)]
 pub struct RawItem {
     pub id: String,
@@ -175,8 +175,8 @@ impl Scanner {
         Ok(Self {
             config,
             tag_regex: Regex::new(r"(?P<full>@(?P<id>[A-Z]+[0-9\.]+)@)")?,
-            from_regex: Regex::new(r"FROM:\s*(@[A-Z0-9\.]+@(?:\s*,\s*@[A-Z0-9\.]+@)*)")?,
-            id_regex: Regex::new(r"@([A-Z]+[0-9\.]+)@")?,
+            from_regex: Regex::new(r"FROM:\s*(@?[A-Z0-9\.]+(?:\s*,\s*@?[A-Z0-9\.]+)*)")?,
+            id_regex: Regex::new(r"@?([A-Z]+[0-9\.]+)@?")?,
         })
     }
 
@@ -357,7 +357,7 @@ mod tests {
         }
     }
 
-    // @UT2@ (FROM: @REQ1.3@)
+    // @UT2@ (FROM: REQ1.3)
     #[test]
     fn test_scan_markdown() {
         let content = r#"

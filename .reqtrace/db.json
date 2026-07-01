@@ -1,0 +1,858 @@
+{
+  "items": {
+    "ARC1": {
+      "id": "ARC1",
+      "item_type": "Architecture",
+      "requirement_type": null,
+      "title": "Core Graph & Data Management",
+      "file_path": "docs/architecture.md",
+      "line_range": {
+        "start": 11,
+        "end": 13
+      },
+      "derived_from": [
+        "REQ1"
+      ]
+    },
+    "ARC1.1": {
+      "id": "ARC1.1",
+      "item_type": "Architecture",
+      "requirement_type": null,
+      "title": "Traceability Graph Model",
+      "file_path": "docs/architecture.md",
+      "line_range": {
+        "start": 15,
+        "end": 17
+      },
+      "derived_from": [
+        "REQ1.1"
+      ]
+    },
+    "ARC1.2": {
+      "id": "ARC1.2",
+      "item_type": "Architecture",
+      "requirement_type": null,
+      "title": "JSON Database Serializer",
+      "file_path": "docs/architecture.md",
+      "line_range": {
+        "start": 19,
+        "end": 21
+      },
+      "derived_from": [
+        "REQ1.2"
+      ]
+    },
+    "ARC1.3": {
+      "id": "ARC1.3",
+      "item_type": "Architecture",
+      "requirement_type": null,
+      "title": "Configuration Loader",
+      "file_path": "docs/architecture.md",
+      "line_range": {
+        "start": 23,
+        "end": 27
+      },
+      "derived_from": [
+        "REQ5.2"
+      ]
+    },
+    "ARC2": {
+      "id": "ARC2",
+      "item_type": "Architecture",
+      "requirement_type": null,
+      "title": "Extraction & Transformation",
+      "file_path": "docs/architecture.md",
+      "line_range": {
+        "start": 29,
+        "end": 31
+      },
+      "derived_from": [
+        "REQ1.3"
+      ]
+    },
+    "ARC2.1": {
+      "id": "ARC2.1",
+      "item_type": "Architecture",
+      "requirement_type": null,
+      "title": "Multi-Language File Scanner",
+      "file_path": "docs/architecture.md",
+      "line_range": {
+        "start": 33,
+        "end": 35
+      },
+      "derived_from": [
+        "REQ1.3"
+      ]
+    },
+    "ARC2.2": {
+      "id": "ARC2.2",
+      "item_type": "Architecture",
+      "requirement_type": null,
+      "title": "Comment Formatter",
+      "file_path": "docs/architecture.md",
+      "line_range": {
+        "start": 37,
+        "end": 41
+      },
+      "derived_from": [
+        "REQ3.1"
+      ]
+    },
+    "ARC3": {
+      "id": "ARC3",
+      "item_type": "Architecture",
+      "requirement_type": null,
+      "title": "Analysis & Verification",
+      "file_path": "docs/architecture.md",
+      "line_range": {
+        "start": 43,
+        "end": 45
+      },
+      "derived_from": [
+        "REQ2"
+      ]
+    },
+    "ARC3.1": {
+      "id": "ARC3.1",
+      "item_type": "Architecture",
+      "requirement_type": null,
+      "title": "Graph Validator",
+      "file_path": "docs/architecture.md",
+      "line_range": {
+        "start": 47,
+        "end": 51
+      },
+      "derived_from": [
+        "REQ2.1"
+      ]
+    },
+    "ARC4": {
+      "id": "ARC4",
+      "item_type": "Architecture",
+      "requirement_type": null,
+      "title": "Interfaces & Integration",
+      "file_path": "docs/architecture.md",
+      "line_range": {
+        "start": 53,
+        "end": 55
+      },
+      "derived_from": [
+        "REQ4"
+      ]
+    },
+    "ARC4.1": {
+      "id": "ARC4.1",
+      "item_type": "Architecture",
+      "requirement_type": null,
+      "title": "CLI Command Dispatcher",
+      "file_path": "docs/architecture.md",
+      "line_range": {
+        "start": 57,
+        "end": 59
+      },
+      "derived_from": [
+        "REQ5.1"
+      ]
+    },
+    "ARC4.2": {
+      "id": "ARC4.2",
+      "item_type": "Architecture",
+      "requirement_type": null,
+      "title": "File Watcher",
+      "file_path": "docs/architecture.md",
+      "line_range": {
+        "start": 61,
+        "end": 63
+      },
+      "derived_from": [
+        "REQ4.1"
+      ]
+    },
+    "ARC4.3": {
+      "id": "ARC4.3",
+      "item_type": "Architecture",
+      "requirement_type": null,
+      "title": "Visualization Engine",
+      "file_path": "docs/architecture.md",
+      "line_range": {
+        "start": 65,
+        "end": 67
+      },
+      "derived_from": [
+        "REQ4.2"
+      ]
+    },
+    "ARC4.4": {
+      "id": "ARC4.4",
+      "item_type": "Architecture",
+      "requirement_type": null,
+      "title": "MCP SSE Server",
+      "file_path": "docs/architecture.md",
+      "line_range": {
+        "start": 69,
+        "end": 71
+      },
+      "derived_from": [
+        "REQ4.3"
+      ]
+    },
+    "ARC4.5": {
+      "id": "ARC4.5",
+      "item_type": "Architecture",
+      "requirement_type": null,
+      "title": "LSP Client Integration",
+      "file_path": "docs/architecture.md",
+      "line_range": {
+        "start": 73,
+        "end": 95
+      },
+      "derived_from": [
+        "REQ7.1"
+      ]
+    },
+    "IMP1.1": {
+      "id": "IMP1.1",
+      "item_type": "Implementation",
+      "requirement_type": null,
+      "title": "TraceItem",
+      "file_path": "src/graph.rs",
+      "line_range": {
+        "start": 6,
+        "end": 15
+      },
+      "derived_from": [
+        "ARC1.1"
+      ]
+    },
+    "IMP1.2": {
+      "id": "IMP1.2",
+      "item_type": "Implementation",
+      "requirement_type": null,
+      "title": "Serializer",
+      "file_path": "src/db.rs",
+      "line_range": {
+        "start": 7,
+        "end": 7
+      },
+      "derived_from": [
+        "ARC1.2"
+      ]
+    },
+    "IMP1.3": {
+      "id": "IMP1.3",
+      "item_type": "Implementation",
+      "requirement_type": null,
+      "title": "Config",
+      "file_path": "src/config.rs",
+      "line_range": {
+        "start": 6,
+        "end": 10
+      },
+      "derived_from": [
+        "ARC1.3"
+      ]
+    },
+    "IMP2.1": {
+      "id": "IMP2.1",
+      "item_type": "Implementation",
+      "requirement_type": null,
+      "title": "RawItem",
+      "file_path": "src/scanner.rs",
+      "line_range": {
+        "start": 16,
+        "end": 23
+      },
+      "derived_from": [
+        "ARC2.1"
+      ]
+    },
+    "IMP3.1": {
+      "id": "IMP3.1",
+      "item_type": "Implementation",
+      "requirement_type": null,
+      "title": "ValidationIssue",
+      "file_path": "src/graph.rs",
+      "line_range": {
+        "start": 23,
+        "end": 29
+      },
+      "derived_from": [
+        "ARC3.1"
+      ]
+    },
+    "IMP4.1": {
+      "id": "IMP4.1",
+      "item_type": "Implementation",
+      "requirement_type": null,
+      "title": "Cli",
+      "file_path": "src/cli.rs",
+      "line_range": {
+        "start": 9,
+        "end": 15
+      },
+      "derived_from": [
+        "ARC4.1"
+      ]
+    },
+    "IMP4.4": {
+      "id": "IMP4.4",
+      "item_type": "Implementation",
+      "requirement_type": null,
+      "title": "start_server",
+      "file_path": "src/server.rs",
+      "line_range": {
+        "start": 20,
+        "end": 38
+      },
+      "derived_from": [
+        "ARC4.4"
+      ]
+    },
+    "REQ1": {
+      "id": "REQ1",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "Graph Model & Database",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 19,
+        "end": 23
+      },
+      "derived_from": []
+    },
+    "REQ1.1": {
+      "id": "REQ1.1",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "Traceability Graph Representation",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 26,
+        "end": 39
+      },
+      "derived_from": [
+        "REQ1"
+      ]
+    },
+    "REQ1.2": {
+      "id": "REQ1.2",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "Database Storage",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 42,
+        "end": 56
+      },
+      "derived_from": [
+        "REQ1"
+      ]
+    },
+    "REQ1.3": {
+      "id": "REQ1.3",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "Parser and File Scanner",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 59,
+        "end": 78
+      },
+      "derived_from": [
+        "REQ1"
+      ]
+    },
+    "REQ2": {
+      "id": "REQ2",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "Validation & Checking",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 81,
+        "end": 85
+      },
+      "derived_from": []
+    },
+    "REQ2.1": {
+      "id": "REQ2.1",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "Traceability Issue Detection",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 88,
+        "end": 107
+      },
+      "derived_from": [
+        "REQ2"
+      ]
+    },
+    "REQ2.2": {
+      "id": "REQ2.2",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "CLI Validation Validation Output",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 110,
+        "end": 127
+      },
+      "derived_from": [
+        "REQ2"
+      ]
+    },
+    "REQ3": {
+      "id": "REQ3",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "Comment Formatting & Updating",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 130,
+        "end": 133
+      },
+      "derived_from": []
+    },
+    "REQ3.1": {
+      "id": "REQ3.1",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "Standardizing Reference Comments",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 136,
+        "end": 155
+      },
+      "derived_from": [
+        "REQ3"
+      ]
+    },
+    "REQ4": {
+      "id": "REQ4",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "Server Mode",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 158,
+        "end": 162
+      },
+      "derived_from": []
+    },
+    "REQ4.1": {
+      "id": "REQ4.1",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "Automatic Reloading",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 165,
+        "end": 179
+      },
+      "derived_from": [
+        "REQ4"
+      ]
+    },
+    "REQ4.2": {
+      "id": "REQ4.2",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "Web UI & Interactive Graph Visualization",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 182,
+        "end": 200
+      },
+      "derived_from": [
+        "REQ4"
+      ]
+    },
+    "REQ4.3": {
+      "id": "REQ4.3",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "MCP Server",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 203,
+        "end": 217
+      },
+      "derived_from": [
+        "REQ4"
+      ]
+    },
+    "REQ4.3.1": {
+      "id": "REQ4.3.1",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "MCP Tool for Context Retrieval",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 220,
+        "end": 242
+      },
+      "derived_from": [
+        "REQ4.3"
+      ]
+    },
+    "REQ5": {
+      "id": "REQ5",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "CLI Operations",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 245,
+        "end": 249
+      },
+      "derived_from": []
+    },
+    "REQ5.1": {
+      "id": "REQ5.1",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "CLI Commands",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 252,
+        "end": 265
+      },
+      "derived_from": [
+        "REQ5"
+      ]
+    },
+    "REQ5.2": {
+      "id": "REQ5.2",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "Configuration File Parsing",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 268,
+        "end": 281
+      },
+      "derived_from": [
+        "REQ5"
+      ]
+    },
+    "REQ5.3": {
+      "id": "REQ5.3",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "Static HTML Graph Export",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 284,
+        "end": 304
+      },
+      "derived_from": [
+        "REQ5"
+      ]
+    },
+    "REQ6": {
+      "id": "REQ6",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "Deployment & CI/CD",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 307,
+        "end": 311
+      },
+      "derived_from": []
+    },
+    "REQ6.1": {
+      "id": "REQ6.1",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "Pre-compiled Releases",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 314,
+        "end": 326
+      },
+      "derived_from": [
+        "REQ6"
+      ]
+    },
+    "REQ6.2": {
+      "id": "REQ6.2",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "Custom GitHub Action",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 329,
+        "end": 347
+      },
+      "derived_from": [
+        "REQ6"
+      ]
+    },
+    "REQ7": {
+      "id": "REQ7",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "Language Server Integration",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 350,
+        "end": 354
+      },
+      "derived_from": []
+    },
+    "REQ7.1": {
+      "id": "REQ7.1",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "LSP Source Location Resolution",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 357,
+        "end": 372
+      },
+      "derived_from": [
+        "REQ7"
+      ]
+    },
+    "UT1": {
+      "id": "UT1",
+      "item_type": "Test",
+      "requirement_type": null,
+      "title": "tests",
+      "file_path": "src/config.rs",
+      "line_range": {
+        "start": 37,
+        "end": 67
+      },
+      "derived_from": [
+        "REQ5.2"
+      ]
+    },
+    "UT10": {
+      "id": "UT10",
+      "item_type": "Test",
+      "requirement_type": null,
+      "title": "reqtrace_tests",
+      "file_path": "src/main.rs",
+      "line_range": {
+        "start": 13,
+        "end": 86
+      },
+      "derived_from": [
+        "REQ4.2"
+      ]
+    },
+    "UT11": {
+      "id": "UT11",
+      "item_type": "Test",
+      "requirement_type": null,
+      "title": "reqtrace_tests",
+      "file_path": "src/main.rs",
+      "line_range": {
+        "start": 13,
+        "end": 86
+      },
+      "derived_from": [
+        "REQ4.3"
+      ]
+    },
+    "UT12": {
+      "id": "UT12",
+      "item_type": "Test",
+      "requirement_type": null,
+      "title": "reqtrace_tests",
+      "file_path": "src/main.rs",
+      "line_range": {
+        "start": 13,
+        "end": 86
+      },
+      "derived_from": [
+        "REQ4.3.1"
+      ]
+    },
+    "UT13": {
+      "id": "UT13",
+      "item_type": "Test",
+      "requirement_type": null,
+      "title": "reqtrace_tests",
+      "file_path": "src/main.rs",
+      "line_range": {
+        "start": 13,
+        "end": 86
+      },
+      "derived_from": [
+        "REQ5.1"
+      ]
+    },
+    "UT14": {
+      "id": "UT14",
+      "item_type": "Test",
+      "requirement_type": null,
+      "title": "reqtrace_tests",
+      "file_path": "src/main.rs",
+      "line_range": {
+        "start": 13,
+        "end": 86
+      },
+      "derived_from": [
+        "REQ5.3"
+      ]
+    },
+    "UT15": {
+      "id": "UT15",
+      "item_type": "Test",
+      "requirement_type": null,
+      "title": "reqtrace_tests",
+      "file_path": "src/main.rs",
+      "line_range": {
+        "start": 13,
+        "end": 86
+      },
+      "derived_from": [
+        "REQ6.1"
+      ]
+    },
+    "UT16": {
+      "id": "UT16",
+      "item_type": "Test",
+      "requirement_type": null,
+      "title": "reqtrace_tests",
+      "file_path": "src/main.rs",
+      "line_range": {
+        "start": 13,
+        "end": 86
+      },
+      "derived_from": [
+        "REQ6.2"
+      ]
+    },
+    "UT17": {
+      "id": "UT17",
+      "item_type": "Test",
+      "requirement_type": null,
+      "title": "reqtrace_tests",
+      "file_path": "src/main.rs",
+      "line_range": {
+        "start": 13,
+        "end": 86
+      },
+      "derived_from": [
+        "REQ7.1"
+      ]
+    },
+    "UT2": {
+      "id": "UT2",
+      "item_type": "Test",
+      "requirement_type": null,
+      "title": "tests",
+      "file_path": "src/scanner.rs",
+      "line_range": {
+        "start": 340,
+        "end": 386
+      },
+      "derived_from": [
+        "REQ1.3"
+      ]
+    },
+    "UT3": {
+      "id": "UT3",
+      "item_type": "Test",
+      "requirement_type": null,
+      "title": "tests",
+      "file_path": "src/graph.rs",
+      "line_range": {
+        "start": 148,
+        "end": 256
+      },
+      "derived_from": [
+        "REQ2.1"
+      ]
+    },
+    "UT4": {
+      "id": "UT4",
+      "item_type": "Test",
+      "requirement_type": null,
+      "title": "tests",
+      "file_path": "src/db.rs",
+      "line_range": {
+        "start": 23,
+        "end": 57
+      },
+      "derived_from": [
+        "REQ1.2"
+      ]
+    },
+    "UT5": {
+      "id": "UT5",
+      "item_type": "Test",
+      "requirement_type": null,
+      "title": "tests",
+      "file_path": "src/graph.rs",
+      "line_range": {
+        "start": 148,
+        "end": 256
+      },
+      "derived_from": [
+        "REQ2.1"
+      ]
+    },
+    "UT6": {
+      "id": "UT6",
+      "item_type": "Test",
+      "requirement_type": null,
+      "title": "reqtrace_tests",
+      "file_path": "src/main.rs",
+      "line_range": {
+        "start": 13,
+        "end": 86
+      },
+      "derived_from": [
+        "REQ1.1"
+      ]
+    },
+    "UT7": {
+      "id": "UT7",
+      "item_type": "Test",
+      "requirement_type": null,
+      "title": "reqtrace_tests",
+      "file_path": "src/main.rs",
+      "line_range": {
+        "start": 13,
+        "end": 86
+      },
+      "derived_from": [
+        "REQ2.2"
+      ]
+    },
+    "UT8": {
+      "id": "UT8",
+      "item_type": "Test",
+      "requirement_type": null,
+      "title": "reqtrace_tests",
+      "file_path": "src/main.rs",
+      "line_range": {
+        "start": 13,
+        "end": 86
+      },
+      "derived_from": [
+        "REQ3.1"
+      ]
+    },
+    "UT9": {
+      "id": "UT9",
+      "item_type": "Test",
+      "requirement_type": null,
+      "title": "reqtrace_tests",
+      "file_path": "src/main.rs",
+      "line_range": {
+        "start": 13,
+        "end": 86
+      },
+      "derived_from": [
+        "REQ4.1"
+      ]
+    }
+  }
+}

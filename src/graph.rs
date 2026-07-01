@@ -1,8 +1,8 @@
 use crate::config::Config;
 use crate::scanner::{LineRange, RawItem};
-use std::collections::HashMap;
+use std::collections::BTreeMap;
 
-// @ARC1.1@ (FROM: @REQ1.1@)
+// @IMP1.1@ (FROM: ARC1.1)
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub struct TraceItem {
     pub id: String,
@@ -16,15 +16,16 @@ pub struct TraceItem {
 
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub struct Graph {
-    pub items: HashMap<String, TraceItem>,
+    pub items: BTreeMap<String, TraceItem>,
 }
 
-// @ARC3.1@ (FROM: @REQ2.1@)
+// @IMP3.1@ (FROM: ARC3.1)
 #[derive(Debug, PartialEq)]
 pub enum ValidationIssue {
     Orphan(String),
     BrokenLink(String, String), // source_id, target_id
     DuplicateId(String),
+    UntestedRequirement(String),
 }
 
 impl Default for Graph {
@@ -36,7 +37,7 @@ impl Default for Graph {
 impl Graph {
     pub fn new() -> Self {
         Self {
-            items: HashMap::new(),
+            items: BTreeMap::new(),
         }
     }
 
@@ -77,11 +78,14 @@ impl Graph {
 
     pub fn validate(&self) -> Vec<ValidationIssue> {
         let mut issues = Vec::new();
-        let mut child_ids = std::collections::HashSet::new();
+        let mut children_map: BTreeMap<String, Vec<String>> = BTreeMap::new();
 
         for item in self.items.values() {
             for target_id in &item.derived_from {
-                child_ids.insert(item.id.clone());
+                children_map
+                    .entry(target_id.clone())
+                    .or_default()
+                    .push(item.id.clone());
                 if !self.items.contains_key(target_id) {
                     issues.push(ValidationIssue::BrokenLink(
                         item.id.clone(),
@@ -99,7 +103,45 @@ impl Graph {
             }
         }
 
+        // Untested Requirement detection: Requirements that have no Tests deriving from them (directly or transitively)
+        for item in self.items.values() {
+            if item.item_type == "Requirement" {
+                if !self.has_test_transitive(&item.id, &children_map) {
+                    issues.push(ValidationIssue::UntestedRequirement(item.id.clone()));
+                }
+            }
+        }
+
         issues
+    }
+
+    fn has_test_transitive(
+        &self,
+        id: &str,
+        children_map: &BTreeMap<String, Vec<String>>,
+    ) -> bool {
+        let mut visited = std::collections::HashSet::new();
+        let mut stack = vec![id.to_string()];
+
+        while let Some(current_id) = stack.pop() {
+            if !visited.insert(current_id.clone()) {
+                continue;
+            }
+
+            if let Some(item) = self.items.get(&current_id) {
+                if item.item_type == "Test" {
+                    return true;
+                }
+            }
+
+            if let Some(children) = children_map.get(&current_id) {
+                for child in children {
+                    stack.push(child.clone());
+                }
+            }
+        }
+
+        false
     }
 }
 
@@ -108,7 +150,7 @@ mod tests {
     use super::*;
     use std::path::PathBuf;
 
-    // @UT3@ (FROM: @REQ2.1@)
+    // @UT3@ (FROM: REQ2.1)
     #[test]
     fn test_validation_orphan_and_broken() {
         let raw_items = vec![
@@ -155,5 +197,60 @@ mod tests {
             "REQ-1".into()
         )));
         assert!(issues.contains(&ValidationIssue::Orphan("ARCH-2".into())));
+    }
+
+    // @UT5@ (FROM: REQ2.1)
+    #[test]
+    fn test_validation_untested_requirement() {
+        let raw_items = vec![
+            RawItem {
+                id: "REQ-1".into(),
+                file_path: PathBuf::from("reqs.md"),
+                line_range: LineRange { start: 1, end: 1 },
+                title: "Requirement 1".into(),
+                derived_from: vec![],
+            },
+            RawItem {
+                id: "REQ-2".into(),
+                file_path: PathBuf::from("reqs.md"),
+                line_range: LineRange { start: 10, end: 10 },
+                title: "Requirement 2".into(),
+                derived_from: vec![],
+            },
+            RawItem {
+                id: "UT-1".into(),
+                file_path: PathBuf::from("test.rs"),
+                line_range: LineRange { start: 1, end: 1 },
+                title: "Unit Test 1".into(),
+                derived_from: vec!["REQ-1".into()],
+            },
+        ];
+
+        let config = Config {
+            paths: crate::config::Paths {
+                scan: vec![],
+                ignore: None,
+                db: PathBuf::from("db.json"),
+            },
+            types: vec![
+                crate::config::TypeMapping {
+                    prefix: "REQ".into(),
+                    item_type: "Requirement".into(),
+                    requirement_type: None,
+                },
+                crate::config::TypeMapping {
+                    prefix: "UT".into(),
+                    item_type: "Test".into(),
+                    requirement_type: None,
+                },
+            ],
+        };
+
+        let (_, issues) = Graph::build(raw_items, &config);
+
+        // REQ-1 is tested by UT-1
+        assert!(!issues.contains(&ValidationIssue::UntestedRequirement("REQ-1".into())));
+        // REQ-2 is not tested
+        assert!(issues.contains(&ValidationIssue::UntestedRequirement("REQ-2".into())));
     }
 }

@@ -16,7 +16,7 @@ pub struct AppState {
     pub config: Config,
 }
 
-// @ARC4.4@ (FROM: @REQ4.3@)
+// @IMP4.4@ (FROM: ARC4.4)
 pub async fn start_server(config: Config) -> Result<()> {
     let scanner = Scanner::new(config.clone())?;
     let raw_items = scanner.scan_all()?;
