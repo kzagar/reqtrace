@@ -2,7 +2,7 @@ use anyhow::Result;
 use serde::Deserialize;
 use std::path::PathBuf;
 
-// @ARC1.3@ (FROM: @REQ5.2@)
+// @IMP1.3@ (FROM: ARC1.3)
 #[derive(Debug, Deserialize, Clone)]
 pub struct Config {
     pub paths: Paths,
@@ -38,7 +38,7 @@ impl Config {
 mod tests {
     use super::*;
 
-    // @UT1@ (FROM: @REQ5.2@)
+    // @UT1@ (FROM: REQ5.2)
     #[test]
     fn test_parse_valid_toml() {
         let toml = r#"

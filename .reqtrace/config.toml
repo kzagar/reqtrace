@@ -1,0 +1,25 @@
+[paths]
+scan = ["src", "docs"]
+ignore = ["target", ".git"]
+db = ".reqtrace/db.json"
+
+[[types]]
+prefix = "REQ"
+item_type = "Requirement"
+requirement_type = "Functional"
+
+[[types]]
+prefix = "ARC"
+item_type = "Architecture"
+
+[[types]]
+prefix = "IMP"
+item_type = "Implementation"
+
+[[types]]
+prefix = "UT"
+item_type = "Test"
+
+[[types]]
+prefix = "IT"
+item_type = "Test"
