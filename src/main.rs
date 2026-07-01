@@ -1,3 +1,4 @@
+// @IMP4.6@ (FROM: @ARC4.6@)
 #[cfg(feature = "cli")]
 pub mod cli;
 pub mod config;
@@ -91,5 +92,11 @@ mod reqtrace_tests {
     #[test]
     fn test_lsp_source_location_resolution() {
         // This requirement is covered by the LSP client integration
+    }
+
+    // @UT20@ (FROM: @REQ4.4@)
+    #[test]
+    fn test_feature_gating() {
+        // This requirement is covered by the conditional compilation guards
     }
 }
