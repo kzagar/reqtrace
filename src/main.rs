@@ -95,7 +95,7 @@ mod reqtrace_tests {
         // This requirement is covered by the LSP client integration
     }
 
-    // @UT20@ (FROM: @REQ4.4@)
+    // @UT23@ (FROM: @REQ4.4@)
     #[test]
     fn test_feature_gating() {
         // This requirement is covered by the conditional compilation guards

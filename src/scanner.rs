@@ -242,7 +242,7 @@ Passwords must be hashed.
         std::fs::remove_file(temp_file).unwrap();
     }
 
-    // @UT20@ (FROM: @REQ1.3@)
+    // @UT21@ (FROM: @REQ1.3@)
     #[test]
     fn test_scan_proquint() {
         let content = r#"

@@ -116,6 +116,7 @@ pub fn generate_next_id(prefix: &str, existing_ids: &HashSet<String>) -> anyhow:
 mod tests {
     use super::*;
 
+    // @UT22@ (FROM: @REQ5.4@)
     #[test]
     fn test_permutation() {
         let seed = 12345;
