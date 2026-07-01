@@ -3,28 +3,30 @@ use std::collections::HashSet;
 
 pub fn get_project_name() -> String {
     // 1. Cargo.toml
-    if let Ok(content) = std::fs::read_to_string("Cargo.toml") {
-        if let Ok(toml) = content.parse::<toml::Value>() {
-            if let Some(name) = toml
-                .get("package")
+    if let Some(name) = std::fs::read_to_string("Cargo.toml")
+        .ok()
+        .and_then(|content| content.parse::<toml::Value>().ok())
+        .and_then(|toml| {
+            toml.get("package")
                 .and_then(|p| p.get("name"))
                 .and_then(|n| n.as_str())
-            {
-                return name.to_string();
-            }
-        }
+                .map(|s| s.to_string())
+        })
+    {
+        return name;
     }
     // 2. pyproject.toml
-    if let Ok(content) = std::fs::read_to_string("pyproject.toml") {
-        if let Ok(toml) = content.parse::<toml::Value>() {
-            if let Some(name) = toml
-                .get("project")
+    if let Some(name) = std::fs::read_to_string("pyproject.toml")
+        .ok()
+        .and_then(|content| content.parse::<toml::Value>().ok())
+        .and_then(|toml| {
+            toml.get("project")
                 .and_then(|p| p.get("name"))
                 .and_then(|n| n.as_str())
-            {
-                return name.to_string();
-            }
-        }
+                .map(|s| s.to_string())
+        })
+    {
+        return name;
     }
     // 3. Directory name
     std::env::current_dir()
