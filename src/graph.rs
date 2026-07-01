@@ -105,10 +105,9 @@ impl Graph {
 
         // Untested Requirement detection: Requirements that have no Tests deriving from them (directly or transitively)
         for item in self.items.values() {
-            if item.item_type == "Requirement" {
-                if !self.has_test_transitive(&item.id, &children_map) {
-                    issues.push(ValidationIssue::UntestedRequirement(item.id.clone()));
-                }
+            if item.item_type == "Requirement" && !self.has_test_transitive(&item.id, &children_map)
+            {
+                issues.push(ValidationIssue::UntestedRequirement(item.id.clone()));
             }
         }
 
@@ -124,10 +123,12 @@ impl Graph {
                 continue;
             }
 
-            if let Some(item) = self.items.get(&current_id) {
-                if item.item_type == "Test" {
-                    return true;
-                }
+            if self
+                .items
+                .get(&current_id)
+                .is_some_and(|it| it.item_type == "Test")
+            {
+                return true;
             }
 
             if let Some(children) = children_map.get(&current_id) {
