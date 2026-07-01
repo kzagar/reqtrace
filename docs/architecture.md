@@ -59,7 +59,14 @@ How users and agents interact with `reqtrace`.
 
 <!-- @ARC4.1@ (FROM: @REQ5.1@, @REQ2.2@) -->
 ### CLI Command Dispatcher
-The entry point for `validate`, `update`, `server`, and `export` commands. Built with `clap`.
+The entry point for `validate`, `update`, `server`, `export`, and `gen-id`
+commands. Built with `clap`.
+
+<!-- @ARC4.7@ (FROM: @REQ5.4@) -->
+### Proquint ID Generator
+Logic for generating unique, deterministic proquint identifiers. Uses a
+16-bit permutation (Feistel network) seeded by the project name hash to ensure
+a stable sequence and avoid collisions with existing IDs.
 
 <!-- @ARC4.2@ (FROM: @REQ4.1@) -->
 ### File Watcher
@@ -98,6 +105,7 @@ Cargo feature flags (`cli`, `server`, `mcp`) that compile modules conditionally,
 | @REQ4.3.1@  | @ARC4.4@   |       |
 | @REQ4.4@    | @ARC4.6@   |       |
 | @REQ5.1@    | @ARC4.1@   |       |
+| @REQ5.4@    | @ARC4.7@   |       |
 | @REQ5.2@    | @ARC1.3@   |       |
 | @REQ5.3@    | @ARC4.3@   |       |
 | @REQ6.1@    | —          | CI/CD concern (deployment) |

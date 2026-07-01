@@ -31,9 +31,9 @@ impl Scanner {
     pub fn new(config: Config) -> Result<Self> {
         Ok(Self {
             config,
-            tag_regex: Regex::new(r"(?P<full>@(?P<id>[A-Z]+[0-9\.]+)@)")?,
-            from_regex: Regex::new(r"FROM:\s*(@?[A-Z0-9\.]+(?:\s*,\s*@?[A-Z0-9\.]+)*)")?,
-            id_regex: Regex::new(r"@?([A-Z]+[0-9\.]+)@?")?,
+            tag_regex: Regex::new(r"(?P<full>@(?P<id>[a-zA-Z0-9][a-zA-Z0-9\.\-]*)@)")?,
+            from_regex: Regex::new(r"FROM:\s*(@?[a-zA-Z0-9\.\-]+(?:\s*,\s*@?[a-zA-Z0-9\.\-]+)*)")?,
+            id_regex: Regex::new(r"@?([a-zA-Z0-9][a-zA-Z0-9\.\-]*)@?")?,
         })
     }
 
@@ -238,6 +238,32 @@ Passwords must be hashed.
         assert_eq!(items[0].title, "Login feature");
         assert_eq!(items[1].id, "REQ1.2");
         assert_eq!(items[1].derived_from, vec!["REQ1.1"]);
+
+        std::fs::remove_file(temp_file).unwrap();
+    }
+
+    // @UT20@ (FROM: @REQ1.3@)
+    #[test]
+    fn test_scan_proquint() {
+        let content = r#"
+<!-- @REQ-lusab-babad@ -->
+### Proquint ID
+Testing proquint IDs.
+
+<!-- @ARCH-1@ (FROM: @REQ-lusab-babad@) -->
+### Legacy ID
+Testing legacy ID with proquint as parent.
+"#;
+        let temp_file = "test_proquint.md";
+        std::fs::write(temp_file, content).unwrap();
+
+        let scanner = Scanner::new(mock_config()).unwrap();
+        let items = scanner.scan_file(Path::new(temp_file)).unwrap();
+
+        assert_eq!(items.len(), 2);
+        assert_eq!(items[0].id, "REQ-lusab-babad");
+        assert_eq!(items[1].id, "ARCH-1");
+        assert_eq!(items[1].derived_from, vec!["REQ-lusab-babad"]);
 
         std::fs::remove_file(temp_file).unwrap();
     }

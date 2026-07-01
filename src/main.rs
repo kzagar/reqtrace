@@ -4,6 +4,7 @@ pub mod cli;
 pub mod config;
 pub mod db;
 pub mod graph;
+pub mod id_gen;
 pub mod languages;
 pub mod scanner;
 #[cfg(feature = "server")]

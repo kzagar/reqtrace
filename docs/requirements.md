@@ -30,6 +30,7 @@ Architectural items, and Tests.
 
 - Priority: MUST
 - Rationale: Core data model.
+- Recommendation: Use proquint identifiers (e.g., `REQ-lusab`) for better human-readability.
 - Acceptance:
   - Scenario: Adding items to the graph
     - GIVEN an empty traceability graph
@@ -287,15 +288,32 @@ updating comment headers, and validating the graph.
 
 The CLI tool SHALL expose the following subcommands: `server` (start the
 server), `update` (sync database and rewrite comments), `validate` (lint the
-graph), and `export` (generate standalone visualization).
+graph), `export` (generate standalone visualization), and `gen-id` (generate
+proquint identifiers).
 
 - Priority: MUST
 - Rationale: Primary developer interaction.
 - Acceptance:
   - Scenario: Help menu
     - WHEN `reqtrace --help` is executed
-    - THEN it lists `server`, `update`, `validate`, and `export` as available
-      subcommands
+    - THEN it lists `server`, `update`, `validate`, `export`, and `gen-id` as
+      available subcommands
+
+<!-- @REQ5.4@ (FROM: @REQ5.1@) -->
+
+### ID Generation
+
+The system SHALL provide a command to generate a new, unique proquint
+identifier based on a deterministic sequence seeded by the project name.
+
+- Priority: SHOULD
+- Rationale: Simplifies creating human-friendly, non-colliding IDs.
+- Acceptance:
+  - Scenario: Generating a unique ID
+    - GIVEN a project with existing IDs `REQ-lusab` and `REQ-babad`
+    - WHEN `reqtrace gen-id --prefix REQ-` is executed
+    - THEN it outputs the next available ID in the proquint sequence
+    - AND the outputted ID does not conflict with any existing IDs
 
 <!-- @REQ5.2@ (FROM: @REQ5@) -->
 
