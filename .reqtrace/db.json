@@ -162,7 +162,7 @@
       "file_path": "docs/architecture.md",
       "line_range": {
         "start": 61,
-        "end": 63
+        "end": 64
       },
       "derived_from": [
         "REQ5.1"
@@ -175,8 +175,8 @@
       "title": "File Watcher",
       "file_path": "docs/architecture.md",
       "line_range": {
-        "start": 65,
-        "end": 67
+        "start": 72,
+        "end": 74
       },
       "derived_from": [
         "REQ4.1"
@@ -189,8 +189,8 @@
       "title": "Visualization Engine",
       "file_path": "docs/architecture.md",
       "line_range": {
-        "start": 69,
-        "end": 71
+        "start": 76,
+        "end": 78
       },
       "derived_from": [
         "REQ4.2"
@@ -203,8 +203,8 @@
       "title": "MCP SSE Server",
       "file_path": "docs/architecture.md",
       "line_range": {
-        "start": 73,
-        "end": 75
+        "start": 80,
+        "end": 82
       },
       "derived_from": [
         "REQ4.3"
@@ -217,8 +217,8 @@
       "title": "LSP Client Integration",
       "file_path": "docs/architecture.md",
       "line_range": {
-        "start": 77,
-        "end": 79
+        "start": 84,
+        "end": 86
       },
       "derived_from": [
         "REQ7.1"
@@ -231,11 +231,25 @@
       "title": "Feature Gating Configuration",
       "file_path": "docs/architecture.md",
       "line_range": {
-        "start": 81,
-        "end": 105
+        "start": 88,
+        "end": 113
       },
       "derived_from": [
         "REQ4.4"
+      ]
+    },
+    "ARC4.7": {
+      "id": "ARC4.7",
+      "item_type": "Architecture",
+      "requirement_type": null,
+      "title": "Proquint ID Generator",
+      "file_path": "docs/architecture.md",
+      "line_range": {
+        "start": 66,
+        "end": 70
+      },
+      "derived_from": [
+        "REQ5.4"
       ]
     },
     "IMP1.1": {
@@ -357,8 +371,8 @@
       "title": "main",
       "file_path": "src/main.rs",
       "line_range": {
-        "start": 12,
-        "end": 16
+        "start": 13,
+        "end": 17
       },
       "derived_from": [
         "ARC4.6"
@@ -384,7 +398,7 @@
       "file_path": "docs/requirements.md",
       "line_range": {
         "start": 26,
-        "end": 39
+        "end": 40
       },
       "derived_from": [
         "REQ1"
@@ -397,8 +411,8 @@
       "title": "Database Storage",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 42,
-        "end": 56
+        "start": 43,
+        "end": 57
       },
       "derived_from": [
         "REQ1"
@@ -411,8 +425,8 @@
       "title": "Parser and File Scanner",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 59,
-        "end": 74
+        "start": 60,
+        "end": 75
       },
       "derived_from": [
         "REQ1"
@@ -425,8 +439,8 @@
       "title": "Python Language Support",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 77,
-        "end": 96
+        "start": 78,
+        "end": 97
       },
       "derived_from": [
         "REQ1.3"
@@ -439,8 +453,8 @@
       "title": "Validation & Checking",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 99,
-        "end": 103
+        "start": 100,
+        "end": 104
       },
       "derived_from": []
     },
@@ -451,8 +465,8 @@
       "title": "Traceability Issue Detection",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 106,
-        "end": 125
+        "start": 107,
+        "end": 126
       },
       "derived_from": [
         "REQ2"
@@ -465,8 +479,8 @@
       "title": "CLI Validation Validation Output",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 128,
-        "end": 145
+        "start": 129,
+        "end": 146
       },
       "derived_from": [
         "REQ2"
@@ -479,8 +493,8 @@
       "title": "Comment Formatting & Updating",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 148,
-        "end": 151
+        "start": 149,
+        "end": 152
       },
       "derived_from": []
     },
@@ -491,8 +505,8 @@
       "title": "Standardizing Reference Comments",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 154,
-        "end": 173
+        "start": 155,
+        "end": 174
       },
       "derived_from": [
         "REQ3"
@@ -505,8 +519,8 @@
       "title": "Server Mode",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 176,
-        "end": 180
+        "start": 177,
+        "end": 181
       },
       "derived_from": []
     },
@@ -517,8 +531,8 @@
       "title": "Automatic Reloading",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 183,
-        "end": 197
+        "start": 184,
+        "end": 198
       },
       "derived_from": [
         "REQ4"
@@ -531,8 +545,8 @@
       "title": "Web UI & Interactive Graph Visualization",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 200,
-        "end": 218
+        "start": 201,
+        "end": 219
       },
       "derived_from": [
         "REQ4"
@@ -545,8 +559,8 @@
       "title": "MCP Server",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 221,
-        "end": 235
+        "start": 222,
+        "end": 236
       },
       "derived_from": [
         "REQ4"
@@ -559,8 +573,8 @@
       "title": "MCP Tool for Context Retrieval",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 238,
-        "end": 256
+        "start": 239,
+        "end": 257
       },
       "derived_from": [
         "REQ4.3"
@@ -573,8 +587,8 @@
       "title": "Feature Gating",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 259,
-        "end": 276
+        "start": 260,
+        "end": 277
       },
       "derived_from": [
         "REQ4"
@@ -587,8 +601,8 @@
       "title": "CLI Operations",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 279,
-        "end": 283
+        "start": 280,
+        "end": 284
       },
       "derived_from": []
     },
@@ -599,8 +613,8 @@
       "title": "CLI Commands",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 286,
-        "end": 299
+        "start": 287,
+        "end": 301
       },
       "derived_from": [
         "REQ5"
@@ -613,8 +627,8 @@
       "title": "Configuration File Parsing",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 302,
-        "end": 315
+        "start": 320,
+        "end": 333
       },
       "derived_from": [
         "REQ5"
@@ -627,11 +641,25 @@
       "title": "Static HTML Graph Export",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 318,
-        "end": 338
+        "start": 336,
+        "end": 356
       },
       "derived_from": [
         "REQ5"
+      ]
+    },
+    "REQ5.4": {
+      "id": "REQ5.4",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "ID Generation",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 304,
+        "end": 317
+      },
+      "derived_from": [
+        "REQ5.1"
       ]
     },
     "REQ6": {
@@ -641,8 +669,8 @@
       "title": "Deployment & CI/CD",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 341,
-        "end": 345
+        "start": 359,
+        "end": 363
       },
       "derived_from": []
     },
@@ -653,8 +681,8 @@
       "title": "Pre-compiled Releases",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 348,
-        "end": 360
+        "start": 366,
+        "end": 378
       },
       "derived_from": [
         "REQ6"
@@ -667,8 +695,8 @@
       "title": "Custom GitHub Action",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 363,
-        "end": 381
+        "start": 381,
+        "end": 399
       },
       "derived_from": [
         "REQ6"
@@ -681,8 +709,8 @@
       "title": "Language Server Integration",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 384,
-        "end": 388
+        "start": 402,
+        "end": 406
       },
       "derived_from": []
     },
@@ -693,8 +721,8 @@
       "title": "LSP Source Location Resolution",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 391,
-        "end": 406
+        "start": 409,
+        "end": 424
       },
       "derived_from": [
         "REQ7"
@@ -721,8 +749,8 @@
       "title": "reqtrace_tests",
       "file_path": "src/main.rs",
       "line_range": {
-        "start": 23,
-        "end": 102
+        "start": 24,
+        "end": 103
       },
       "derived_from": [
         "REQ4.2"
@@ -735,8 +763,8 @@
       "title": "reqtrace_tests",
       "file_path": "src/main.rs",
       "line_range": {
-        "start": 23,
-        "end": 102
+        "start": 24,
+        "end": 103
       },
       "derived_from": [
         "REQ4.3"
@@ -749,8 +777,8 @@
       "title": "reqtrace_tests",
       "file_path": "src/main.rs",
       "line_range": {
-        "start": 23,
-        "end": 102
+        "start": 24,
+        "end": 103
       },
       "derived_from": [
         "REQ4.3.1"
@@ -763,8 +791,8 @@
       "title": "reqtrace_tests",
       "file_path": "src/main.rs",
       "line_range": {
-        "start": 23,
-        "end": 102
+        "start": 24,
+        "end": 103
       },
       "derived_from": [
         "REQ5.1"
@@ -777,8 +805,8 @@
       "title": "reqtrace_tests",
       "file_path": "src/main.rs",
       "line_range": {
-        "start": 23,
-        "end": 102
+        "start": 24,
+        "end": 103
       },
       "derived_from": [
         "REQ5.3"
@@ -791,8 +819,8 @@
       "title": "reqtrace_tests",
       "file_path": "src/main.rs",
       "line_range": {
-        "start": 23,
-        "end": 102
+        "start": 24,
+        "end": 103
       },
       "derived_from": [
         "REQ6.1"
@@ -805,8 +833,8 @@
       "title": "reqtrace_tests",
       "file_path": "src/main.rs",
       "line_range": {
-        "start": 23,
-        "end": 102
+        "start": 24,
+        "end": 103
       },
       "derived_from": [
         "REQ6.2"
@@ -819,8 +847,8 @@
       "title": "reqtrace_tests",
       "file_path": "src/main.rs",
       "line_range": {
-        "start": 23,
-        "end": 102
+        "start": 24,
+        "end": 103
       },
       "derived_from": [
         "REQ7.1"
@@ -848,7 +876,7 @@
       "file_path": "src/scanner.rs",
       "line_range": {
         "start": 198,
-        "end": 266
+        "end": 292
       },
       "derived_from": [
         "REQ1.4"
@@ -862,21 +890,49 @@
       "file_path": "src/scanner.rs",
       "line_range": {
         "start": 198,
-        "end": 266
+        "end": 292
       },
       "derived_from": [
         "REQ1.3"
       ]
     },
-    "UT20": {
-      "id": "UT20",
+    "UT21": {
+      "id": "UT21",
+      "item_type": "Test",
+      "requirement_type": null,
+      "title": "tests",
+      "file_path": "src/scanner.rs",
+      "line_range": {
+        "start": 198,
+        "end": 292
+      },
+      "derived_from": [
+        "REQ1.3"
+      ]
+    },
+    "UT22": {
+      "id": "UT22",
+      "item_type": "Test",
+      "requirement_type": null,
+      "title": "tests",
+      "file_path": "src/id_gen.rs",
+      "line_range": {
+        "start": 115,
+        "end": 129
+      },
+      "derived_from": [
+        "REQ5.4"
+      ]
+    },
+    "UT23": {
+      "id": "UT23",
       "item_type": "Test",
       "requirement_type": null,
       "title": "reqtrace_tests",
       "file_path": "src/main.rs",
       "line_range": {
-        "start": 23,
-        "end": 102
+        "start": 24,
+        "end": 103
       },
       "derived_from": [
         "REQ4.4"
@@ -931,8 +987,8 @@
       "title": "reqtrace_tests",
       "file_path": "src/main.rs",
       "line_range": {
-        "start": 23,
-        "end": 102
+        "start": 24,
+        "end": 103
       },
       "derived_from": [
         "REQ1.1"
@@ -945,8 +1001,8 @@
       "title": "reqtrace_tests",
       "file_path": "src/main.rs",
       "line_range": {
-        "start": 23,
-        "end": 102
+        "start": 24,
+        "end": 103
       },
       "derived_from": [
         "REQ2.2"
@@ -959,8 +1015,8 @@
       "title": "reqtrace_tests",
       "file_path": "src/main.rs",
       "line_range": {
-        "start": 23,
-        "end": 102
+        "start": 24,
+        "end": 103
       },
       "derived_from": [
         "REQ3.1"
@@ -973,8 +1029,8 @@
       "title": "reqtrace_tests",
       "file_path": "src/main.rs",
       "line_range": {
-        "start": 23,
-        "end": 102
+        "start": 24,
+        "end": 103
       },
       "derived_from": [
         "REQ4.1"

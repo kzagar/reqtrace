@@ -35,6 +35,8 @@ It achieves this by:
   locate source code definitions for architectural and test items.
 - **CI/CD Integration**: Custom composite GitHub Action for automated graph
   validation.
+- **Proquint IDs**: Recommends and supports [proquint](https://arxiv.org/html/0901.4016)
+  identifiers for stable, pronounceable, and human-friendly traceability links.
 
 ## Repository Layout
 
@@ -58,6 +60,21 @@ It achieves this by:
 | **CLI Only (Rust + Python)** | `cli`, `rust`, `python` | 5.76 MB | Standard CLI commands (`validate`, `update`, `export`) with Rust & Python AST parsing. |
 | **CLI + Server (Rust + Python)** | `cli`, `rust`, `python`, `server` | 5.73 MB | Adds the background server and file watcher (`server` subcommand). |
 | **All Features** (Default) | `cli`, `rust`, `python`, `server`, `mcp` | 5.79 MB | Full capabilities including Model Context Protocol (MCP) server endpoints. |
+
+### Generating IDs
+
+To maintain human-friendly and unique identifiers, `reqtrace` recommends using
+proquints. You can generate the next available 16-bit proquint ID for a given
+prefix using the `gen-id` command:
+
+```bash
+reqtrace gen-id --prefix REQ-
+# Output: REQ-lusab
+```
+
+The generation algorithm is deterministic and based on the project name,
+ensuring a stable sequence of IDs while avoiding collisions with identifiers
+already in use.
 
 To compile a custom feature set:
 
