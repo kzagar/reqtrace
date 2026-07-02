@@ -126,4 +126,75 @@ mod tests {
             assert_eq!(i, u);
         }
     }
+
+    // @UT24@ (FROM: @REQ5.4@)
+    #[test]
+    fn test_permutation_full_range_is_bijective() {
+        let seed = 987654321;
+        let mut seen = HashSet::new();
+        for i in 0..=u16::MAX {
+            let p = permute(i, seed);
+            assert_eq!(unpermute(p, seed), i);
+            assert!(seen.insert(p), "permute produced a duplicate value for {i}");
+        }
+        assert_eq!(seen.len(), 65536);
+    }
+
+    // @UT25@ (FROM: @REQ5.4@)
+    #[test]
+    fn test_permutation_different_seeds_diverge() {
+        let a = permute(42, 1);
+        let b = permute(42, 2);
+        assert_ne!(a, b);
+    }
+
+    // @UT26@ (FROM: @REQ5.4@)
+    #[test]
+    fn test_generate_next_id_empty_set() {
+        let existing = HashSet::new();
+        let id = generate_next_id("REQ-", &existing).unwrap();
+        assert!(id.starts_with("REQ-"));
+    }
+
+    // @UT27@ (FROM: @REQ5.4@)
+    #[test]
+    fn test_generate_next_id_does_not_collide() {
+        let mut existing = HashSet::new();
+        for _ in 0..50 {
+            let id = generate_next_id("REQ-", &existing).unwrap();
+            assert!(
+                existing.insert(id.clone()),
+                "generated id {id} collided with an existing id"
+            );
+        }
+    }
+
+    // @UT28@ (FROM: @REQ5.4@)
+    #[test]
+    fn test_generate_next_id_ignores_other_prefixes() {
+        let mut existing = HashSet::new();
+        for _ in 0..10 {
+            let id = generate_next_id("OTHER-", &existing).unwrap();
+            existing.insert(id);
+        }
+        // None of the "OTHER-" ids should influence "REQ-" generation,
+        // and the two prefixes must not collide with each other.
+        let req_id = generate_next_id("REQ-", &existing).unwrap();
+        assert!(req_id.starts_with("REQ-"));
+        assert!(!existing.contains(&req_id));
+    }
+
+    // @UT29@ (FROM: @REQ5.4@)
+    #[test]
+    fn test_generate_next_id_exhausted_returns_error() {
+        let project_name = get_project_name();
+        let seed = hash_seed(&project_name);
+        let mut existing = HashSet::new();
+        for idx in 0..=u16::MAX {
+            let quint = permute(idx, seed).to_quint();
+            existing.insert(format!("REQ-{quint}"));
+        }
+        let result = generate_next_id("REQ-", &existing);
+        assert!(result.is_err());
+    }
 }
