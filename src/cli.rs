@@ -111,7 +111,7 @@ pub async fn run() -> Result<()> {
             let template = include_str!("../static/index.html");
             let replaced = template.replace(
                 "window.__GRAPH_DATA__ = null;",
-                &format!("window.__GRAPH_DATA__ = {};", graph_json)
+                &format!("window.__GRAPH_DATA__ = {};", graph_json),
             );
 
             std::fs::write(output, replaced)?;
