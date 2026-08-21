@@ -101,8 +101,21 @@ pub async fn run() -> Result<()> {
             let next_id = crate::id_gen::generate_next_id(prefix, &existing_ids)?;
             println!("{}", next_id);
         }
-        _ => {
-            println!("Command not yet implemented");
+        // @IMP-mozum@ (FROM: @ARC-mozum@)
+        Commands::Export { output } => {
+            let scanner = Scanner::new(config.clone())?;
+            let raw_items = scanner.scan_all()?;
+            let (graph, _) = Graph::build(raw_items, &config);
+
+            let graph_json = serde_json::to_string(&graph)?;
+            let template = include_str!("../static/index.html");
+            let replaced = template.replace(
+                "window.__GRAPH_DATA__ = null;",
+                &format!("window.__GRAPH_DATA__ = {};", graph_json)
+            );
+
+            std::fs::write(output, replaced)?;
+            println!("Graph successfully exported to {}", output);
         }
     }
 
