@@ -280,6 +280,20 @@
         "ARC-vapik"
       ]
     },
+    "IMP-mozum": {
+      "id": "IMP-mozum",
+      "item_type": "Implementation",
+      "requirement_type": null,
+      "title": "run",
+      "file_path": "src/cli.rs",
+      "line_range": {
+        "start": 39,
+        "end": 123
+      },
+      "derived_from": [
+        "ARC-mozum"
+      ]
+    },
     "IMP-rimad": {
       "id": "IMP-rimad",
       "item_type": "Implementation",
@@ -750,7 +764,7 @@
       "file_path": "src/main.rs",
       "line_range": {
         "start": 24,
-        "end": 103
+        "end": 350
       },
       "derived_from": [
         "REQ-bofud"
@@ -806,7 +820,7 @@
       "file_path": "src/main.rs",
       "line_range": {
         "start": 24,
-        "end": 103
+        "end": 350
       },
       "derived_from": [
         "REQ-tusut"
@@ -862,7 +876,7 @@
       "file_path": "src/main.rs",
       "line_range": {
         "start": 24,
-        "end": 103
+        "end": 350
       },
       "derived_from": [
         "REQ-palan"
@@ -932,7 +946,7 @@
       "file_path": "src/main.rs",
       "line_range": {
         "start": 24,
-        "end": 103
+        "end": 350
       },
       "derived_from": [
         "REQ-zolag"
@@ -946,7 +960,7 @@
       "file_path": "src/main.rs",
       "line_range": {
         "start": 24,
-        "end": 103
+        "end": 350
       },
       "derived_from": [
         "REQ-gamof"
@@ -960,7 +974,7 @@
       "file_path": "src/main.rs",
       "line_range": {
         "start": 24,
-        "end": 103
+        "end": 350
       },
       "derived_from": [
         "REQ-jomag"
@@ -974,7 +988,7 @@
       "file_path": "src/main.rs",
       "line_range": {
         "start": 24,
-        "end": 103
+        "end": 350
       },
       "derived_from": [
         "REQ-kuguj"
@@ -1002,7 +1016,7 @@
       "file_path": "src/main.rs",
       "line_range": {
         "start": 24,
-        "end": 103
+        "end": 350
       },
       "derived_from": [
         "REQ-votar"
@@ -1044,7 +1058,7 @@
       "file_path": "src/main.rs",
       "line_range": {
         "start": 24,
-        "end": 103
+        "end": 350
       },
       "derived_from": [
         "REQ-mozum"
@@ -1058,7 +1072,7 @@
       "file_path": "src/main.rs",
       "line_range": {
         "start": 24,
-        "end": 103
+        "end": 350
       },
       "derived_from": [
         "REQ-vakih"
@@ -1086,7 +1100,7 @@
       "file_path": "src/main.rs",
       "line_range": {
         "start": 24,
-        "end": 103
+        "end": 350
       },
       "derived_from": [
         "REQ-vapik"
@@ -1100,7 +1114,7 @@
       "file_path": "src/main.rs",
       "line_range": {
         "start": 24,
-        "end": 103
+        "end": 350
       },
       "derived_from": [
         "REQ-mijom"
@@ -1114,7 +1128,7 @@
       "file_path": "src/main.rs",
       "line_range": {
         "start": 24,
-        "end": 103
+        "end": 350
       },
       "derived_from": [
         "REQ-zapaj"
