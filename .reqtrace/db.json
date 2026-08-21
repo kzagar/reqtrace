@@ -1,7 +1,7 @@
 {
   "items": {
-    "ARC1": {
-      "id": "ARC1",
+    "ARC-gizih": {
+      "id": "ARC-gizih",
       "item_type": "Architecture",
       "requirement_type": null,
       "title": "Core Graph & Data Management",
@@ -11,11 +11,11 @@
         "end": 13
       },
       "derived_from": [
-        "REQ1"
+        "REQ-gizih"
       ]
     },
-    "ARC1.1": {
-      "id": "ARC1.1",
+    "ARC-vapik": {
+      "id": "ARC-vapik",
       "item_type": "Architecture",
       "requirement_type": null,
       "title": "Traceability Graph Model",
@@ -25,11 +25,11 @@
         "end": 17
       },
       "derived_from": [
-        "REQ1.1"
+        "REQ-vapik"
       ]
     },
-    "ARC1.2": {
-      "id": "ARC1.2",
+    "ARC-sivoh": {
+      "id": "ARC-sivoh",
       "item_type": "Architecture",
       "requirement_type": null,
       "title": "JSON Database Serializer",
@@ -39,11 +39,11 @@
         "end": 21
       },
       "derived_from": [
-        "REQ1.2"
+        "REQ-sivoh"
       ]
     },
-    "ARC1.3": {
-      "id": "ARC1.3",
+    "ARC-zaruh": {
+      "id": "ARC-zaruh",
       "item_type": "Architecture",
       "requirement_type": null,
       "title": "Configuration Loader",
@@ -53,11 +53,11 @@
         "end": 27
       },
       "derived_from": [
-        "REQ5.2"
+        "REQ-jafaf"
       ]
     },
-    "ARC2": {
-      "id": "ARC2",
+    "ARC-rimad": {
+      "id": "ARC-rimad",
       "item_type": "Architecture",
       "requirement_type": null,
       "title": "Extraction & Transformation",
@@ -67,11 +67,11 @@
         "end": 31
       },
       "derived_from": [
-        "REQ1.3"
+        "REQ-zaruh"
       ]
     },
-    "ARC2.1": {
-      "id": "ARC2.1",
+    "ARC-fuloz": {
+      "id": "ARC-fuloz",
       "item_type": "Architecture",
       "requirement_type": null,
       "title": "Multi-Language File Scanner",
@@ -81,11 +81,11 @@
         "end": 35
       },
       "derived_from": [
-        "REQ1.3"
+        "REQ-zaruh"
       ]
     },
-    "ARC2.2": {
-      "id": "ARC2.2",
+    "ARC-rulad": {
+      "id": "ARC-rulad",
       "item_type": "Architecture",
       "requirement_type": null,
       "title": "Comment Formatter",
@@ -95,11 +95,11 @@
         "end": 45
       },
       "derived_from": [
-        "REQ3.1"
+        "REQ-tusut"
       ]
     },
-    "ARC2.3": {
-      "id": "ARC2.3",
+    "ARC-zolag": {
+      "id": "ARC-zolag",
       "item_type": "Architecture",
       "requirement_type": null,
       "title": "Language Support Registry & Parsers",
@@ -109,11 +109,11 @@
         "end": 39
       },
       "derived_from": [
-        "REQ1.4"
+        "REQ-rimad"
       ]
     },
-    "ARC3": {
-      "id": "ARC3",
+    "ARC-rivil": {
+      "id": "ARC-rivil",
       "item_type": "Architecture",
       "requirement_type": null,
       "title": "Analysis & Verification",
@@ -123,11 +123,11 @@
         "end": 49
       },
       "derived_from": [
-        "REQ2"
+        "REQ-fuloz"
       ]
     },
-    "ARC3.1": {
-      "id": "ARC3.1",
+    "ARC-tusut": {
+      "id": "ARC-tusut",
       "item_type": "Architecture",
       "requirement_type": null,
       "title": "Graph Validator",
@@ -137,11 +137,11 @@
         "end": 55
       },
       "derived_from": [
-        "REQ2.1"
+        "REQ-rulad"
       ]
     },
-    "ARC4": {
-      "id": "ARC4",
+    "ARC-pisap": {
+      "id": "ARC-pisap",
       "item_type": "Architecture",
       "requirement_type": null,
       "title": "Interfaces & Integration",
@@ -151,11 +151,11 @@
         "end": 59
       },
       "derived_from": [
-        "REQ4"
+        "REQ-siris"
       ]
     },
-    "ARC4.1": {
-      "id": "ARC4.1",
+    "ARC-siris": {
+      "id": "ARC-siris",
       "item_type": "Architecture",
       "requirement_type": null,
       "title": "CLI Command Dispatcher",
@@ -165,11 +165,11 @@
         "end": 64
       },
       "derived_from": [
-        "REQ5.1"
+        "REQ-gamof"
       ]
     },
-    "ARC4.2": {
-      "id": "ARC4.2",
+    "ARC-palan": {
+      "id": "ARC-palan",
       "item_type": "Architecture",
       "requirement_type": null,
       "title": "File Watcher",
@@ -179,11 +179,11 @@
         "end": 74
       },
       "derived_from": [
-        "REQ4.1"
+        "REQ-palan"
       ]
     },
-    "ARC4.3": {
-      "id": "ARC4.3",
+    "ARC-mozum": {
+      "id": "ARC-mozum",
       "item_type": "Architecture",
       "requirement_type": null,
       "title": "Visualization Engine",
@@ -193,11 +193,11 @@
         "end": 78
       },
       "derived_from": [
-        "REQ4.2"
+        "REQ-mozum"
       ]
     },
-    "ARC4.4": {
-      "id": "ARC4.4",
+    "ARC-votar": {
+      "id": "ARC-votar",
       "item_type": "Architecture",
       "requirement_type": null,
       "title": "MCP SSE Server",
@@ -207,11 +207,11 @@
         "end": 82
       },
       "derived_from": [
-        "REQ4.3"
+        "REQ-votar"
       ]
     },
-    "ARC4.5": {
-      "id": "ARC4.5",
+    "ARC-mijom": {
+      "id": "ARC-mijom",
       "item_type": "Architecture",
       "requirement_type": null,
       "title": "LSP Client Integration",
@@ -221,11 +221,11 @@
         "end": 86
       },
       "derived_from": [
-        "REQ7.1"
+        "REQ-jomag"
       ]
     },
-    "ARC4.6": {
-      "id": "ARC4.6",
+    "ARC-vakih": {
+      "id": "ARC-vakih",
       "item_type": "Architecture",
       "requirement_type": null,
       "title": "Feature Gating Configuration",
@@ -235,11 +235,11 @@
         "end": 113
       },
       "derived_from": [
-        "REQ4.4"
+        "REQ-vakih"
       ]
     },
-    "ARC4.7": {
-      "id": "ARC4.7",
+    "ARC-vugul": {
+      "id": "ARC-vugul",
       "item_type": "Architecture",
       "requirement_type": null,
       "title": "Proquint ID Generator",
@@ -249,11 +249,11 @@
         "end": 70
       },
       "derived_from": [
-        "REQ5.4"
+        "REQ-kitir"
       ]
     },
-    "IMP1.1": {
-      "id": "IMP1.1",
+    "IMP-gizih": {
+      "id": "IMP-gizih",
       "item_type": "Implementation",
       "requirement_type": null,
       "title": "TraceItem",
@@ -263,11 +263,11 @@
         "end": 15
       },
       "derived_from": [
-        "ARC1.1"
+        "ARC-vapik"
       ]
     },
-    "IMP1.2": {
-      "id": "IMP1.2",
+    "IMP-vapik": {
+      "id": "IMP-vapik",
       "item_type": "Implementation",
       "requirement_type": null,
       "title": "Serializer",
@@ -277,11 +277,11 @@
         "end": 7
       },
       "derived_from": [
-        "ARC1.2"
+        "ARC-sivoh"
       ]
     },
-    "IMP1.3": {
-      "id": "IMP1.3",
+    "IMP-sivoh": {
+      "id": "IMP-sivoh",
       "item_type": "Implementation",
       "requirement_type": null,
       "title": "Config",
@@ -291,11 +291,11 @@
         "end": 10
       },
       "derived_from": [
-        "ARC1.3"
+        "ARC-zaruh"
       ]
     },
-    "IMP2.1": {
-      "id": "IMP2.1",
+    "IMP-zaruh": {
+      "id": "IMP-zaruh",
       "item_type": "Implementation",
       "requirement_type": null,
       "title": "RawItem",
@@ -305,11 +305,11 @@
         "end": 21
       },
       "derived_from": [
-        "REQ1.3"
+        "REQ-zaruh"
       ]
     },
-    "IMP2.3": {
-      "id": "IMP2.3",
+    "IMP-rimad": {
+      "id": "IMP-rimad",
       "item_type": "Implementation",
       "requirement_type": null,
       "title": "ParsedSymbol",
@@ -319,11 +319,11 @@
         "end": 14
       },
       "derived_from": [
-        "ARC2.3"
+        "ARC-zolag"
       ]
     },
-    "IMP3.1": {
-      "id": "IMP3.1",
+    "IMP-fuloz": {
+      "id": "IMP-fuloz",
       "item_type": "Implementation",
       "requirement_type": null,
       "title": "ValidationIssue",
@@ -333,11 +333,11 @@
         "end": 29
       },
       "derived_from": [
-        "ARC3.1"
+        "ARC-tusut"
       ]
     },
-    "IMP4.1": {
-      "id": "IMP4.1",
+    "IMP-rulad": {
+      "id": "IMP-rulad",
       "item_type": "Implementation",
       "requirement_type": null,
       "title": "Cli",
@@ -347,11 +347,11 @@
         "end": 15
       },
       "derived_from": [
-        "ARC4.1"
+        "ARC-siris"
       ]
     },
-    "IMP4.4": {
-      "id": "IMP4.4",
+    "IMP-zolag": {
+      "id": "IMP-zolag",
       "item_type": "Implementation",
       "requirement_type": null,
       "title": "start_server",
@@ -361,11 +361,11 @@
         "end": 45
       },
       "derived_from": [
-        "REQ4"
+        "REQ-siris"
       ]
     },
-    "IMP4.6": {
-      "id": "IMP4.6",
+    "IMP-rivil": {
+      "id": "IMP-rivil",
       "item_type": "Implementation",
       "requirement_type": null,
       "title": "main",
@@ -375,11 +375,11 @@
         "end": 17
       },
       "derived_from": [
-        "ARC4.6"
+        "ARC-vakih"
       ]
     },
-    "REQ1": {
-      "id": "REQ1",
+    "REQ-gizih": {
+      "id": "REQ-gizih",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "Graph Model & Database",
@@ -390,8 +390,8 @@
       },
       "derived_from": []
     },
-    "REQ1.1": {
-      "id": "REQ1.1",
+    "REQ-vapik": {
+      "id": "REQ-vapik",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "Traceability Graph Representation",
@@ -401,11 +401,11 @@
         "end": 40
       },
       "derived_from": [
-        "REQ1"
+        "REQ-gizih"
       ]
     },
-    "REQ1.2": {
-      "id": "REQ1.2",
+    "REQ-sivoh": {
+      "id": "REQ-sivoh",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "Database Storage",
@@ -415,11 +415,11 @@
         "end": 57
       },
       "derived_from": [
-        "REQ1"
+        "REQ-gizih"
       ]
     },
-    "REQ1.3": {
-      "id": "REQ1.3",
+    "REQ-zaruh": {
+      "id": "REQ-zaruh",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "Parser and File Scanner",
@@ -429,11 +429,11 @@
         "end": 75
       },
       "derived_from": [
-        "REQ1"
+        "REQ-gizih"
       ]
     },
-    "REQ1.4": {
-      "id": "REQ1.4",
+    "REQ-rimad": {
+      "id": "REQ-rimad",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "Python Language Support",
@@ -443,11 +443,11 @@
         "end": 97
       },
       "derived_from": [
-        "REQ1.3"
+        "REQ-zaruh"
       ]
     },
-    "REQ2": {
-      "id": "REQ2",
+    "REQ-fuloz": {
+      "id": "REQ-fuloz",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "Validation & Checking",
@@ -458,8 +458,8 @@
       },
       "derived_from": []
     },
-    "REQ2.1": {
-      "id": "REQ2.1",
+    "REQ-rulad": {
+      "id": "REQ-rulad",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "Traceability Issue Detection",
@@ -469,11 +469,11 @@
         "end": 126
       },
       "derived_from": [
-        "REQ2"
+        "REQ-fuloz"
       ]
     },
-    "REQ2.2": {
-      "id": "REQ2.2",
+    "REQ-zolag": {
+      "id": "REQ-zolag",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "CLI Validation Validation Output",
@@ -483,11 +483,11 @@
         "end": 146
       },
       "derived_from": [
-        "REQ2"
+        "REQ-fuloz"
       ]
     },
-    "REQ3": {
-      "id": "REQ3",
+    "REQ-rivil": {
+      "id": "REQ-rivil",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "Comment Formatting & Updating",
@@ -498,8 +498,8 @@
       },
       "derived_from": []
     },
-    "REQ3.1": {
-      "id": "REQ3.1",
+    "REQ-tusut": {
+      "id": "REQ-tusut",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "Standardizing Reference Comments",
@@ -509,11 +509,11 @@
         "end": 174
       },
       "derived_from": [
-        "REQ3"
+        "REQ-rivil"
       ]
     },
-    "REQ4": {
-      "id": "REQ4",
+    "REQ-siris": {
+      "id": "REQ-siris",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "Server Mode",
@@ -524,8 +524,8 @@
       },
       "derived_from": []
     },
-    "REQ4.1": {
-      "id": "REQ4.1",
+    "REQ-palan": {
+      "id": "REQ-palan",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "Automatic Reloading",
@@ -535,11 +535,11 @@
         "end": 198
       },
       "derived_from": [
-        "REQ4"
+        "REQ-siris"
       ]
     },
-    "REQ4.2": {
-      "id": "REQ4.2",
+    "REQ-mozum": {
+      "id": "REQ-mozum",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "Web UI & Interactive Graph Visualization",
@@ -549,11 +549,11 @@
         "end": 219
       },
       "derived_from": [
-        "REQ4"
+        "REQ-siris"
       ]
     },
-    "REQ4.3": {
-      "id": "REQ4.3",
+    "REQ-votar": {
+      "id": "REQ-votar",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "MCP Server",
@@ -563,11 +563,11 @@
         "end": 236
       },
       "derived_from": [
-        "REQ4"
+        "REQ-siris"
       ]
     },
-    "REQ4.3.1": {
-      "id": "REQ4.3.1",
+    "REQ-mijom": {
+      "id": "REQ-mijom",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "MCP Tool for Context Retrieval",
@@ -577,11 +577,11 @@
         "end": 257
       },
       "derived_from": [
-        "REQ4.3"
+        "REQ-votar"
       ]
     },
-    "REQ4.4": {
-      "id": "REQ4.4",
+    "REQ-vakih": {
+      "id": "REQ-vakih",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "Feature Gating",
@@ -591,11 +591,11 @@
         "end": 277
       },
       "derived_from": [
-        "REQ4"
+        "REQ-siris"
       ]
     },
-    "REQ5": {
-      "id": "REQ5",
+    "REQ-vugul": {
+      "id": "REQ-vugul",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "CLI Operations",
@@ -606,8 +606,8 @@
       },
       "derived_from": []
     },
-    "REQ5.1": {
-      "id": "REQ5.1",
+    "REQ-gamof": {
+      "id": "REQ-gamof",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "CLI Commands",
@@ -617,11 +617,11 @@
         "end": 301
       },
       "derived_from": [
-        "REQ5"
+        "REQ-vugul"
       ]
     },
-    "REQ5.2": {
-      "id": "REQ5.2",
+    "REQ-jafaf": {
+      "id": "REQ-jafaf",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "Configuration File Parsing",
@@ -631,11 +631,11 @@
         "end": 333
       },
       "derived_from": [
-        "REQ5"
+        "REQ-vugul"
       ]
     },
-    "REQ5.3": {
-      "id": "REQ5.3",
+    "REQ-bofud": {
+      "id": "REQ-bofud",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "Static HTML Graph Export",
@@ -645,11 +645,11 @@
         "end": 356
       },
       "derived_from": [
-        "REQ5"
+        "REQ-vugul"
       ]
     },
-    "REQ5.4": {
-      "id": "REQ5.4",
+    "REQ-kitir": {
+      "id": "REQ-kitir",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "ID Generation",
@@ -659,11 +659,11 @@
         "end": 317
       },
       "derived_from": [
-        "REQ5.1"
+        "REQ-gamof"
       ]
     },
-    "REQ6": {
-      "id": "REQ6",
+    "REQ-komop": {
+      "id": "REQ-komop",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "Deployment & CI/CD",
@@ -674,8 +674,8 @@
       },
       "derived_from": []
     },
-    "REQ6.1": {
-      "id": "REQ6.1",
+    "REQ-kuguj": {
+      "id": "REQ-kuguj",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "Pre-compiled Releases",
@@ -685,11 +685,11 @@
         "end": 378
       },
       "derived_from": [
-        "REQ6"
+        "REQ-komop"
       ]
     },
-    "REQ6.2": {
-      "id": "REQ6.2",
+    "REQ-zapaj": {
+      "id": "REQ-zapaj",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "Custom GitHub Action",
@@ -699,11 +699,11 @@
         "end": 399
       },
       "derived_from": [
-        "REQ6"
+        "REQ-komop"
       ]
     },
-    "REQ7": {
-      "id": "REQ7",
+    "REQ-puzun": {
+      "id": "REQ-puzun",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "Language Server Integration",
@@ -714,8 +714,8 @@
       },
       "derived_from": []
     },
-    "REQ7.1": {
-      "id": "REQ7.1",
+    "REQ-jomag": {
+      "id": "REQ-jomag",
       "item_type": "Requirement",
       "requirement_type": "Functional",
       "title": "LSP Source Location Resolution",
@@ -725,11 +725,11 @@
         "end": 424
       },
       "derived_from": [
-        "REQ7"
+        "REQ-puzun"
       ]
     },
-    "UT1": {
-      "id": "UT1",
+    "UT-gizih": {
+      "id": "UT-gizih",
       "item_type": "Test",
       "requirement_type": null,
       "title": "tests",
@@ -739,11 +739,11 @@
         "end": 67
       },
       "derived_from": [
-        "REQ5.2"
+        "REQ-jafaf"
       ]
     },
-    "UT10": {
-      "id": "UT10",
+    "UT-vapik": {
+      "id": "UT-vapik",
       "item_type": "Test",
       "requirement_type": null,
       "title": "reqtrace_tests",
@@ -753,11 +753,11 @@
         "end": 103
       },
       "derived_from": [
-        "REQ4.2"
+        "REQ-mozum"
       ]
     },
-    "UT11": {
-      "id": "UT11",
+    "UT-sivoh": {
+      "id": "UT-sivoh",
       "item_type": "Test",
       "requirement_type": null,
       "title": "reqtrace_tests",
@@ -767,11 +767,11 @@
         "end": 103
       },
       "derived_from": [
-        "REQ4.3"
+        "REQ-votar"
       ]
     },
-    "UT12": {
-      "id": "UT12",
+    "UT-zaruh": {
+      "id": "UT-zaruh",
       "item_type": "Test",
       "requirement_type": null,
       "title": "reqtrace_tests",
@@ -781,11 +781,11 @@
         "end": 103
       },
       "derived_from": [
-        "REQ4.3.1"
+        "REQ-mijom"
       ]
     },
-    "UT13": {
-      "id": "UT13",
+    "UT-rimad": {
+      "id": "UT-rimad",
       "item_type": "Test",
       "requirement_type": null,
       "title": "reqtrace_tests",
@@ -795,11 +795,11 @@
         "end": 103
       },
       "derived_from": [
-        "REQ5.1"
+        "REQ-gamof"
       ]
     },
-    "UT14": {
-      "id": "UT14",
+    "UT-fuloz": {
+      "id": "UT-fuloz",
       "item_type": "Test",
       "requirement_type": null,
       "title": "reqtrace_tests",
@@ -809,11 +809,11 @@
         "end": 103
       },
       "derived_from": [
-        "REQ5.3"
+        "REQ-bofud"
       ]
     },
-    "UT15": {
-      "id": "UT15",
+    "UT-rulad": {
+      "id": "UT-rulad",
       "item_type": "Test",
       "requirement_type": null,
       "title": "reqtrace_tests",
@@ -823,11 +823,11 @@
         "end": 103
       },
       "derived_from": [
-        "REQ6.1"
+        "REQ-kuguj"
       ]
     },
-    "UT16": {
-      "id": "UT16",
+    "UT-zolag": {
+      "id": "UT-zolag",
       "item_type": "Test",
       "requirement_type": null,
       "title": "reqtrace_tests",
@@ -837,11 +837,11 @@
         "end": 103
       },
       "derived_from": [
-        "REQ6.2"
+        "REQ-zapaj"
       ]
     },
-    "UT17": {
-      "id": "UT17",
+    "UT-rivil": {
+      "id": "UT-rivil",
       "item_type": "Test",
       "requirement_type": null,
       "title": "reqtrace_tests",
@@ -851,11 +851,11 @@
         "end": 103
       },
       "derived_from": [
-        "REQ7.1"
+        "REQ-jomag"
       ]
     },
-    "UT18": {
-      "id": "UT18",
+    "UT-tusut": {
+      "id": "UT-tusut",
       "item_type": "Test",
       "requirement_type": null,
       "title": "tests",
@@ -865,11 +865,11 @@
         "end": 160
       },
       "derived_from": [
-        "REQ1.4"
+        "REQ-rimad"
       ]
     },
-    "UT19": {
-      "id": "UT19",
+    "UT-pisap": {
+      "id": "UT-pisap",
       "item_type": "Test",
       "requirement_type": null,
       "title": "tests",
@@ -879,11 +879,11 @@
         "end": 292
       },
       "derived_from": [
-        "REQ1.4"
+        "REQ-rimad"
       ]
     },
-    "UT2": {
-      "id": "UT2",
+    "UT-siris": {
+      "id": "UT-siris",
       "item_type": "Test",
       "requirement_type": null,
       "title": "tests",
@@ -893,11 +893,11 @@
         "end": 292
       },
       "derived_from": [
-        "REQ1.3"
+        "REQ-zaruh"
       ]
     },
-    "UT21": {
-      "id": "UT21",
+    "UT-palan": {
+      "id": "UT-palan",
       "item_type": "Test",
       "requirement_type": null,
       "title": "tests",
@@ -907,11 +907,11 @@
         "end": 292
       },
       "derived_from": [
-        "REQ1.3"
+        "REQ-zaruh"
       ]
     },
-    "UT22": {
-      "id": "UT22",
+    "UT-mozum": {
+      "id": "UT-mozum",
       "item_type": "Test",
       "requirement_type": null,
       "title": "tests",
@@ -921,11 +921,11 @@
         "end": 200
       },
       "derived_from": [
-        "REQ5.4"
+        "REQ-kitir"
       ]
     },
-    "UT23": {
-      "id": "UT23",
+    "UT-votar": {
+      "id": "UT-votar",
       "item_type": "Test",
       "requirement_type": null,
       "title": "reqtrace_tests",
@@ -935,11 +935,11 @@
         "end": 103
       },
       "derived_from": [
-        "REQ4.4"
+        "REQ-vakih"
       ]
     },
-    "UT24": {
-      "id": "UT24",
+    "UT-mijom": {
+      "id": "UT-mijom",
       "item_type": "Test",
       "requirement_type": null,
       "title": "tests",
@@ -949,11 +949,11 @@
         "end": 200
       },
       "derived_from": [
-        "REQ5.4"
+        "REQ-kitir"
       ]
     },
-    "UT25": {
-      "id": "UT25",
+    "UT-vakih": {
+      "id": "UT-vakih",
       "item_type": "Test",
       "requirement_type": null,
       "title": "tests",
@@ -963,11 +963,11 @@
         "end": 200
       },
       "derived_from": [
-        "REQ5.4"
+        "REQ-kitir"
       ]
     },
-    "UT26": {
-      "id": "UT26",
+    "UT-vugul": {
+      "id": "UT-vugul",
       "item_type": "Test",
       "requirement_type": null,
       "title": "tests",
@@ -977,11 +977,11 @@
         "end": 200
       },
       "derived_from": [
-        "REQ5.4"
+        "REQ-kitir"
       ]
     },
-    "UT27": {
-      "id": "UT27",
+    "UT-gamof": {
+      "id": "UT-gamof",
       "item_type": "Test",
       "requirement_type": null,
       "title": "tests",
@@ -991,11 +991,11 @@
         "end": 200
       },
       "derived_from": [
-        "REQ5.4"
+        "REQ-kitir"
       ]
     },
-    "UT28": {
-      "id": "UT28",
+    "UT-jafaf": {
+      "id": "UT-jafaf",
       "item_type": "Test",
       "requirement_type": null,
       "title": "tests",
@@ -1005,11 +1005,11 @@
         "end": 200
       },
       "derived_from": [
-        "REQ5.4"
+        "REQ-kitir"
       ]
     },
-    "UT29": {
-      "id": "UT29",
+    "UT-bofud": {
+      "id": "UT-bofud",
       "item_type": "Test",
       "requirement_type": null,
       "title": "tests",
@@ -1019,11 +1019,11 @@
         "end": 200
       },
       "derived_from": [
-        "REQ5.4"
+        "REQ-kitir"
       ]
     },
-    "UT3": {
-      "id": "UT3",
+    "UT-kitir": {
+      "id": "UT-kitir",
       "item_type": "Test",
       "requirement_type": null,
       "title": "tests",
@@ -1033,11 +1033,11 @@
         "end": 253
       },
       "derived_from": [
-        "REQ2.1"
+        "REQ-rulad"
       ]
     },
-    "UT4": {
-      "id": "UT4",
+    "UT-komop": {
+      "id": "UT-komop",
       "item_type": "Test",
       "requirement_type": null,
       "title": "tests",
@@ -1047,11 +1047,11 @@
         "end": 57
       },
       "derived_from": [
-        "REQ1.2"
+        "REQ-sivoh"
       ]
     },
-    "UT5": {
-      "id": "UT5",
+    "UT-kuguj": {
+      "id": "UT-kuguj",
       "item_type": "Test",
       "requirement_type": null,
       "title": "tests",
@@ -1061,11 +1061,11 @@
         "end": 253
       },
       "derived_from": [
-        "REQ2.1"
+        "REQ-rulad"
       ]
     },
-    "UT6": {
-      "id": "UT6",
+    "UT-zapaj": {
+      "id": "UT-zapaj",
       "item_type": "Test",
       "requirement_type": null,
       "title": "reqtrace_tests",
@@ -1075,11 +1075,11 @@
         "end": 103
       },
       "derived_from": [
-        "REQ1.1"
+        "REQ-vapik"
       ]
     },
-    "UT7": {
-      "id": "UT7",
+    "UT-puzun": {
+      "id": "UT-puzun",
       "item_type": "Test",
       "requirement_type": null,
       "title": "reqtrace_tests",
@@ -1089,11 +1089,11 @@
         "end": 103
       },
       "derived_from": [
-        "REQ2.2"
+        "REQ-zolag"
       ]
     },
-    "UT8": {
-      "id": "UT8",
+    "UT-jomag": {
+      "id": "UT-jomag",
       "item_type": "Test",
       "requirement_type": null,
       "title": "reqtrace_tests",
@@ -1103,11 +1103,11 @@
         "end": 103
       },
       "derived_from": [
-        "REQ3.1"
+        "REQ-tusut"
       ]
     },
-    "UT9": {
-      "id": "UT9",
+    "UT-litip": {
+      "id": "UT-litip",
       "item_type": "Test",
       "requirement_type": null,
       "title": "reqtrace_tests",
@@ -1117,7 +1117,7 @@
         "end": 103
       },
       "derived_from": [
-        "REQ4.1"
+        "REQ-palan"
       ]
     }
   }

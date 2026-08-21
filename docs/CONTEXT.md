@@ -13,7 +13,7 @@
 - **reqtrace CLI** — The command-line interface for executing one-off graph
   updates and validating the graph.
 - **Item ID** — A unique identifier of the form `<item type><id>` (e.g.,
-  `REQ1.1`, `ARCH-parser`), where `<id>` is a unique identifier within the scope
+  `REQ-vapik`, `ARCH-parser`), where `<id>` is a unique identifier within the scope
   of `<item type>`. The `<id>` can be hierarchical (e.g. `1.2.3`), camel-case,
   kebab-case, or an abbreviation.
 - **Item Type** — The classification of an item in the graph (e.g., requirement,
@@ -22,13 +22,13 @@
   prefix (e.g., `REQ`, `PERF`, `REL`) as configured in `.reqtrace/config.toml`.
 - **Comment Tag** — The syntax `[@<item id>@]` or similar, embedded within
   comments in source files (e.g., `// @ARCH-parser@` in Rust or
-  `<!-- @REQ1.1@ -->` in Markdown) to declare an item.
+  `<!-- @REQ-vapik@ -->` in Markdown) to declare an item.
 
 - **Link Declaration** — The syntax used in comments to define relationships
   between items, supporting both inline format (e.g.,
-  `// @ARCH-parser@ (FROM: @REQ1.1@)`) and multi-line list format for items with
+  `// @ARCH-parser@ (FROM: @REQ-vapik@)`) and multi-line list format for items with
   many parents (e.g., `// @ARCH-parser@ FROM:` followed by indent-listed IDs
-  like `//   REQ1.3 (title)`).
+  like `//   REQ-zaruh (title)`).
 - **Comment Formatting/Rewriting** — A feature of the `reqtrace CLI` that
   standardizes and updates the descriptive text alongside `Link Declarations` in
   source code comments or manual test documents to match the current

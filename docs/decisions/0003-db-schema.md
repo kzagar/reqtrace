@@ -24,8 +24,8 @@ We chose a flat key-value map of items keyed by their unique Item ID:
 ```json
 {
   "items": {
-    "REQ1.1": {
-      "id": "REQ1.1",
+    "REQ-vapik": {
+      "id": "REQ-vapik",
       "type": "Requirement",
       "requirement_type": "Functional",
       "title": "Email / password login",
@@ -39,7 +39,7 @@ We chose a flat key-value map of items keyed by their unique Item ID:
       "title": "File Parser Module",
       "file_path": "src/parser.rs",
       "line_number": 42,
-      "derived_from": ["REQ1.3", "REQ3.4"]
+      "derived_from": ["REQ-zaruh", "REQ-pisap"]
     }
   }
 }

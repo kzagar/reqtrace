@@ -2,7 +2,7 @@ use anyhow::Result;
 use serde::Deserialize;
 use std::path::PathBuf;
 
-// @IMP1.3@ (FROM: ARC1.3)
+// @IMP-sivoh@ (FROM: ARC-zaruh)
 #[derive(Debug, Deserialize, Clone)]
 pub struct Config {
     pub paths: Paths,
@@ -38,7 +38,7 @@ impl Config {
 mod tests {
     use super::*;
 
-    // @UT1@ (FROM: REQ5.2)
+    // @UT-gizih@ (FROM: REQ-jafaf)
     #[test]
     fn test_parse_valid_toml() {
         let toml = r#"
@@ -48,12 +48,12 @@ mod tests {
             db = ".reqtrace/db.json"
 
             [[types]]
-            prefix = "REQ"
+            prefix = "REQ-"
             item_type = "Requirement"
             requirement_type = "Functional"
 
             [[types]]
-            prefix = "ARCH"
+            prefix = "ARC-"
             item_type = "Architecture"
         "#;
 
@@ -61,7 +61,7 @@ mod tests {
         assert_eq!(config.paths.scan.len(), 2);
         assert_eq!(config.paths.db, PathBuf::from(".reqtrace/db.json"));
         assert_eq!(config.types.len(), 2);
-        assert_eq!(config.types[0].prefix, "REQ");
+        assert_eq!(config.types[0].prefix, "REQ-");
         assert_eq!(config.types[1].item_type, "Architecture");
     }
 }

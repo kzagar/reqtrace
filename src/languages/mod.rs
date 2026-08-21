@@ -5,7 +5,7 @@ pub mod python;
 #[cfg(feature = "rust")]
 pub mod rust;
 
-// @IMP2.3@ (FROM: @ARC2.3@)
+// @IMP-rimad@ (FROM: @ARC-zolag@)
 #[derive(Debug, Clone, PartialEq)]
 pub struct ParsedSymbol {
     pub name: String,

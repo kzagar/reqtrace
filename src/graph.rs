@@ -2,7 +2,7 @@ use crate::config::Config;
 use crate::scanner::{LineRange, RawItem};
 use std::collections::BTreeMap;
 
-// @IMP1.1@ (FROM: ARC1.1)
+// @IMP-gizih@ (FROM: ARC-vapik)
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub struct TraceItem {
     pub id: String,
@@ -19,7 +19,7 @@ pub struct Graph {
     pub items: BTreeMap<String, TraceItem>,
 }
 
-// @IMP3.1@ (FROM: ARC3.1)
+// @IMP-fuloz@ (FROM: ARC-tusut)
 #[derive(Debug, PartialEq)]
 pub enum ValidationIssue {
     Orphan(String),
@@ -147,7 +147,7 @@ mod tests {
     use super::*;
     use std::path::PathBuf;
 
-    // @UT3@ (FROM: REQ2.1)
+    // @UT-kitir@ (FROM: REQ-rulad)
     #[test]
     fn test_validation_orphan_and_broken() {
         let raw_items = vec![
@@ -196,7 +196,7 @@ mod tests {
         assert!(issues.contains(&ValidationIssue::Orphan("ARCH-2".into())));
     }
 
-    // @UT5@ (FROM: REQ2.1)
+    // @UT-kuguj@ (FROM: REQ-rulad)
     #[test]
     fn test_validation_untested_requirement() {
         let raw_items = vec![

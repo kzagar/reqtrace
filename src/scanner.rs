@@ -10,7 +10,7 @@ pub struct LineRange {
     pub end: usize,
 }
 
-// @IMP2.1@ (FROM: @REQ1.3@)
+// @IMP-zaruh@ (FROM: @REQ-zaruh@)
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize, PartialEq)]
 pub struct RawItem {
     pub id: String,
@@ -208,22 +208,22 @@ mod tests {
                 db: PathBuf::from("db.json"),
             },
             types: vec![TypeMapping {
-                prefix: "REQ".into(),
+                prefix: "REQ-".into(),
                 item_type: "Requirement".into(),
                 requirement_type: Some("Functional".into()),
             }],
         }
     }
 
-    // @UT2@ (FROM: @REQ1.3@)
+    // @UT-siris@ (FROM: @REQ-zaruh@)
     #[test]
     fn test_scan_markdown() {
         let content = r#"
-<!-- @REQ1.1@ -->
+<!-- @REQ-vapik@ -->
 ### Login feature
 Allows users to login.
 
-<!-- @REQ1.2@ (FROM: @REQ1.1@) -->
+<!-- @REQ-sivoh@ (FROM: @REQ-vapik@) -->
 ### Password hashing
 Passwords must be hashed.
 "#;
@@ -234,15 +234,15 @@ Passwords must be hashed.
         let items = scanner.scan_file(Path::new(temp_file)).unwrap();
 
         assert_eq!(items.len(), 2);
-        assert_eq!(items[0].id, "REQ1.1");
+        assert_eq!(items[0].id, "REQ-vapik");
         assert_eq!(items[0].title, "Login feature");
-        assert_eq!(items[1].id, "REQ1.2");
-        assert_eq!(items[1].derived_from, vec!["REQ1.1"]);
+        assert_eq!(items[1].id, "REQ-sivoh");
+        assert_eq!(items[1].derived_from, vec!["REQ-vapik"]);
 
         std::fs::remove_file(temp_file).unwrap();
     }
 
-    // @UT21@ (FROM: @REQ1.3@)
+    // @UT-palan@ (FROM: @REQ-zaruh@)
     #[test]
     fn test_scan_proquint() {
         let content = r#"
@@ -268,11 +268,11 @@ Testing legacy ID with proquint as parent.
         std::fs::remove_file(temp_file).unwrap();
     }
 
-    // @UT19@ (FROM: @REQ1.4@)
+    // @UT-pisap@ (FROM: @REQ-rimad@)
     #[test]
     fn test_scan_python() {
         let content = r#"
-# @REQ1.1@
+# @REQ-vapik@
 class Parent:
     def method_1(self):
         pass
@@ -284,7 +284,7 @@ class Parent:
         let items = scanner.scan_file(Path::new(temp_file)).unwrap();
 
         assert_eq!(items.len(), 1);
-        assert_eq!(items[0].id, "REQ1.1");
+        assert_eq!(items[0].id, "REQ-vapik");
         assert_eq!(items[0].title, "Parent");
 
         std::fs::remove_file(temp_file).unwrap();

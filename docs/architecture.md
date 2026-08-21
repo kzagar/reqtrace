@@ -7,84 +7,84 @@
 
 ## 1. Core Graph & Data Management
 
-<!-- @ARC1@ (FROM: @REQ1@) -->
+<!-- @ARC-gizih@ (FROM: @REQ-gizih@) -->
 ### Core Graph & Data Management
 The foundation of `reqtrace` that manages the in-memory representation and persistence of traceability items.
 
-<!-- @ARC1.1@ (FROM: @REQ1.1@) -->
+<!-- @ARC-vapik@ (FROM: @REQ-vapik@) -->
 ### Traceability Graph Model
 An in-memory directed graph where nodes are `TraceItem` objects (Requirements, Architecture, Tests) and edges represent `derived_from` relationships.
 
-<!-- @ARC1.2@ (FROM: @REQ1.2@) -->
+<!-- @ARC-sivoh@ (FROM: @REQ-sivoh@) -->
 ### JSON Database Serializer
 Handles reading and writing the `.reqtrace/db.json` file. Ensures stable, sorted, pretty-printed output for clean Git diffs.
 
-<!-- @ARC1.3@ (FROM: @REQ5.2@) -->
+<!-- @ARC-zaruh@ (FROM: @REQ-jafaf@) -->
 ### Configuration Loader
 Parses `.reqtrace/config.toml` to determine scan paths, ignore patterns, and ID-to-type mappings.
 
 ## 2. Extraction & Transformation
 
-<!-- @ARC2@ (FROM: @REQ1.3@, @REQ3@) -->
+<!-- @ARC-rimad@ (FROM: @REQ-zaruh@, @REQ-rivil@) -->
 ### Extraction & Transformation
 Logic for discovering tags in source files and keeping them in sync.
 
-<!-- @ARC2.1@ (FROM: @REQ1.3@) -->
+<!-- @ARC-fuloz@ (FROM: @REQ-zaruh@) -->
 ### Multi-Language File Scanner
 Recursively walks configured paths and uses regex-based parsers to extract tags and metadata (file, line, title) from Rust, Markdown, and other configured file types.
 
-<!-- @ARC2.3@ (FROM: @REQ1.4@) -->
+<!-- @ARC-zolag@ (FROM: @REQ-rimad@) -->
 ### Language Support Registry & Parsers
 An isolated plugin/registry architecture for parsing source code files. Each supported language (e.g. Rust, Python) implements a common parser interface to return structured symbol scopes and line ranges.
 
-<!-- @ARC2.2@ (FROM: @REQ3.1@) -->
+<!-- @ARC-rulad@ (FROM: @REQ-tusut@) -->
 ### Comment Formatter
 Rewrites source file comments to synchronize referenced item titles with the current state of the graph.
 
 ## 3. Analysis & Verification
 
-<!-- @ARC3@ (FROM: @REQ2@) -->
+<!-- @ARC-rivil@ (FROM: @REQ-fuloz@) -->
 ### Analysis & Verification
 Ensures the integrity of the traceability graph.
 
-<!-- @ARC3.1@ (FROM: @REQ2.1@) -->
+<!-- @ARC-tusut@ (FROM: @REQ-rulad@) -->
 ### Graph Validator
 Runs a suite of checks: orphan detection, broken link detection, cycle detection, and duplicate ID detection.
 
 ## 4. Interfaces & Integration
 
-<!-- @ARC4@ (FROM: @REQ4@, @REQ5@, @REQ7@) -->
+<!-- @ARC-pisap@ (FROM: @REQ-siris@, @REQ-vugul@, @REQ-puzun@) -->
 ### Interfaces & Integration
 How users and agents interact with `reqtrace`.
 
-<!-- @ARC4.1@ (FROM: @REQ5.1@, @REQ2.2@) -->
+<!-- @ARC-siris@ (FROM: @REQ-gamof@, @REQ-zolag@) -->
 ### CLI Command Dispatcher
 The entry point for `validate`, `update`, `server`, `export`, and `gen-id`
 commands. Built with `clap`.
 
-<!-- @ARC4.7@ (FROM: @REQ5.4@) -->
+<!-- @ARC-vugul@ (FROM: @REQ-kitir@) -->
 ### Proquint ID Generator
 Logic for generating unique, deterministic proquint identifiers. Uses a
 16-bit permutation (Feistel network) seeded by the project name hash to ensure
 a stable sequence and avoid collisions with existing IDs.
 
-<!-- @ARC4.2@ (FROM: @REQ4.1@) -->
+<!-- @ARC-palan@ (FROM: @REQ-palan@) -->
 ### File Watcher
 Uses the `notify` crate to detect file changes and trigger graph re-scans in server mode.
 
-<!-- @ARC4.3@ (FROM: @REQ4.2@, @REQ5.3@) -->
+<!-- @ARC-mozum@ (FROM: @REQ-mozum@, @REQ-bofud@) -->
 ### Visualization Engine
 Generates an interactive D3.js or similar graph visualization. Served dynamically by the server or exported as a standalone HTML file.
 
-<!-- @ARC4.4@ (FROM: @REQ4.3@, @REQ4.3.1@) -->
+<!-- @ARC-votar@ (FROM: @REQ-votar@, @REQ-mijom@) -->
 ### MCP SSE Server
 Exposes the Traceability Graph via Model Context Protocol over HTTP/SSE, allowing AI agents to query context and implementation details.
 
-<!-- @ARC4.5@ (FROM: @REQ7.1@) -->
+<!-- @ARC-mijom@ (FROM: @REQ-jomag@) -->
 ### LSP Client Integration
 Optional component that connects to a local Language Server to resolve exact source ranges and code snippets for architectural items.
 
-<!-- @ARC4.6@ (FROM: @REQ4.4@) -->
+<!-- @ARC-vakih@ (FROM: @REQ-vakih@) -->
 ### Feature Gating Configuration
 Cargo feature flags (`cli`, `server`, `mcp`) that compile modules conditionally, excluding parser/web server/CLI dependencies to minimize compilation time and binary size when those environments are not needed.
 
@@ -92,22 +92,22 @@ Cargo feature flags (`cli`, `server`, `mcp`) that compile modules conditionally,
 
 | Requirement | Covered by | Notes |
 | ----------- | ---------- | ----- |
-| @REQ1.1@    | @ARC1.1@   |       |
-| @REQ1.2@    | @ARC1.2@   |       |
-| @REQ1.3@    | @ARC2.1@   |       |
-| @REQ1.4@    | @ARC2.3@   |       |
-| @REQ2.1@    | @ARC3.1@   |       |
-| @REQ2.2@    | @ARC4.1@   |       |
-| @REQ3.1@    | @ARC2.2@   |       |
-| @REQ4.1@    | @ARC4.2@   |       |
-| @REQ4.2@    | @ARC4.3@   |       |
-| @REQ4.3@    | @ARC4.4@   |       |
-| @REQ4.3.1@  | @ARC4.4@   |       |
-| @REQ4.4@    | @ARC4.6@   |       |
-| @REQ5.1@    | @ARC4.1@   |       |
-| @REQ5.4@    | @ARC4.7@   |       |
-| @REQ5.2@    | @ARC1.3@   |       |
-| @REQ5.3@    | @ARC4.3@   |       |
-| @REQ6.1@    | —          | CI/CD concern (deployment) |
-| @REQ6.2@    | —          | CI/CD concern (action/ dir) |
-| @REQ7.1@    | @ARC4.5@   |       |
+| @REQ-vapik@    | @ARC-vapik@   |       |
+| @REQ-sivoh@    | @ARC-sivoh@   |       |
+| @REQ-zaruh@    | @ARC-fuloz@   |       |
+| @REQ-rimad@    | @ARC-zolag@   |       |
+| @REQ-rulad@    | @ARC-tusut@   |       |
+| @REQ-zolag@    | @ARC-siris@   |       |
+| @REQ-tusut@    | @ARC-rulad@   |       |
+| @REQ-palan@    | @ARC-palan@   |       |
+| @REQ-mozum@    | @ARC-mozum@   |       |
+| @REQ-votar@    | @ARC-votar@   |       |
+| @REQ-mijom@  | @ARC-votar@   |       |
+| @REQ-vakih@    | @ARC-vakih@   |       |
+| @REQ-gamof@    | @ARC-siris@   |       |
+| @REQ-kitir@    | @ARC-vugul@   |       |
+| @REQ-jafaf@    | @ARC-zaruh@   |       |
+| @REQ-bofud@    | @ARC-mozum@   |       |
+| @REQ-kuguj@    | —          | CI/CD concern (deployment) |
+| @REQ-zapaj@    | —          | CI/CD concern (action/ dir) |
+| @REQ-jomag@    | @ARC-mijom@   |       |

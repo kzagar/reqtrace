@@ -123,7 +123,7 @@ impl LanguageParser for PythonParser {
 mod tests {
     use super::*;
 
-    // @UT18@ (FROM: @REQ1.4@)
+    // @UT-tusut@ (FROM: @REQ-rimad@)
     #[test]
     fn test_python_parsing() {
         let content = r#"

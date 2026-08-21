@@ -5,7 +5,7 @@ use crate::scanner::Scanner;
 use anyhow::Result;
 use clap::{Parser, Subcommand};
 
-// @IMP4.1@ (FROM: ARC4.1)
+// @IMP-rulad@ (FROM: ARC-siris)
 #[derive(Parser)]
 #[command(name = "reqtrace")]
 #[command(about = "Systems and software engineering tooling for establishing traceability to requirements", long_about = None)]
@@ -30,8 +30,8 @@ pub enum Commands {
     },
     /// Generate the next proquint ID
     GenId {
-        /// The prefix for the ID (e.g., REQ, ARC)
-        #[arg(short, long, default_value = "REQ")]
+        /// The prefix for the ID (e.g., REQ-, ARC-)
+        #[arg(short, long, default_value = "REQ-")]
         prefix: String,
     },
 }
@@ -49,12 +49,12 @@ pub async fn run() -> Result<()> {
             },
             types: vec![
                 crate::config::TypeMapping {
-                    prefix: "REQ".into(),
+                    prefix: "REQ-".into(),
                     item_type: "Requirement".into(),
                     requirement_type: Some("Functional".into()),
                 },
                 crate::config::TypeMapping {
-                    prefix: "ARC".into(),
+                    prefix: "ARC-".into(),
                     item_type: "Architecture".into(),
                     requirement_type: None,
                 },

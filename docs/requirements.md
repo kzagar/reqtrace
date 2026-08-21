@@ -14,14 +14,14 @@ of the codebase.
 
 ## 1. Graph Model & Database
 
-<!-- @REQ1@ -->
+<!-- @REQ-gizih@ -->
 
 ### Graph Model & Database
 
 `reqtrace` SHALL maintain an in-memory graph of all traceability items and
 serialize it into a version-controlled database.
 
-<!-- @REQ1.1@ (FROM: @REQ1@) -->
+<!-- @REQ-vapik@ (FROM: @REQ-gizih@) -->
 
 ### Traceability Graph Representation
 
@@ -38,7 +38,7 @@ Architectural items, and Tests.
     - THEN the graph contains these nodes with correct metadata and link
       relationships
 
-<!-- @REQ1.2@ (FROM: @REQ1@) -->
+<!-- @REQ-sivoh@ (FROM: @REQ-gizih@) -->
 
 ### Database Storage
 
@@ -55,7 +55,7 @@ pretty-printed, key-sorted, single-item-per-line JSON format.
     - AND the JSON keys are sorted alphabetically
     - AND the indentation is standardized to ensure clean Git diffs
 
-<!-- @REQ1.3@ (FROM: @REQ1@) -->
+<!-- @REQ-zaruh@ (FROM: @REQ-gizih@) -->
 
 ### Parser and File Scanner
 
@@ -68,12 +68,12 @@ annotations.
 - Acceptance:
   - Scenario: Scanning files for tags
     - GIVEN a project containing source files with tag comments (e.g.,
-      `// @ARCH-parser@` or `<!-- @REQ1.1@ -->`)
+      `// @ARCH-parser@` or `<!-- @REQ-vapik@ -->`)
     - WHEN the scanner is run
     - THEN it finds all tagged items and adds them to the graph with their file
       paths and line numbers
 
-<!-- @REQ1.4@ (FROM: @REQ1.3@) -->
+<!-- @REQ-rimad@ (FROM: @REQ-zaruh@) -->
 
 ### Python Language Support
 
@@ -86,7 +86,7 @@ lines.
 - Acceptance:
   - Scenario: Scanning Python files
     - GIVEN a Python file containing a class and def method with tag comments
-      (e.g., `# @IMP1.1@`)
+      (e.g., `# @IMP-gizih@`)
     - WHEN the scanner is run
     - THEN it resolves the tag to the class/method scope and correctly sets
       the start and end line ranges.
@@ -95,14 +95,14 @@ lines.
 
 ## 2. Validation & Checking
 
-<!-- @REQ2@ -->
+<!-- @REQ-fuloz@ -->
 
 ### Validation & Checking
 
 `reqtrace` SHALL validate the traceability graph and detect gaps or
 inconsistencies.
 
-<!-- @REQ2.1@ (FROM: @REQ2@) -->
+<!-- @REQ-rulad@ (FROM: @REQ-fuloz@) -->
 
 ### Traceability Issue Detection
 
@@ -119,12 +119,12 @@ The system SHALL detect the following validation issues:
 - Rationale: Detects gaps in verification and implementation.
 - Acceptance:
   - Scenario: Identifying orphan architecture items
-    - GIVEN a graph with a requirement `@REQ1.1@` and an architectural item
+    - GIVEN a graph with a requirement `@REQ-vapik@` and an architectural item
       `@ARCH-helper@` that does not link to any requirement
     - WHEN validation is executed
     - THEN the tool reports `@ARCH-helper@` as an orphan item
 
-<!-- @REQ2.2@ (FROM: @REQ2@) -->
+<!-- @REQ-zolag@ (FROM: @REQ-fuloz@) -->
 
 ### CLI Validation Validation Output
 
@@ -144,13 +144,13 @@ non-zero exit code if issues are found.
 
 ## 3. Comment Formatting & Updating
 
-<!-- @REQ3@ -->
+<!-- @REQ-rivil@ -->
 
 ### Comment Formatting & Updating
 
 `reqtrace` SHALL format and update reference comments in project source files.
 
-<!-- @REQ3.1@ (FROM: @REQ3@) -->
+<!-- @REQ-tusut@ (FROM: @REQ-rivil@) -->
 
 ### Standardizing Reference Comments
 
@@ -162,24 +162,24 @@ of the derived-from items.
   automatically.
 - Acceptance:
   - Scenario: Updating multi-line comments
-    - GIVEN a source file with `// @ARCH-parser@ FROM: REQ1.3`
+    - GIVEN a source file with `// @ARCH-parser@ FROM: REQ-zaruh`
     - WHEN the update CLI command is executed
     - THEN the comment is rewritten to
-      `// @ARCH-parser@ FROM:\n//   REQ1.3 (input file name is specified for parser)`
+      `// @ARCH-parser@ FROM:\n//   REQ-zaruh (input file name is specified for parser)`
     - AND the requirement title is appended in parentheses
 
 ---
 
 ## 4. Server Mode
 
-<!-- @REQ4@ -->
+<!-- @REQ-siris@ -->
 
 ### Server Mode
 
 `reqtrace` SHALL support a long-running daemon server that monitors files,
 serves a Web UI, and exposes an MCP server.
 
-<!-- @REQ4.1@ (FROM: @REQ4@) -->
+<!-- @REQ-palan@ (FROM: @REQ-siris@) -->
 
 ### Automatic Reloading
 
@@ -196,7 +196,7 @@ traceability graph dynamically upon any change.
     - THEN the server detects the change
     - AND updates the in-memory traceability graph automatically
 
-<!-- @REQ4.2@ (FROM: @REQ4@) -->
+<!-- @REQ-mozum@ (FROM: @REQ-siris@) -->
 
 ### Web UI & Interactive Graph Visualization
 
@@ -217,7 +217,7 @@ the server, sharing the same HTML/CSS/JS frontend as the static export.
     - AND nodes are color-coded and shaped according to their type (Requirement,
       Architecture, or Test)
 
-<!-- @REQ4.3@ (FROM: @REQ4@) -->
+<!-- @REQ-votar@ (FROM: @REQ-siris@) -->
 
 ### MCP Server
 
@@ -234,7 +234,7 @@ the same port to allow agents to query the graph.
     - THEN the server returns the requested node metadata from the warmed
       in-memory graph
 
-<!-- @REQ4.3.1@ (FROM: @REQ4.3@) -->
+<!-- @REQ-mijom@ (FROM: @REQ-votar@) -->
 
 ### MCP Tool for Context Retrieval
 
@@ -245,17 +245,17 @@ corresponding source code implementations resolved via the Language Server.
 - Priority: MUST
 - Rationale: Allows AI agents to gather full implementation context and
   traceability links for specific requirements or code components.
-- Related: @REQ7.1@
+- Related: @REQ-jomag@
 - Acceptance:
   - Scenario: Retrieve context for a requirement ID
     - GIVEN the MCP server is active and LSP is available
-    - WHEN the tool is called with `["REQ1.1"]`
-    - THEN it returns the metadata for `REQ1.1`
+    - WHEN the tool is called with `["REQ-vapik"]`
+    - THEN it returns the metadata for `REQ-vapik`
     - AND it returns its linked architecture and test items
     - AND it returns the source code snippets implementing those
       architectural/test items resolved via the Language Server
 
-<!-- @REQ4.4@ (FROM: @REQ4@) -->
+<!-- @REQ-vakih@ (FROM: @REQ-siris@) -->
 
 ### Feature Gating
 
@@ -275,14 +275,14 @@ Server Mode, and MCP Server—using Cargo feature flags.
 
 ## 5. CLI Operations
 
-<!-- @REQ5@ -->
+<!-- @REQ-vugul@ -->
 
 ### CLI Operations
 
 `reqtrace` SHALL provide a command-line interface for running the server,
 updating comment headers, and validating the graph.
 
-<!-- @REQ5.1@ (FROM: @REQ5@) -->
+<!-- @REQ-gamof@ (FROM: @REQ-vugul@) -->
 
 ### CLI Commands
 
@@ -299,7 +299,7 @@ proquint identifiers).
     - THEN it lists `server`, `update`, `validate`, `export`, and `gen-id` as
       available subcommands
 
-<!-- @REQ5.4@ (FROM: @REQ5.1@) -->
+<!-- @REQ-kitir@ (FROM: @REQ-gamof@) -->
 
 ### ID Generation
 
@@ -315,7 +315,7 @@ identifier based on a deterministic sequence seeded by the project name.
     - THEN it outputs the next available ID in the proquint sequence
     - AND the outputted ID does not conflict with any existing IDs
 
-<!-- @REQ5.2@ (FROM: @REQ5@) -->
+<!-- @REQ-jafaf@ (FROM: @REQ-vugul@) -->
 
 ### Configuration File Parsing
 
@@ -331,7 +331,7 @@ details.
     - THEN it exits with a descriptive error message indicating configuration
       loading failed
 
-<!-- @REQ5.3@ (FROM: @REQ5@) -->
+<!-- @REQ-bofud@ (FROM: @REQ-vugul@) -->
 
 ### Static HTML Graph Export
 
@@ -354,14 +354,14 @@ directly into it.
 
 ## 6. Deployment & CI/CD
 
-<!-- @REQ6@ -->
+<!-- @REQ-komop@ -->
 
 ### Deployment & CI/CD
 
 `reqtrace` SHALL support multi-platform pre-compiled releases and a GitHub
 Action.
 
-<!-- @REQ6.1@ (FROM: @REQ6@) -->
+<!-- @REQ-kuguj@ (FROM: @REQ-komop@) -->
 
 ### Pre-compiled Releases
 
@@ -376,7 +376,7 @@ The tool SHALL build and publish pre-compiled executable releases for Linux
     - WHEN run in a standard 64-bit Windows environment
     - THEN it starts without dynamic linking failures
 
-<!-- @REQ6.2@ (FROM: @REQ6@) -->
+<!-- @REQ-zapaj@ (FROM: @REQ-komop@) -->
 
 ### Custom GitHub Action
 
@@ -397,14 +397,14 @@ validation.
 
 ## 7. Language Server Integration
 
-<!-- @REQ7@ -->
+<!-- @REQ-puzun@ -->
 
 ### Language Server Integration
 
 `reqtrace` SHALL integrate with Language Servers to resolve source code
 locations and details.
 
-<!-- @REQ7.1@ (FROM: @REQ7@) -->
+<!-- @REQ-jomag@ (FROM: @REQ-puzun@) -->
 
 ### LSP Source Location Resolution
 

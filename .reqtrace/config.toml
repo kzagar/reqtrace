@@ -4,22 +4,22 @@ ignore = ["target", ".git"]
 db = ".reqtrace/db.json"
 
 [[types]]
-prefix = "REQ"
+prefix = "REQ-"
 item_type = "Requirement"
 requirement_type = "Functional"
 
 [[types]]
-prefix = "ARC"
+prefix = "ARC-"
 item_type = "Architecture"
 
 [[types]]
-prefix = "IMP"
+prefix = "IMP-"
 item_type = "Implementation"
 
 [[types]]
-prefix = "UT"
+prefix = "UT-"
 item_type = "Test"
 
 [[types]]
-prefix = "IT"
+prefix = "IT-"
 item_type = "Test"

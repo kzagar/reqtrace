@@ -3,7 +3,7 @@ use anyhow::Result;
 use std::fs::File;
 use std::path::Path;
 
-// @IMP1.2@ (FROM: ARC1.2)
+// @IMP-vapik@ (FROM: ARC-sivoh)
 pub struct Serializer;
 
 impl Serializer {
@@ -27,14 +27,14 @@ mod tests {
     use std::collections::BTreeMap;
     use std::path::PathBuf;
 
-    // @UT4@ (FROM: REQ1.2)
+    // @UT-komop@ (FROM: REQ-sivoh)
     #[test]
     fn test_serialization() {
         let mut items = BTreeMap::new();
         items.insert(
-            "REQ1".into(),
+            "REQ-gizih".into(),
             TraceItem {
-                id: "REQ1".into(),
+                id: "REQ-gizih".into(),
                 item_type: "Requirement".into(),
                 requirement_type: Some("Functional".into()),
                 title: "Req 1".into(),
@@ -50,7 +50,7 @@ mod tests {
 
         let loaded = Serializer::load(path).unwrap();
         assert_eq!(loaded.items.len(), 1);
-        assert_eq!(loaded.items["REQ1"].title, "Req 1");
+        assert_eq!(loaded.items["REQ-gizih"].title, "Req 1");
 
         std::fs::remove_file(path).unwrap();
     }

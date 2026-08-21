@@ -116,7 +116,7 @@ pub fn generate_next_id(prefix: &str, existing_ids: &HashSet<String>) -> anyhow:
 mod tests {
     use super::*;
 
-    // @UT22@ (FROM: @REQ5.4@)
+    // @UT-mozum@ (FROM: @REQ-kitir@)
     #[test]
     fn test_permutation() {
         let seed = 12345;
@@ -127,7 +127,7 @@ mod tests {
         }
     }
 
-    // @UT24@ (FROM: @REQ5.4@)
+    // @UT-mijom@ (FROM: @REQ-kitir@)
     #[test]
     fn test_permutation_full_range_is_bijective() {
         let seed = 987654321;
@@ -140,7 +140,7 @@ mod tests {
         assert_eq!(seen.len(), 65536);
     }
 
-    // @UT25@ (FROM: @REQ5.4@)
+    // @UT-vakih@ (FROM: @REQ-kitir@)
     #[test]
     fn test_permutation_different_seeds_diverge() {
         let a = permute(42, 1);
@@ -148,7 +148,7 @@ mod tests {
         assert_ne!(a, b);
     }
 
-    // @UT26@ (FROM: @REQ5.4@)
+    // @UT-vugul@ (FROM: @REQ-kitir@)
     #[test]
     fn test_generate_next_id_empty_set() {
         let existing = HashSet::new();
@@ -156,7 +156,7 @@ mod tests {
         assert!(id.starts_with("REQ-"));
     }
 
-    // @UT27@ (FROM: @REQ5.4@)
+    // @UT-gamof@ (FROM: @REQ-kitir@)
     #[test]
     fn test_generate_next_id_does_not_collide() {
         let mut existing = HashSet::new();
@@ -169,7 +169,7 @@ mod tests {
         }
     }
 
-    // @UT28@ (FROM: @REQ5.4@)
+    // @UT-jafaf@ (FROM: @REQ-kitir@)
     #[test]
     fn test_generate_next_id_ignores_other_prefixes() {
         let mut existing = HashSet::new();
@@ -184,7 +184,7 @@ mod tests {
         assert!(!existing.contains(&req_id));
     }
 
-    // @UT29@ (FROM: @REQ5.4@)
+    // @UT-bofud@ (FROM: @REQ-kitir@)
     #[test]
     fn test_generate_next_id_exhausted_returns_error() {
         let project_name = get_project_name();

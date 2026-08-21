@@ -1,4 +1,4 @@
-// @IMP4.6@ (FROM: @ARC4.6@)
+// @IMP-rivil@ (FROM: @ARC-vakih@)
 #[cfg(feature = "cli")]
 pub mod cli;
 pub mod config;
@@ -23,79 +23,79 @@ fn main() {
 
 #[cfg(test)]
 mod reqtrace_tests {
-    // @UT6@ (FROM: REQ1.1)
+    // @UT-zapaj@ (FROM: REQ-vapik)
     #[test]
     fn test_requirement_graph_representation() {
         // This requirement is covered by the core logic of Graph::build
     }
 
-    // @UT7@ (FROM: REQ2.2)
+    // @UT-puzun@ (FROM: REQ-zolag)
     #[test]
     fn test_cli_validation_output() {
         // This requirement is covered by the Cli::run logic for Commands::Validate
     }
 
-    // @UT8@ (FROM: REQ3.1)
+    // @UT-jomag@ (FROM: REQ-tusut)
     #[test]
     fn test_reference_comment_standardization() {
         // This requirement is planned for the update command
     }
 
-    // @UT9@ (FROM: REQ4.1)
+    // @UT-litip@ (FROM: REQ-palan)
     #[test]
     fn test_automatic_reloading() {
         // This requirement is covered by the server's notify integration
     }
 
-    // @UT10@ (FROM: REQ4.2)
+    // @UT-vapik@ (FROM: REQ-mozum)
     #[test]
     fn test_web_ui_visualization() {
         // This requirement is covered by the server's axum routes
     }
 
-    // @UT11@ (FROM: REQ4.3)
+    // @UT-sivoh@ (FROM: REQ-votar)
     #[test]
     fn test_mcp_server() {
         // This requirement is covered by the MCP SSE endpoint
     }
 
-    // @UT12@ (FROM: REQ4.3.1)
+    // @UT-zaruh@ (FROM: REQ-mijom)
     #[test]
     fn test_mcp_tool_context_retrieval() {
         // This requirement is covered by the MCP tool implementation
     }
 
-    // @UT13@ (FROM: REQ5.1)
+    // @UT-rimad@ (FROM: REQ-gamof)
     #[test]
     fn test_cli_commands() {
         // This requirement is covered by the clap derive in Cli
     }
 
-    // @UT14@ (FROM: REQ5.3)
+    // @UT-fuloz@ (FROM: REQ-bofud)
     #[test]
     fn test_static_html_export() {
         // This requirement is covered by the export command
     }
 
-    // @UT15@ (FROM: REQ6.1)
+    // @UT-rulad@ (FROM: REQ-kuguj)
     #[test]
     fn test_pre_compiled_releases() {
         // This requirement is covered by CI/CD
     }
 
-    // @UT16@ (FROM: REQ6.2)
+    // @UT-zolag@ (FROM: REQ-zapaj)
     #[test]
     fn test_custom_github_action() {
         // This requirement is covered by the action/ directory
     }
 
-    // @UT17@ (FROM: REQ7.1)
+    // @UT-rivil@ (FROM: REQ-jomag)
     #[test]
     fn test_lsp_source_location_resolution() {
         // This requirement is covered by the LSP client integration
     }
 
-    // @UT23@ (FROM: @REQ4.4@)
+    // @UT-votar@ (FROM: @REQ-vakih@)
     #[test]
     fn test_feature_gating() {
         // This requirement is covered by the conditional compilation guards
