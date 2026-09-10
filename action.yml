@@ -1,0 +1,56 @@
+name: 'reqtrace Traceability Action'
+description: 'Downloads pre-compiled reqtrace executable and validates traceability graph'
+author: 'kzagar'
+
+inputs:
+  version:
+    description: 'reqtrace release version (e.g. v0.1.1 or latest)'
+    required: false
+    default: 'v0.1.1'
+  args:
+    description: 'Arguments to pass to reqtrace'
+    required: false
+    default: 'validate'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Download and install reqtrace
+      shell: bash
+      run: |
+        VERSION="${{ inputs.version }}"
+        if [ "$VERSION" = "latest" ]; then
+          VERSION="v0.1.1"
+        fi
+        if [[ ! "$VERSION" =~ ^v ]]; then
+          VERSION="v$VERSION"
+        fi
+
+        OS="${{ runner.os }}"
+        case "$OS" in
+          Linux)
+            ASSET="reqtrace-x86_64-unknown-linux-gnu"
+            BINARY_NAME="reqtrace"
+            ;;
+          Windows)
+            ASSET="reqtrace-x86_64-pc-windows-msvc.exe"
+            BINARY_NAME="reqtrace.exe"
+            ;;
+          *)
+            echo "Unsupported runner OS: $OS" >&2
+            exit 1
+            ;;
+        esac
+
+        INSTALL_DIR="$RUNNER_TEMP/reqtrace-bin"
+        mkdir -p "$INSTALL_DIR"
+        URL="https://github.com/kzagar/reqtrace/releases/download/${VERSION}/${ASSET}"
+        echo "Downloading reqtrace ($VERSION) from $URL..."
+        curl -fsSL "$URL" -o "$INSTALL_DIR/$BINARY_NAME"
+        chmod +x "$INSTALL_DIR/$BINARY_NAME"
+        echo "$INSTALL_DIR" >> "$GITHUB_PATH"
+
+    - name: Run reqtrace
+      shell: bash
+      run: |
+        reqtrace ${{ inputs.args }}
