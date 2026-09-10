@@ -4,9 +4,9 @@ author: 'kzagar'
 
 inputs:
   version:
-    description: 'reqtrace release version (e.g. v0.1.1 or latest)'
+    description: 'reqtrace release version (e.g. latest or v0.1.1)'
     required: false
-    default: 'v0.1.1'
+    default: 'latest'
   args:
     description: 'Arguments to pass to reqtrace'
     required: false
@@ -19,12 +19,6 @@ runs:
       shell: bash
       run: |
         VERSION="${{ inputs.version }}"
-        if [ "$VERSION" = "latest" ]; then
-          VERSION="v0.1.1"
-        fi
-        if [[ ! "$VERSION" =~ ^v ]]; then
-          VERSION="v$VERSION"
-        fi
 
         OS="${{ runner.os }}"
         case "$OS" in
@@ -44,7 +38,16 @@ runs:
 
         INSTALL_DIR="$RUNNER_TEMP/reqtrace-bin"
         mkdir -p "$INSTALL_DIR"
-        URL="https://github.com/kzagar/reqtrace/releases/download/${VERSION}/${ASSET}"
+
+        if [ "$VERSION" = "latest" ]; then
+          URL="https://github.com/kzagar/reqtrace/releases/latest/download/${ASSET}"
+        else
+          if [[ ! "$VERSION" =~ ^v ]]; then
+            VERSION="v$VERSION"
+          fi
+          URL="https://github.com/kzagar/reqtrace/releases/download/${VERSION}/${ASSET}"
+        fi
+
         echo "Downloading reqtrace ($VERSION) from $URL..."
         curl -fsSL "$URL" -o "$INSTALL_DIR/$BINARY_NAME"
         chmod +x "$INSTALL_DIR/$BINARY_NAME"
