@@ -399,8 +399,8 @@
       "title": "RawItem",
       "file_path": "src/scanner.rs",
       "line_range": {
-        "start": 14,
-        "end": 21
+        "start": 15,
+        "end": 22
       },
       "derived_from": [
         "REQ-zaruh"
@@ -973,8 +973,8 @@
       "title": "tests",
       "file_path": "src/scanner.rs",
       "line_range": {
-        "start": 198,
-        "end": 292
+        "start": 266,
+        "end": 396
       },
       "derived_from": [
         "REQ-zaruh"
@@ -987,8 +987,8 @@
       "title": "tests",
       "file_path": "src/scanner.rs",
       "line_range": {
-        "start": 198,
-        "end": 292
+        "start": 266,
+        "end": 396
       },
       "derived_from": [
         "REQ-rimad"
@@ -1057,8 +1057,8 @@
       "title": "tests",
       "file_path": "src/scanner.rs",
       "line_range": {
-        "start": 198,
-        "end": 292
+        "start": 266,
+        "end": 396
       },
       "derived_from": [
         "REQ-zaruh"

@@ -1,5 +1,6 @@
 use crate::config::Config;
 use anyhow::Result;
+use globset::{Glob, GlobSet, GlobSetBuilder};
 use regex::Regex;
 use std::path::{Path, PathBuf};
 use walkdir::WalkDir;
@@ -25,22 +26,74 @@ pub struct Scanner {
     tag_regex: Regex,
     from_regex: Regex,
     id_regex: Regex,
+    ignore_globset: GlobSet,
 }
 
 impl Scanner {
     pub fn new(config: Config) -> Result<Self> {
+        let mut builder = GlobSetBuilder::new();
+        if let Some(ref ignore_patterns) = config.paths.ignore {
+            for raw_pat in ignore_patterns {
+                let pat = raw_pat.trim().replace('\\', "/");
+                if pat.is_empty() {
+                    continue;
+                }
+                if let Ok(glob) = Glob::new(&pat) {
+                    builder.add(glob);
+                }
+                if !pat.contains('/')
+                    && let Ok(glob) = Glob::new(&format!("**/{}", pat))
+                {
+                    builder.add(glob);
+                }
+                let trimmed = pat.trim_end_matches('/');
+                if !trimmed.ends_with('*') {
+                    if let Ok(glob) = Glob::new(&format!("{}/**", trimmed)) {
+                        builder.add(glob);
+                    }
+                    if let Ok(glob) =
+                        Glob::new(&format!("**/{}/**", trimmed.trim_start_matches('/')))
+                    {
+                        builder.add(glob);
+                    }
+                    if let Ok(glob) = Glob::new(&format!("**/{}", trimmed.trim_start_matches('/')))
+                    {
+                        builder.add(glob);
+                    }
+                } else if pat.ends_with("/**") || pat.ends_with("/*") {
+                    let dir_prefix = pat.trim_end_matches('*').trim_end_matches('/');
+                    if !dir_prefix.is_empty() {
+                        if let Ok(glob) = Glob::new(dir_prefix) {
+                            builder.add(glob);
+                        }
+                        if let Ok(glob) =
+                            Glob::new(&format!("**/{}", dir_prefix.trim_start_matches('/')))
+                        {
+                            builder.add(glob);
+                        }
+                    }
+                }
+            }
+        }
+        let ignore_globset = builder.build()?;
+
         Ok(Self {
             config,
             tag_regex: Regex::new(r"(?P<full>@(?P<id>[a-zA-Z0-9][a-zA-Z0-9\.\-]*)@)")?,
             from_regex: Regex::new(r"FROM:\s*(@?[a-zA-Z0-9\.\-]+(?:\s*,\s*@?[a-zA-Z0-9\.\-]+)*)")?,
             id_regex: Regex::new(r"@?([a-zA-Z0-9][a-zA-Z0-9\.\-]*)@?")?,
+            ignore_globset,
         })
     }
 
     pub fn scan_all(&self) -> Result<Vec<RawItem>> {
         let mut items = Vec::new();
         for root in &self.config.paths.scan {
-            for entry in WalkDir::new(root).into_iter().filter_map(|e| e.ok()) {
+            for entry in WalkDir::new(root)
+                .into_iter()
+                .filter_entry(|e| !self.should_ignore(e.path()))
+                .filter_map(|e| e.ok())
+            {
                 if entry.file_type().is_file() {
                     let path = entry.path();
                     if self.should_ignore(path) {
@@ -56,16 +109,31 @@ impl Scanner {
         Ok(items)
     }
 
-    fn should_ignore(&self, path: &Path) -> bool {
-        if let Some(ignore) = &self.config.paths.ignore {
-            let path_str = path.to_string_lossy();
-            return ignore.iter().any(|p| path_str.contains(p));
+    pub fn should_ignore(&self, path: &Path) -> bool {
+        let path_str = path.to_string_lossy().replace('\\', "/");
+        let clean_path = path_str.trim_start_matches("./");
+
+        if self.ignore_globset.is_match(clean_path) {
+            return true;
         }
+
+        if let Some(file_name) = path.file_name().and_then(|n| n.to_str())
+            && self.ignore_globset.is_match(file_name)
+        {
+            return true;
+        }
+
         false
     }
 
     pub fn scan_file(&self, path: &Path) -> Result<Vec<RawItem>> {
-        let content = std::fs::read_to_string(path)?;
+        let content = match std::fs::read_to_string(path) {
+            Ok(c) => c,
+            Err(e) if e.kind() == std::io::ErrorKind::InvalidData => {
+                return Ok(Vec::new());
+            }
+            Err(e) => return Err(e.into()),
+        };
         let mut file_items = Vec::new();
         let lines: Vec<&str> = content.lines().collect();
 
@@ -288,5 +356,41 @@ class Parent:
         assert_eq!(items[0].title, "Parent");
 
         std::fs::remove_file(temp_file).unwrap();
+    }
+
+    #[test]
+    fn test_should_ignore_glob_patterns() {
+        let config = Config {
+            paths: Paths {
+                scan: vec![],
+                ignore: Some(vec![
+                    "target/**".into(),
+                    ".git/**".into(),
+                    "node_modules/**".into(),
+                    "dist/**".into(),
+                    ".venv/**".into(),
+                    "venv/**".into(),
+                    "**/*.pyc".into(),
+                    "**/__pycache__/**".into(),
+                ]),
+                db: PathBuf::from("db.json"),
+            },
+            types: vec![],
+        };
+
+        let scanner = Scanner::new(config).unwrap();
+
+        assert!(scanner.should_ignore(Path::new(
+            "src/appmgr/admin/__pycache__/__init__.cpython-313.pyc"
+        )));
+        assert!(scanner.should_ignore(Path::new("src/appmgr/__pycache__")));
+        assert!(scanner.should_ignore(Path::new("tests/unit/test.pyc")));
+        assert!(scanner.should_ignore(Path::new("target/debug/reqtrace")));
+        assert!(scanner.should_ignore(Path::new(".git/HEAD")));
+        assert!(scanner.should_ignore(Path::new(".venv/lib/python3.12/site-packages/pkg")));
+
+        assert!(!scanner.should_ignore(Path::new("src/appmgr/admin/app.py")));
+        assert!(!scanner.should_ignore(Path::new("docs/requirements.md")));
+        assert!(!scanner.should_ignore(Path::new("tests/unit/test_app.py")));
     }
 }
