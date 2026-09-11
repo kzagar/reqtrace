@@ -233,7 +233,10 @@ mod tests {
         let mut seen = HashSet::new();
         for id in &batch {
             assert!(id.starts_with("REQ-"));
-            assert!(!existing.contains(id), "batch id {id} collided with existing id");
+            assert!(
+                !existing.contains(id),
+                "batch id {id} collided with existing id"
+            );
             assert!(seen.insert(id.clone()), "duplicate id {id} within batch");
         }
 
