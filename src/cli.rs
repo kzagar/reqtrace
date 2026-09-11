@@ -28,11 +28,14 @@ pub enum Commands {
         #[arg(short, long)]
         output: String,
     },
-    /// Generate the next proquint ID
+    /// Generate proquint identifiers
     GenId {
         /// The prefix for the ID (e.g., REQ-, ARC-)
         #[arg(short, long, default_value = "REQ-")]
         prefix: String,
+        /// Number of IDs to generate
+        #[arg(short, long, default_value_t = 1)]
+        count: usize,
     },
 }
 
@@ -92,14 +95,16 @@ pub async fn run() -> Result<()> {
         Commands::Server => {
             crate::server::start_server(config).await?;
         }
-        Commands::GenId { prefix } => {
+        Commands::GenId { prefix, count } => {
             let scanner = Scanner::new(config.clone())?;
             let raw_items = scanner.scan_all()?;
             let existing_ids: std::collections::HashSet<String> =
                 raw_items.into_iter().map(|it| it.id).collect();
 
-            let next_id = crate::id_gen::generate_next_id(prefix, &existing_ids)?;
-            println!("{}", next_id);
+            let ids = crate::id_gen::generate_ids(prefix, &existing_ids, *count)?;
+            for id in ids {
+                println!("{}", id);
+            }
         }
         // @IMP-mozum@ (FROM: @ARC-mozum@)
         Commands::Export { output } => {

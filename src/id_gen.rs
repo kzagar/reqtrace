@@ -73,7 +73,15 @@ fn unpermute(val: u16, seed: u64) -> u16 {
     ((l as u16) << 8) | (r as u16)
 }
 
-pub fn generate_next_id(prefix: &str, existing_ids: &HashSet<String>) -> anyhow::Result<String> {
+// @IMP-votar@ (FROM: @ARC-gamof@)
+pub fn generate_ids(
+    prefix: &str,
+    existing_ids: &HashSet<String>,
+    count: usize,
+) -> anyhow::Result<Vec<String>> {
+    if count == 0 {
+        return Ok(Vec::new());
+    }
     let project_name = get_project_name();
     let seed = hash_seed(&project_name);
 
@@ -93,14 +101,19 @@ pub fn generate_next_id(prefix: &str, existing_ids: &HashSet<String>) -> anyhow:
     }
 
     let mut next_idx = if has_any { max_idx.wrapping_add(1) } else { 0 };
+    let mut results = Vec::with_capacity(count);
+    let mut current_existing = existing_ids.clone();
 
     for _ in 0..65536 {
         let candidate_val = permute(next_idx, seed);
         let candidate_quint = candidate_val.to_quint();
         let candidate_id = format!("{}{}", prefix, candidate_quint);
 
-        if !existing_ids.contains(&candidate_id) {
-            return Ok(candidate_id);
+        if current_existing.insert(candidate_id.clone()) {
+            results.push(candidate_id);
+            if results.len() == count {
+                return Ok(results);
+            }
         }
 
         next_idx = next_idx.wrapping_add(1);
@@ -109,7 +122,16 @@ pub fn generate_next_id(prefix: &str, existing_ids: &HashSet<String>) -> anyhow:
         }
     }
 
-    anyhow::bail!("No available IDs left for prefix {}", prefix)
+    anyhow::bail!(
+        "No available IDs left for prefix {} (generated {} of {} requested)",
+        prefix,
+        results.len(),
+        count
+    )
+}
+
+pub fn generate_next_id(prefix: &str, existing_ids: &HashSet<String>) -> anyhow::Result<String> {
+    generate_ids(prefix, existing_ids, 1).map(|mut v| v.remove(0))
 }
 
 #[cfg(test)]
@@ -196,5 +218,26 @@ mod tests {
         }
         let result = generate_next_id("REQ-", &existing);
         assert!(result.is_err());
+    }
+
+    // @UT-nikag@ (FROM: @REQ-litip@)
+    #[test]
+    fn test_generate_ids_batch() {
+        let mut existing = HashSet::new();
+        existing.insert("REQ-lusab".to_string());
+        existing.insert("REQ-babad".to_string());
+
+        let batch = generate_ids("REQ-", &existing, 5).unwrap();
+        assert_eq!(batch.len(), 5);
+
+        let mut seen = HashSet::new();
+        for id in &batch {
+            assert!(id.starts_with("REQ-"));
+            assert!(!existing.contains(id), "batch id {id} collided with existing id");
+            assert!(seen.insert(id.clone()), "duplicate id {id} within batch");
+        }
+
+        let empty = generate_ids("REQ-", &existing, 0).unwrap();
+        assert!(empty.is_empty());
     }
 }

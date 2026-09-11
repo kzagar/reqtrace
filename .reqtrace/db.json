@@ -14,6 +14,20 @@
         "REQ-zaruh"
       ]
     },
+    "ARC-gamof": {
+      "id": "ARC-gamof",
+      "item_type": "Architecture",
+      "requirement_type": null,
+      "title": "Batch ID Generator",
+      "file_path": "docs/architecture.md",
+      "line_range": {
+        "start": 72,
+        "end": 77
+      },
+      "derived_from": [
+        "REQ-litip"
+      ]
+    },
     "ARC-gizih": {
       "id": "ARC-gizih",
       "item_type": "Architecture",
@@ -35,8 +49,8 @@
       "title": "LSP Client Integration",
       "file_path": "docs/architecture.md",
       "line_range": {
-        "start": 84,
-        "end": 86
+        "start": 91,
+        "end": 93
       },
       "derived_from": [
         "REQ-jomag"
@@ -49,8 +63,8 @@
       "title": "Visualization Engine",
       "file_path": "docs/architecture.md",
       "line_range": {
-        "start": 76,
-        "end": 78
+        "start": 83,
+        "end": 85
       },
       "derived_from": [
         "REQ-mozum"
@@ -63,8 +77,8 @@
       "title": "File Watcher",
       "file_path": "docs/architecture.md",
       "line_range": {
-        "start": 72,
-        "end": 74
+        "start": 79,
+        "end": 81
       },
       "derived_from": [
         "REQ-palan"
@@ -175,8 +189,8 @@
       "title": "Feature Gating Configuration",
       "file_path": "docs/architecture.md",
       "line_range": {
-        "start": 88,
-        "end": 113
+        "start": 95,
+        "end": 121
       },
       "derived_from": [
         "REQ-vakih"
@@ -203,8 +217,8 @@
       "title": "MCP SSE Server",
       "file_path": "docs/architecture.md",
       "line_range": {
-        "start": 80,
-        "end": 82
+        "start": 87,
+        "end": 89
       },
       "derived_from": [
         "REQ-votar"
@@ -287,8 +301,8 @@
       "title": "run",
       "file_path": "src/cli.rs",
       "line_range": {
-        "start": 39,
-        "end": 123
+        "start": 42,
+        "end": 128
       },
       "derived_from": [
         "ARC-mozum"
@@ -364,6 +378,20 @@
         "ARC-sivoh"
       ]
     },
+    "IMP-votar": {
+      "id": "IMP-votar",
+      "item_type": "Implementation",
+      "requirement_type": null,
+      "title": "generate_ids",
+      "file_path": "src/id_gen.rs",
+      "line_range": {
+        "start": 77,
+        "end": 131
+      },
+      "derived_from": [
+        "ARC-gamof"
+      ]
+    },
     "IMP-zaruh": {
       "id": "IMP-zaruh",
       "item_type": "Implementation",
@@ -399,8 +427,8 @@
       "title": "Static HTML Graph Export",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 336,
-        "end": 356
+        "start": 355,
+        "end": 375
       },
       "derived_from": [
         "REQ-vugul"
@@ -451,8 +479,8 @@
       "title": "Configuration File Parsing",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 320,
-        "end": 333
+        "start": 339,
+        "end": 352
       },
       "derived_from": [
         "REQ-vugul"
@@ -465,8 +493,8 @@
       "title": "LSP Source Location Resolution",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 409,
-        "end": 424
+        "start": 428,
+        "end": 443
       },
       "derived_from": [
         "REQ-puzun"
@@ -493,8 +521,8 @@
       "title": "Deployment & CI/CD",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 359,
-        "end": 363
+        "start": 378,
+        "end": 382
       },
       "derived_from": []
     },
@@ -505,11 +533,25 @@
       "title": "Pre-compiled Releases",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 366,
-        "end": 378
+        "start": 385,
+        "end": 397
       },
       "derived_from": [
         "REQ-komop"
+      ]
+    },
+    "REQ-litip": {
+      "id": "REQ-litip",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "Batch ID Generation",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 320,
+        "end": 336
+      },
+      "derived_from": [
+        "REQ-kitir"
       ]
     },
     "REQ-mijom": {
@@ -561,8 +603,8 @@
       "title": "Language Server Integration",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 402,
-        "end": 406
+        "start": 421,
+        "end": 425
       },
       "derived_from": []
     },
@@ -707,8 +749,8 @@
       "title": "Custom GitHub Action",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 381,
-        "end": 399
+        "start": 400,
+        "end": 418
       },
       "derived_from": [
         "REQ-komop"
@@ -749,8 +791,8 @@
       "title": "tests",
       "file_path": "src/id_gen.rs",
       "line_range": {
-        "start": 115,
-        "end": 200
+        "start": 137,
+        "end": 243
       },
       "derived_from": [
         "REQ-kitir"
@@ -777,8 +819,8 @@
       "title": "tests",
       "file_path": "src/id_gen.rs",
       "line_range": {
-        "start": 115,
-        "end": 200
+        "start": 137,
+        "end": 243
       },
       "derived_from": [
         "REQ-kitir"
@@ -805,8 +847,8 @@
       "title": "tests",
       "file_path": "src/id_gen.rs",
       "line_range": {
-        "start": 115,
-        "end": 200
+        "start": 137,
+        "end": 243
       },
       "derived_from": [
         "REQ-kitir"
@@ -889,8 +931,8 @@
       "title": "tests",
       "file_path": "src/id_gen.rs",
       "line_range": {
-        "start": 115,
-        "end": 200
+        "start": 137,
+        "end": 243
       },
       "derived_from": [
         "REQ-kitir"
@@ -903,11 +945,25 @@
       "title": "tests",
       "file_path": "src/id_gen.rs",
       "line_range": {
-        "start": 115,
-        "end": 200
+        "start": 137,
+        "end": 243
       },
       "derived_from": [
         "REQ-kitir"
+      ]
+    },
+    "UT-nikag": {
+      "id": "UT-nikag",
+      "item_type": "Test",
+      "requirement_type": null,
+      "title": "tests",
+      "file_path": "src/id_gen.rs",
+      "line_range": {
+        "start": 137,
+        "end": 243
+      },
+      "derived_from": [
+        "REQ-litip"
       ]
     },
     "UT-palan": {
@@ -1043,8 +1099,8 @@
       "title": "tests",
       "file_path": "src/id_gen.rs",
       "line_range": {
-        "start": 115,
-        "end": 200
+        "start": 137,
+        "end": 243
       },
       "derived_from": [
         "REQ-kitir"
@@ -1085,8 +1141,8 @@
       "title": "tests",
       "file_path": "src/id_gen.rs",
       "line_range": {
-        "start": 115,
-        "end": 200
+        "start": 137,
+        "end": 243
       },
       "derived_from": [
         "REQ-kitir"

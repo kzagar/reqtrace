@@ -315,6 +315,25 @@ identifier based on a deterministic sequence seeded by the project name.
     - THEN it outputs the next available ID in the proquint sequence
     - AND the outputted ID does not conflict with any existing IDs
 
+<!-- @REQ-litip@ (FROM: @REQ-kitir@) -->
+
+### Batch ID Generation
+
+The `gen-id` command SHALL support generating multiple unique IDs in a single
+invocation via a `--count` flag. All IDs generated in the batch SHALL be unique
+within the batch and unique across the project.
+
+- Priority: SHOULD
+- Rationale: Allows users and agents to obtain a batch of non-colliding IDs
+  upfront without requiring interleaved database updates between each ID.
+- Acceptance:
+  - Scenario: Batch generation of unique IDs
+    - GIVEN a project with existing IDs
+    - WHEN `reqtrace gen-id --prefix REQ- --count 5` is executed
+    - THEN it outputs 5 distinct IDs, one per line
+    - AND none of the generated IDs collide with existing project IDs or with
+      each other
+
 <!-- @REQ-jafaf@ (FROM: @REQ-vugul@) -->
 
 ### Configuration File Parsing

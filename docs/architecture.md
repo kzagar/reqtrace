@@ -68,6 +68,13 @@ Logic for generating unique, deterministic proquint identifiers. Uses a
 16-bit permutation (Feistel network) seeded by the project name hash to ensure
 a stable sequence and avoid collisions with existing IDs.
 
+<!-- @ARC-gamof@ (FROM: @REQ-litip@) -->
+### Batch ID Generator
+Extends the proquint ID generation system to support batch generation via the
+`--count` flag. Advances through the 16-bit permutation sequence seeded by the
+project name hash, maintaining an in-memory set of visited/existing tags to
+produce a sequence of non-colliding IDs in a single invocation.
+
 <!-- @ARC-palan@ (FROM: @REQ-palan@) -->
 ### File Watcher
 Uses the `notify` crate to detect file changes and trigger graph re-scans in server mode.
@@ -106,6 +113,7 @@ Cargo feature flags (`cli`, `server`, `mcp`) that compile modules conditionally,
 | @REQ-vakih@    | @ARC-vakih@   |       |
 | @REQ-gamof@    | @ARC-siris@   |       |
 | @REQ-kitir@    | @ARC-vugul@   |       |
+| @REQ-litip@    | @ARC-gamof@   |       |
 | @REQ-jafaf@    | @ARC-zaruh@   |       |
 | @REQ-bofud@    | @ARC-mozum@   |       |
 | @REQ-kuguj@    | —          | CI/CD concern (deployment) |
