@@ -287,8 +287,26 @@ mod reqtrace_tests {
     // @UT-rimad@ (FROM: REQ-gamof)
     #[test]
     fn test_cli_commands() {
-        use clap::CommandFactory;
+        use clap::{CommandFactory, Parser};
         crate::cli::Cli::command().debug_assert();
+
+        let cli_count = crate::cli::Cli::try_parse_from(["reqtrace", "gen-id", "--count", "3"]).unwrap();
+        match cli_count.command {
+            crate::cli::Commands::GenId { count, .. } => assert_eq!(count, 3),
+            _ => panic!("Expected GenId"),
+        }
+
+        let cli_c = crate::cli::Cli::try_parse_from(["reqtrace", "gen-id", "-c", "4"]).unwrap();
+        match cli_c.command {
+            crate::cli::Commands::GenId { count, .. } => assert_eq!(count, 4),
+            _ => panic!("Expected GenId"),
+        }
+
+        let cli_n = crate::cli::Cli::try_parse_from(["reqtrace", "gen-id", "-n", "5"]).unwrap();
+        match cli_n.command {
+            crate::cli::Commands::GenId { count, .. } => assert_eq!(count, 5),
+            _ => panic!("Expected GenId"),
+        }
     }
 
     // @UT-fuloz@ (FROM: REQ-bofud)

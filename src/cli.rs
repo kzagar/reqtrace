@@ -34,7 +34,7 @@ pub enum Commands {
         #[arg(short, long, default_value = "REQ-")]
         prefix: String,
         /// Number of IDs to generate
-        #[arg(short, long, default_value_t = 1)]
+        #[arg(short, long, short_alias = 'n', default_value_t = 1)]
         count: usize,
     },
 }

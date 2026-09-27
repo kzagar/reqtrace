@@ -320,7 +320,7 @@ identifier based on a deterministic sequence seeded by the project name.
 ### Batch ID Generation
 
 The `gen-id` command SHALL support generating multiple unique IDs in a single
-invocation via a `--count` flag. All IDs generated in the batch SHALL be unique
+invocation via `-c`, `-n`, or `--count` flags. All IDs generated in the batch SHALL be unique
 within the batch and unique across the project.
 
 - Priority: SHOULD
@@ -329,7 +329,7 @@ within the batch and unique across the project.
 - Acceptance:
   - Scenario: Batch generation of unique IDs
     - GIVEN a project with existing IDs
-    - WHEN `reqtrace gen-id --prefix REQ- --count 5` is executed
+    - WHEN `reqtrace gen-id --prefix REQ- --count 5` or `reqtrace gen-id --prefix REQ- -n 5` is executed
     - THEN it outputs 5 distinct IDs, one per line
     - AND none of the generated IDs collide with existing project IDs or with
       each other

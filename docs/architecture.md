@@ -71,7 +71,7 @@ a stable sequence and avoid collisions with existing IDs.
 <!-- @ARC-gamof@ (FROM: @REQ-litip@) -->
 ### Batch ID Generator
 Extends the proquint ID generation system to support batch generation via the
-`--count` flag. Advances through the 16-bit permutation sequence seeded by the
+`-c`, `-n`, or `--count` flag. Advances through the 16-bit permutation sequence seeded by the
 project name hash, maintaining an in-memory set of visited/existing tags to
 produce a sequence of non-colliding IDs in a single invocation.
 
