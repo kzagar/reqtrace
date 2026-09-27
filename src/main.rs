@@ -290,7 +290,8 @@ mod reqtrace_tests {
         use clap::{CommandFactory, Parser};
         crate::cli::Cli::command().debug_assert();
 
-        let cli_count = crate::cli::Cli::try_parse_from(["reqtrace", "gen-id", "--count", "3"]).unwrap();
+        let cli_count =
+            crate::cli::Cli::try_parse_from(["reqtrace", "gen-id", "--count", "3"]).unwrap();
         match cli_count.command {
             crate::cli::Commands::GenId { count, .. } => assert_eq!(count, 3),
             _ => panic!("Expected GenId"),
