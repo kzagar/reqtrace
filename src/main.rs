@@ -366,4 +366,14 @@ mod reqtrace_tests {
         let mcp_enabled = cfg!(feature = "mcp");
         assert!(cli_enabled || server_enabled || mcp_enabled || true);
     }
+
+    // @UT-toloz@ (FROM: REQ-rudar)
+    #[test]
+    #[ignore = "implementation pending"]
+    fn test_traceability_link_command() {}
+
+    // @UT-rofob@ (FROM: REQ-toloz)
+    #[test]
+    #[ignore = "implementation pending"]
+    fn test_traceability_link_verification() {}
 }

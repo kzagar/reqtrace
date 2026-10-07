@@ -393,4 +393,14 @@ class Parent:
         assert!(!scanner.should_ignore(Path::new("docs/requirements.md")));
         assert!(!scanner.should_ignore(Path::new("tests/unit/test_app.py")));
     }
+
+    // @UT-tokuk@ (FROM: REQ-nikag)
+    #[test]
+    #[ignore = "implementation pending"]
+    fn test_visible_markdown_traceability_items() {}
+
+    // @UT-rudar@ (FROM: REQ-tokuk)
+    #[test]
+    #[ignore = "implementation pending"]
+    fn test_bare_and_hyperlinked_id_parsing() {}
 }
