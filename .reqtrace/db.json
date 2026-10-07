@@ -427,8 +427,8 @@
       "title": "Static HTML Graph Export",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 355,
-        "end": 375
+        "start": 448,
+        "end": 468
       },
       "derived_from": [
         "REQ-vugul"
@@ -441,8 +441,8 @@
       "title": "Validation & Checking",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 100,
-        "end": 104
+        "start": 146,
+        "end": 150
       },
       "derived_from": []
     },
@@ -453,8 +453,8 @@
       "title": "CLI Commands",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 287,
-        "end": 301
+        "start": 333,
+        "end": 347
       },
       "derived_from": [
         "REQ-vugul"
@@ -479,8 +479,8 @@
       "title": "Configuration File Parsing",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 339,
-        "end": 352
+        "start": 432,
+        "end": 445
       },
       "derived_from": [
         "REQ-vugul"
@@ -493,8 +493,8 @@
       "title": "LSP Source Location Resolution",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 428,
-        "end": 443
+        "start": 521,
+        "end": 536
       },
       "derived_from": [
         "REQ-puzun"
@@ -507,8 +507,8 @@
       "title": "ID Generation",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 304,
-        "end": 317
+        "start": 397,
+        "end": 410
       },
       "derived_from": [
         "REQ-gamof"
@@ -521,8 +521,8 @@
       "title": "Deployment & CI/CD",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 378,
-        "end": 382
+        "start": 471,
+        "end": 475
       },
       "derived_from": []
     },
@@ -533,8 +533,8 @@
       "title": "Pre-compiled Releases",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 385,
-        "end": 397
+        "start": 478,
+        "end": 490
       },
       "derived_from": [
         "REQ-komop"
@@ -547,8 +547,8 @@
       "title": "Batch ID Generation",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 320,
-        "end": 336
+        "start": 413,
+        "end": 429
       },
       "derived_from": [
         "REQ-kitir"
@@ -561,8 +561,8 @@
       "title": "MCP Tool for Context Retrieval",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 239,
-        "end": 257
+        "start": 285,
+        "end": 303
       },
       "derived_from": [
         "REQ-votar"
@@ -575,11 +575,25 @@
       "title": "Web UI & Interactive Graph Visualization",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 201,
-        "end": 219
+        "start": 247,
+        "end": 265
       },
       "derived_from": [
         "REQ-siris"
+      ]
+    },
+    "REQ-nikag": {
+      "id": "REQ-nikag",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "Visible Markdown Traceability Items",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 96,
+        "end": 119
+      },
+      "derived_from": [
+        "REQ-zaruh"
       ]
     },
     "REQ-palan": {
@@ -589,8 +603,8 @@
       "title": "Automatic Reloading",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 184,
-        "end": 198
+        "start": 230,
+        "end": 244
       },
       "derived_from": [
         "REQ-siris"
@@ -603,8 +617,8 @@
       "title": "Language Server Integration",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 421,
-        "end": 425
+        "start": 514,
+        "end": 518
       },
       "derived_from": []
     },
@@ -616,7 +630,7 @@
       "file_path": "docs/requirements.md",
       "line_range": {
         "start": 78,
-        "end": 97
+        "end": 93
       },
       "derived_from": [
         "REQ-zaruh"
@@ -629,10 +643,24 @@
       "title": "Comment Formatting & Updating",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 149,
-        "end": 152
+        "start": 195,
+        "end": 198
       },
       "derived_from": []
+    },
+    "REQ-rudar": {
+      "id": "REQ-rudar",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "Traceability Link Command",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 350,
+        "end": 372
+      },
+      "derived_from": [
+        "REQ-gamof"
+      ]
     },
     "REQ-rulad": {
       "id": "REQ-rulad",
@@ -641,8 +669,8 @@
       "title": "Traceability Issue Detection",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 107,
-        "end": 126
+        "start": 153,
+        "end": 172
       },
       "derived_from": [
         "REQ-fuloz"
@@ -655,8 +683,8 @@
       "title": "Server Mode",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 177,
-        "end": 181
+        "start": 223,
+        "end": 227
       },
       "derived_from": []
     },
@@ -674,6 +702,34 @@
         "REQ-gizih"
       ]
     },
+    "REQ-tokuk": {
+      "id": "REQ-tokuk",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "Bare and Hyperlinked ID Parsing",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 122,
+        "end": 143
+      },
+      "derived_from": [
+        "REQ-nikag"
+      ]
+    },
+    "REQ-toloz": {
+      "id": "REQ-toloz",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "Traceability Link Verification",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 375,
+        "end": 394
+      },
+      "derived_from": [
+        "REQ-rudar"
+      ]
+    },
     "REQ-tusut": {
       "id": "REQ-tusut",
       "item_type": "Requirement",
@@ -681,8 +737,8 @@
       "title": "Standardizing Reference Comments",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 155,
-        "end": 174
+        "start": 201,
+        "end": 220
       },
       "derived_from": [
         "REQ-rivil"
@@ -695,8 +751,8 @@
       "title": "Feature Gating",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 260,
-        "end": 277
+        "start": 306,
+        "end": 323
       },
       "derived_from": [
         "REQ-siris"
@@ -723,8 +779,8 @@
       "title": "MCP Server",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 222,
-        "end": 236
+        "start": 268,
+        "end": 282
       },
       "derived_from": [
         "REQ-siris"
@@ -737,8 +793,8 @@
       "title": "CLI Operations",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 280,
-        "end": 284
+        "start": 326,
+        "end": 330
       },
       "derived_from": []
     },
@@ -749,8 +805,8 @@
       "title": "Custom GitHub Action",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 400,
-        "end": 418
+        "start": 493,
+        "end": 511
       },
       "derived_from": [
         "REQ-komop"
@@ -777,8 +833,8 @@
       "title": "CLI Validation Validation Output",
       "file_path": "docs/requirements.md",
       "line_range": {
-        "start": 129,
-        "end": 146
+        "start": 175,
+        "end": 192
       },
       "derived_from": [
         "REQ-fuloz"

@@ -91,6 +91,52 @@ lines.
     - THEN it resolves the tag to the class/method scope and correctly sets
       the start and end line ranges.
 
+<!-- @REQ-nikag@ (FROM: @REQ-zaruh@) -->
+
+### Visible Markdown Traceability Items
+
+The system SHALL parse visible item definitions in Markdown files across
+multiple formats (compact inline/blockquote metadata, Markdown tables, and
+attribute bullet lists with single or sub-bullet parents), extracting the item
+ID, upstream parent links, and binding the item title and start line to the
+nearest preceding heading within the section.
+
+- Priority: MUST
+- Rationale: Allows displaying requirement and architecture IDs visibly in rendered documentation while preserving traceability extraction; see [ADR 0005](decisions/0005-visible-markdown-traceability-and-linking.md).
+- Acceptance:
+  - Scenario: Inline metadata line
+    - GIVEN a Markdown file with heading `### Document Splitting` followed by `**ID**: REQ-lusab | **FROM**: REQ-babad`
+    - WHEN the scanner is run
+    - THEN an item with ID `REQ-lusab` is discovered with title `Document Splitting`, parent `REQ-babad`, and start line set to the heading
+  - Scenario: Table metadata format
+    - GIVEN a Markdown file with heading `### Document Splitting` followed by a table with columns `| ID | FROM |` and row `| REQ-lusab | REQ-babad |`
+    - WHEN the scanner is run
+    - THEN an item with ID `REQ-lusab` is discovered with title `Document Splitting` and parent `REQ-babad`
+  - Scenario: Attribute list with sub-bullets
+    - GIVEN a Markdown file with heading `### Document Splitting` followed by `- **ID**: REQ-lusab` and `- **From**:` with sub-bullets `- REQ-babad` and `- REQ-dalap`
+    - WHEN the scanner is run
+    - THEN an item with ID `REQ-lusab` is discovered with parents `REQ-babad` and `REQ-dalap`
+
+<!-- @REQ-tokuk@ (FROM: @REQ-nikag@) -->
+
+### Bare and Hyperlinked ID Parsing
+
+The system SHALL accept bare IDs without `@` delimiters in recognized explicit
+metadata fields (`ID:`, `From:`, and table columns), and SHALL extract target
+IDs from inside Markdown hyperlinks.
+
+- Priority: MUST
+- Rationale: Enables clean rendered typography and Markdown cross-linking without breaking ID parsing; see [ADR 0005](decisions/0005-visible-markdown-traceability-and-linking.md).
+- Acceptance:
+  - Scenario: Parsing bare IDs in metadata fields
+    - GIVEN an attribute list `- **ID**: REQ-lusab` and `- **From**: REQ-babad` without `@` wrappers
+    - WHEN the scanner is run
+    - THEN `REQ-lusab` is parsed as the item ID and `REQ-babad` as the derived-from parent
+  - Scenario: Extracting IDs from Markdown hyperlinks
+    - GIVEN an attribute list `- **ID**: [REQ-lusab](#document-splitting)` and `- **From**: [REQ-babad](requirements.md#REQ-babad)`
+    - WHEN the scanner is run
+    - THEN `REQ-lusab` is extracted as the item ID and `REQ-babad` as the parent ID
+
 ---
 
 ## 2. Validation & Checking
@@ -288,16 +334,63 @@ updating comment headers, and validating the graph.
 
 The CLI tool SHALL expose the following subcommands: `server` (start the
 server), `update` (sync database and rewrite comments), `validate` (lint the
-graph), `export` (generate standalone visualization), and `gen-id` (generate
-proquint identifiers).
+graph), `export` (generate standalone visualization), `gen-id` (generate
+proquint identifiers), and `link` (insert explicit anchors and link item references).
 
 - Priority: MUST
 - Rationale: Primary developer interaction.
 - Acceptance:
   - Scenario: Help menu
     - WHEN `reqtrace --help` is executed
-    - THEN it lists `server`, `update`, `validate`, `export`, and `gen-id` as
+    - THEN it lists `server`, `update`, `validate`, `export`, `gen-id`, and `link` as
       available subcommands
+
+<!-- @REQ-rudar@ (FROM: @REQ-gamof@) -->
+
+### Traceability Link Command
+
+The CLI tool SHALL provide a `link` subcommand that scans Markdown files,
+inserts missing explicit HTML anchors `<a id="..."></a>` at the end of section
+heading lines for all defined items, and rewrites unlinked item references into
+relative Markdown links.
+
+- Priority: MUST
+- Rationale: Automates cross-document and intra-document navigation between related requirements and architectural components; see [ADR 0005](decisions/0005-visible-markdown-traceability-and-linking.md).
+- Acceptance:
+  - Scenario: Inserting explicit heading anchors
+    - GIVEN a Markdown file with heading `### Document Splitting` defining `REQ-lusab` without an HTML anchor
+    - WHEN `reqtrace link` is executed
+    - THEN the heading is updated to `### Document Splitting <a id="REQ-lusab"></a>`
+  - Scenario: Rewriting unlinked references to relative Markdown links
+    - GIVEN a Markdown file containing `From: REQ-lusab` where `REQ-lusab` is defined in `docs/requirements.md`
+    - WHEN `reqtrace link` is executed
+    - THEN the reference is replaced with `From: [REQ-lusab](requirements.md#REQ-lusab)`
+  - Scenario: Preserving existing links
+    - GIVEN a Markdown file containing an already hyperlinked reference `[REQ-lusab](requirements.md#REQ-lusab)`
+    - WHEN `reqtrace link` is executed
+    - THEN the reference is not duplicated or double-linked
+
+<!-- @REQ-toloz@ (FROM: @REQ-rudar@) -->
+
+### Traceability Link Verification
+
+The `link` CLI command SHALL support a `--check` flag that validates whether
+all explicit heading anchors and item reference hyperlinks in Markdown files
+are up to date, exiting with code 0 if all links and anchors are present and
+correct, or exiting with a non-zero code if any anchors or hyperlinks need
+updating.
+
+- Priority: MUST
+- Rationale: Allows CI pipelines to enforce that documentation hyperlinks and anchors remain synchronized without mutating files in-place; see [ADR 0005](decisions/0005-visible-markdown-traceability-and-linking.md).
+- Acceptance:
+  - Scenario: Check mode succeeds when all anchors and links are present
+    - GIVEN a repository where all headings have explicit anchors and all references are hyperlinked
+    - WHEN `reqtrace link --check` is executed
+    - THEN the command exits with code 0 without modifying any files
+  - Scenario: Check mode fails when anchors or links are missing
+    - GIVEN a repository containing an unlinked reference `From: REQ-lusab`
+    - WHEN `reqtrace link --check` is executed
+    - THEN the command exits with a non-zero exit code and outputs the list of files requiring updates
 
 <!-- @REQ-kitir@ (FROM: @REQ-gamof@) -->
 
