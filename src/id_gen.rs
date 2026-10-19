@@ -73,6 +73,17 @@ fn unpermute(val: u16, seed: u64) -> u16 {
     ((l as u16) << 8) | (r as u16)
 }
 
+// Scrambled list of profane proquints (scrambled with XOR key 3).
+// Embedded into the binary at compile time.
+const SCRAMBLED_PROFANITIES_RAW: &str = include_str!("../static/scrambled_profanities.txt");
+
+fn is_scrambled_profane(quint: &str) -> bool {
+    let scrambled: String = quint.chars().map(|c| ((c as u8) ^ 3) as char).collect();
+    SCRAMBLED_PROFANITIES_RAW
+        .lines()
+        .any(|line| line.trim() == scrambled)
+}
+
 // @IMP-votar@ (FROM: @ARC-gamof@)
 pub fn generate_ids(
     prefix: &str,
@@ -107,6 +118,16 @@ pub fn generate_ids(
     for _ in 0..65536 {
         let candidate_val = permute(next_idx, seed);
         let candidate_quint = candidate_val.to_quint();
+
+        // Skip profane proquints by matching their scrambled representation
+        if is_scrambled_profane(&candidate_quint) {
+            next_idx = next_idx.wrapping_add(1);
+            if next_idx == (if has_any { max_idx } else { 65535 }) {
+                break;
+            }
+            continue;
+        }
+
         let candidate_id = format!("{}{}", prefix, candidate_quint);
 
         if current_existing.insert(candidate_id.clone()) {
@@ -242,5 +263,32 @@ mod tests {
 
         let empty = generate_ids("REQ-", &existing, 0).unwrap();
         assert!(empty.is_empty());
+    }
+
+    #[test]
+    fn test_profane_proquints_skipped() {
+        // "bogan", "fukal", "putas", "vagin", "kakat", "nasip" are in the profane list
+        assert!(is_scrambled_profane("bogan"));
+        assert!(is_scrambled_profane("fukal"));
+        assert!(is_scrambled_profane("putas"));
+        assert!(is_scrambled_profane("vagin"));
+        assert!(is_scrambled_profane("kakat"));
+        assert!(is_scrambled_profane("nasip"));
+
+        // Clean words must not be flagged
+        assert!(!is_scrambled_profane("babab"));
+        assert!(!is_scrambled_profane("lusab"));
+        assert!(!is_scrambled_profane("kitir"));
+
+        // Generate 200 IDs and verify none of them match a profane proquint
+        let existing = HashSet::new();
+        let batch = generate_ids("REQ-", &existing, 200).unwrap();
+        for id in &batch {
+            let quint = id.strip_prefix("REQ-").unwrap();
+            assert!(
+                !is_scrambled_profane(quint),
+                "generated id {id} is marked as profane!"
+            );
+        }
     }
 }

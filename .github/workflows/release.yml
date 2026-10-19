@@ -10,8 +10,33 @@ permissions:
   contents: write
 
 jobs:
+  generate-profanities:
+    name: Generate Scrambled Profanities
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Generate scrambled profanities list
+        run: |
+          mkdir -p static dist
+          python3 scripts/generate_scrambled_profanities.py static/scrambled_profanities.txt
+          cp static/scrambled_profanities.txt dist/scrambled_profanities.txt
+
+      - name: Upload scrambled profanities artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: scrambled-profanities
+          path: dist/scrambled_profanities.txt
+
   build:
     name: Build (${{ matrix.target }})
+    needs: generate-profanities
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -31,6 +56,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
+
+      - name: Download generated profanities
+        uses: actions/download-artifact@v4
+        with:
+          name: scrambled-profanities
+          path: static
 
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
@@ -63,13 +94,13 @@ jobs:
 
   release:
     name: Publish GitHub Release
-    needs: build
+    needs: [generate-profanities, build]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
 
-      - name: Download all build artifacts
+      - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
           path: dist
@@ -81,3 +112,4 @@ jobs:
         with:
           files: dist/*
           generate_release_notes: true
+
