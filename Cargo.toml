@@ -1,6 +1,6 @@
 [package]
 name = "reqtrace"
-version = "0.1.4"
+version = "0.1.5"
 edition = "2024"
 
 [dependencies]
@@ -23,10 +23,11 @@ quote = { version = "1.0", optional = true }
 proquint = "0.1.0"
 
 [features]
-default = ["cli", "server", "mcp", "rust", "python"]
+default = ["cli", "server", "mcp", "rust", "python", "typescript"]
 cli = ["dep:clap"]
 server = ["dep:axum", "dep:tower-http", "dep:notify"]
 mcp = ["server"]
 rust = ["dep:syn", "dep:proc-macro2", "dep:quote"]
 python = []
+typescript = []
 

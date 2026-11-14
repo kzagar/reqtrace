@@ -1,5 +1,19 @@
 {
   "items": {
+    "ARC-bofud": {
+      "id": "ARC-bofud",
+      "item_type": "Architecture",
+      "requirement_type": null,
+      "title": "TypeScript / JavaScript Parser",
+      "file_path": "docs/architecture.md",
+      "line_range": {
+        "start": 103,
+        "end": 105
+      },
+      "derived_from": [
+        "REQ-habot"
+      ]
+    },
     "ARC-fuloz": {
       "id": "ARC-fuloz",
       "item_type": "Architecture",
@@ -42,6 +56,34 @@
         "REQ-gizih"
       ]
     },
+    "ARC-jafaf": {
+      "id": "ARC-jafaf",
+      "item_type": "Architecture",
+      "requirement_type": null,
+      "title": "Multi-Parent FROM Extractor",
+      "file_path": "docs/architecture.md",
+      "line_range": {
+        "start": 99,
+        "end": 101
+      },
+      "derived_from": [
+        "REQ-rofob"
+      ]
+    },
+    "ARC-kitir": {
+      "id": "ARC-kitir",
+      "item_type": "Architecture",
+      "requirement_type": null,
+      "title": "CLI Query & Context Engine (`list` / `show`)",
+      "file_path": "docs/architecture.md",
+      "line_range": {
+        "start": 107,
+        "end": 136
+      },
+      "derived_from": [
+        "REQ-polaf"
+      ]
+    },
     "ARC-mijom": {
       "id": "ARC-mijom",
       "item_type": "Architecture",
@@ -67,7 +109,8 @@
         "end": 85
       },
       "derived_from": [
-        "REQ-mozum"
+        "REQ-mozum",
+        "REQ-bofud"
       ]
     },
     "ARC-palan": {
@@ -95,7 +138,9 @@
         "end": 59
       },
       "derived_from": [
-        "REQ-siris"
+        "REQ-siris",
+        "REQ-vugul",
+        "REQ-puzun"
       ]
     },
     "ARC-rimad": {
@@ -109,7 +154,8 @@
         "end": 31
       },
       "derived_from": [
-        "REQ-zaruh"
+        "REQ-zaruh",
+        "REQ-rivil"
       ]
     },
     "ARC-rivil": {
@@ -151,7 +197,8 @@
         "end": 64
       },
       "derived_from": [
-        "REQ-gamof"
+        "REQ-gamof",
+        "REQ-zolag"
       ]
     },
     "ARC-sivoh": {
@@ -190,7 +237,7 @@
       "file_path": "docs/architecture.md",
       "line_range": {
         "start": 95,
-        "end": 121
+        "end": 97
       },
       "derived_from": [
         "REQ-vakih"
@@ -221,7 +268,8 @@
         "end": 89
       },
       "derived_from": [
-        "REQ-votar"
+        "REQ-votar",
+        "REQ-mijom"
       ]
     },
     "ARC-vugul": {
@@ -301,8 +349,8 @@
       "title": "run",
       "file_path": "src/cli.rs",
       "line_range": {
-        "start": 42,
-        "end": 128
+        "start": 69,
+        "end": 302
       },
       "derived_from": [
         "ARC-mozum"
@@ -315,8 +363,8 @@
       "title": "ParsedSymbol",
       "file_path": "src/languages/mod.rs",
       "line_range": {
-        "start": 9,
-        "end": 14
+        "start": 11,
+        "end": 16
       },
       "derived_from": [
         "ARC-zolag"
@@ -364,6 +412,20 @@
         "ARC-zaruh"
       ]
     },
+    "IMP-vakih": {
+      "id": "IMP-vakih",
+      "item_type": "Implementation",
+      "requirement_type": null,
+      "title": "TypeScriptParser",
+      "file_path": "src/languages/typescript.rs",
+      "line_range": {
+        "start": 7,
+        "end": 7
+      },
+      "derived_from": [
+        "ARC-bofud"
+      ]
+    },
     "IMP-vapik": {
       "id": "IMP-vapik",
       "item_type": "Implementation",
@@ -390,6 +452,20 @@
       },
       "derived_from": [
         "ARC-gamof"
+      ]
+    },
+    "IMP-vugul": {
+      "id": "IMP-vugul",
+      "item_type": "Implementation",
+      "requirement_type": null,
+      "title": "load_or_build_graph",
+      "file_path": "src/cli.rs",
+      "line_range": {
+        "start": 305,
+        "end": 314
+      },
+      "derived_from": [
+        "ARC-kitir"
       ]
     },
     "IMP-zaruh": {
@@ -472,6 +548,20 @@
       },
       "derived_from": []
     },
+    "REQ-habot": {
+      "id": "REQ-habot",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "TypeScript and JavaScript Language Support",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 556,
+        "end": 571
+      },
+      "derived_from": [
+        "REQ-zaruh"
+      ]
+    },
     "REQ-jafaf": {
       "id": "REQ-jafaf",
       "item_type": "Requirement",
@@ -494,7 +584,7 @@
       "file_path": "docs/requirements.md",
       "line_range": {
         "start": 521,
-        "end": 536
+        "end": 537
       },
       "derived_from": [
         "REQ-puzun"
@@ -610,6 +700,20 @@
         "REQ-siris"
       ]
     },
+    "REQ-polaf": {
+      "id": "REQ-polaf",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "CLI Database Querying (`list` and `show`)",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 574,
+        "end": 588
+      },
+      "derived_from": [
+        "REQ-gamof"
+      ]
+    },
     "REQ-puzun": {
       "id": "REQ-puzun",
       "item_type": "Requirement",
@@ -647,6 +751,20 @@
         "end": 198
       },
       "derived_from": []
+    },
+    "REQ-rofob": {
+      "id": "REQ-rofob",
+      "item_type": "Requirement",
+      "requirement_type": "Functional",
+      "title": "Multi-Parent FROM Parsing",
+      "file_path": "docs/requirements.md",
+      "line_range": {
+        "start": 540,
+        "end": 553
+      },
+      "derived_from": [
+        "REQ-zaruh"
+      ]
     },
     "REQ-rudar": {
       "id": "REQ-rudar",
@@ -896,6 +1014,20 @@
         "REQ-jafaf"
       ]
     },
+    "UT-habot": {
+      "id": "UT-habot",
+      "item_type": "Test",
+      "requirement_type": null,
+      "title": "tests",
+      "file_path": "src/scanner.rs",
+      "line_range": {
+        "start": 268,
+        "end": 432
+      },
+      "derived_from": [
+        "REQ-rofob"
+      ]
+    },
     "UT-jafaf": {
       "id": "UT-jafaf",
       "item_type": "Test",
@@ -922,6 +1054,20 @@
       },
       "derived_from": [
         "REQ-tusut"
+      ]
+    },
+    "UT-jubid": {
+      "id": "UT-jubid",
+      "item_type": "Test",
+      "requirement_type": null,
+      "title": "tests",
+      "file_path": "src/cli.rs",
+      "line_range": {
+        "start": 340,
+        "end": 383
+      },
+      "derived_from": [
+        "REQ-polaf"
       ]
     },
     "UT-kitir": {
@@ -1029,8 +1175,8 @@
       "title": "tests",
       "file_path": "src/scanner.rs",
       "line_range": {
-        "start": 266,
-        "end": 406
+        "start": 268,
+        "end": 432
       },
       "derived_from": [
         "REQ-zaruh"
@@ -1043,11 +1189,25 @@
       "title": "tests",
       "file_path": "src/scanner.rs",
       "line_range": {
-        "start": 266,
-        "end": 406
+        "start": 268,
+        "end": 432
       },
       "derived_from": [
         "REQ-rimad"
+      ]
+    },
+    "UT-polaf": {
+      "id": "UT-polaf",
+      "item_type": "Test",
+      "requirement_type": null,
+      "title": "tests",
+      "file_path": "src/languages/typescript.rs",
+      "line_range": {
+        "start": 158,
+        "end": 208
+      },
+      "derived_from": [
+        "REQ-habot"
       ]
     },
     "UT-puzun": {
@@ -1113,8 +1273,8 @@
       "title": "tests",
       "file_path": "src/scanner.rs",
       "line_range": {
-        "start": 266,
-        "end": 406
+        "start": 268,
+        "end": 432
       },
       "derived_from": [
         "REQ-tokuk"
@@ -1141,8 +1301,8 @@
       "title": "tests",
       "file_path": "src/scanner.rs",
       "line_range": {
-        "start": 266,
-        "end": 406
+        "start": 268,
+        "end": 432
       },
       "derived_from": [
         "REQ-zaruh"
@@ -1169,8 +1329,8 @@
       "title": "tests",
       "file_path": "src/scanner.rs",
       "line_range": {
-        "start": 266,
-        "end": 406
+        "start": 268,
+        "end": 432
       },
       "derived_from": [
         "REQ-nikag"

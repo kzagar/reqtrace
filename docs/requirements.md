@@ -534,3 +534,55 @@ items.
       in parser.rs
     - THEN it resolves the exact line range and contents of the implementation
       via LSP
+
+<!-- @REQ-rofob@ (FROM: @REQ-zaruh@) -->
+
+### Multi-Parent FROM Parsing
+
+The system SHALL parse comma-separated parent IDs in `FROM:` annotations
+regardless of whether each parent ID is wrapped in `@` delimiters or bare.
+
+- Priority: MUST
+- Rationale: Prevents silent dropping of secondary parent links in multi-parent
+  `FROM:` tags.
+- Acceptance:
+  - Scenario: Parsing comma-separated `@`-wrapped parent IDs
+    - GIVEN a tag comment `<!-- @ARC-abcde@ (FROM: @REQ-aaaaa@, @REQ-bbbbb@) -->`
+    - WHEN the scanner is run
+    - THEN both `REQ-aaaaa` and `REQ-bbbbb` are extracted into `derived_from`
+
+<!-- @REQ-habot@ (FROM: @REQ-zaruh@) -->
+
+### TypeScript and JavaScript Language Support
+
+The system SHALL support TypeScript and JavaScript (`.ts`, `.tsx`, `.js`, `.jsx`)
+files, parsing function, class, arrow-component, and test block declarations to
+determine their symbol names and start/end line ranges.
+
+- Priority: MUST
+- Rationale: Enables accurate symbol titles and line ranges in frontend
+  codebases.
+- Acceptance:
+  - Scenario: Scanning TypeScript and Vitest files
+    - GIVEN a `.ts` file with `export function calculateTotal(...) { ... }` and
+      `describe('TaskDialog', () => { ... })`
+    - WHEN the TypeScript parser is run
+    - THEN it resolves each symbol name with accurate `start_line` and `end_line`
+
+<!-- @REQ-polaf@ (FROM: @REQ-gamof@) -->
+
+### CLI Database Querying (`list` and `show`)
+
+The CLI tool SHALL provide `list` (with `--type`, `--search`, and `--gaps`) and
+`show` (with `--upstream`, `--downstream`, and `--snippets`) subcommands to
+query `.reqtrace/db.json` without reading the entire JSON file or documentation.
+
+- Priority: MUST
+- Rationale: Minimizes LLM context/token usage by returning compact item
+  indices, neighbourhood graphs, and exact line-range snippets.
+- Acceptance:
+  - Scenario: Listing and showing items from the database
+    - GIVEN a project with `.reqtrace/db.json`
+    - WHEN `reqtrace list --type req --search foo` or `reqtrace show REQ-bar --snippets` is executed
+    - THEN the CLI outputs matching items with `file:start-end` coordinates and
+      optional source snippets

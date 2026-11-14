@@ -80,7 +80,9 @@ impl Scanner {
         Ok(Self {
             config,
             tag_regex: Regex::new(r"(?P<full>@(?P<id>[a-zA-Z0-9][a-zA-Z0-9\.\-]*)@)")?,
-            from_regex: Regex::new(r"FROM:\s*(@?[a-zA-Z0-9\.\-]+(?:\s*,\s*@?[a-zA-Z0-9\.\-]+)*)")?,
+            from_regex: Regex::new(
+                r"FROM:\s*(@?[a-zA-Z0-9\.\-]+@?(?:\s*,\s*@?[a-zA-Z0-9\.\-]+@?)*)",
+            )?,
             id_regex: Regex::new(r"@?([a-zA-Z0-9][a-zA-Z0-9\.\-]*)@?")?,
             ignore_globset,
         })
@@ -403,4 +405,28 @@ class Parent:
     #[test]
     #[ignore = "implementation pending"]
     fn test_bare_and_hyperlinked_id_parsing() {}
+
+    // @UT-habot@ (FROM: @REQ-rofob@)
+    #[test]
+    fn test_scan_multi_parent_from() {
+        let content = r#"
+<!-- @ARC-abcde@ (FROM: @REQ-aaaaa@, @REQ-bbbbb@, @REQ-ccccc@) -->
+### Multi-parent Component
+Details here.
+"#;
+        let temp_file = "test_multi_parent.md";
+        std::fs::write(temp_file, content).unwrap();
+
+        let scanner = Scanner::new(mock_config()).unwrap();
+        let items = scanner.scan_file(Path::new(temp_file)).unwrap();
+
+        assert_eq!(items.len(), 1);
+        assert_eq!(items[0].id, "ARC-abcde");
+        assert_eq!(
+            items[0].derived_from,
+            vec!["REQ-aaaaa", "REQ-bbbbb", "REQ-ccccc"]
+        );
+
+        std::fs::remove_file(temp_file).unwrap();
+    }
 }

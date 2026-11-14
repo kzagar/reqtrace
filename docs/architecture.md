@@ -95,6 +95,18 @@ Optional component that connects to a local Language Server to resolve exact sou
 ### Feature Gating Configuration
 Cargo feature flags (`cli`, `server`, `mcp`) that compile modules conditionally, excluding parser/web server/CLI dependencies to minimize compilation time and binary size when those environments are not needed.
 
+<!-- @ARC-jafaf@ (FROM: @REQ-rofob@) -->
+### Multi-Parent FROM Extractor
+Extends `Scanner::from_regex` to match optional trailing `@?` delimiters on every comma-separated parent ID.
+
+<!-- @ARC-bofud@ (FROM: @REQ-habot@) -->
+### TypeScript / JavaScript Parser
+Implements `LanguageParser` for `.ts`, `.tsx`, `.js`, `.jsx` using regex declaration/test-block matching and string/comment-aware brace-depth tracking.
+
+<!-- @ARC-kitir@ (FROM: @REQ-polaf@) -->
+### CLI Query & Context Engine (`list` / `show`)
+Implements `Commands::List` and `Commands::Show` in `src/cli.rs` to filter `.reqtrace/db.json`, traverse upstream/downstream links, and print targeted line-range snippets.
+
 ## Requirement coverage
 
 | Requirement | Covered by | Notes |
@@ -119,3 +131,6 @@ Cargo feature flags (`cli`, `server`, `mcp`) that compile modules conditionally,
 | @REQ-kuguj@    | —          | CI/CD concern (deployment) |
 | @REQ-zapaj@    | —          | CI/CD concern (action/ dir) |
 | @REQ-jomag@    | @ARC-mijom@   |       |
+| @REQ-rofob@    | @ARC-jafaf@   |       |
+| @REQ-habot@    | @ARC-bofud@   |       |
+| @REQ-polaf@    | @ARC-kitir@   |       |

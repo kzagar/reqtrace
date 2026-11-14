@@ -4,6 +4,8 @@ use anyhow::Result;
 pub mod python;
 #[cfg(feature = "rust")]
 pub mod rust;
+#[cfg(feature = "typescript")]
+pub mod typescript;
 
 // @IMP-rimad@ (FROM: @ARC-zolag@)
 #[derive(Debug, Clone, PartialEq)]
@@ -23,6 +25,10 @@ pub fn get_parser(extension: &str) -> Option<Box<dyn LanguageParser>> {
         "rs" => Some(Box::new(rust::RustParser)),
         #[cfg(feature = "python")]
         "py" => Some(Box::new(python::PythonParser)),
+        #[cfg(feature = "typescript")]
+        "ts" | "tsx" | "js" | "jsx" | "mts" | "cts" | "mjs" | "cjs" => {
+            Some(Box::new(typescript::TypeScriptParser))
+        }
         _ => None,
     }
 }
