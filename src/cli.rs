@@ -49,8 +49,11 @@ pub enum Commands {
         /// Show only requirements missing architecture or test coverage
         #[arg(long)]
         gaps: bool,
+        /// Output as JSON
+        #[arg(long)]
+        json: bool,
     },
-    /// Show item details, upstream/downstream links, and optional source snippets
+    /// Show item details, upstream/downstream links, and smart source snippets
     Show {
         /// One or more item IDs (e.g., REQ-kuzur)
         #[arg(required = true)]
@@ -61,9 +64,18 @@ pub enum Commands {
         /// Include all transitive downstream children
         #[arg(short, long)]
         downstream: bool,
-        /// Print source/documentation line ranges from files
-        #[arg(short, long)]
-        snippets: bool,
+        /// Omit source/documentation snippets
+        #[arg(long)]
+        no_snippets: bool,
+        /// Print full snippets without truncation for Implementation/Test items
+        #[arg(long)]
+        full: bool,
+        /// Max lines per Implementation/Test snippet (default: 25)
+        #[arg(long, default_value_t = 25)]
+        max_lines: usize,
+        /// Output as JSON
+        #[arg(long)]
+        json: bool,
     },
 }
 
@@ -154,11 +166,13 @@ pub async fn run() -> Result<()> {
             item_type,
             search,
             gaps,
+            json,
         } => {
             let graph = load_or_build_graph(&config)?;
             let children_map = build_children_map(&graph);
             let type_filter = item_type.as_deref().map(normalize_type_filter);
             let search_lower = search.as_deref().map(|s| s.to_lowercase());
+            let mut json_items = Vec::new();
 
             for item in graph.items.values() {
                 if let Some(ref tf) = type_filter
@@ -191,34 +205,52 @@ pub async fn run() -> Result<()> {
                         continue;
                     }
                 }
-                let from_str = if item.derived_from.is_empty() {
-                    "-".to_string()
+                if *json {
+                    json_items.push(serde_json::json!({
+                        "id": item.id,
+                        "item_type": item.item_type,
+                        "title": item.title,
+                        "file_path": item.file_path,
+                        "line_range": item.line_range,
+                        "derived_from": item.derived_from,
+                        "derived_by": children,
+                    }));
                 } else {
-                    item.derived_from.join(",")
-                };
-                let to_str = if children.is_empty() {
-                    "-".to_string()
-                } else {
-                    children.join(",")
-                };
-                println!(
-                    "{}\t{}\t{}:{}-{}\t{}\tfrom:[{}]\tto:[{}]",
-                    item.id,
-                    item.item_type,
-                    item.file_path.display(),
-                    item.line_range.start,
-                    item.line_range.end,
-                    item.title,
-                    from_str,
-                    to_str
-                );
+                    let from_str = if item.derived_from.is_empty() {
+                        "-".to_string()
+                    } else {
+                        item.derived_from.join(",")
+                    };
+                    let to_str = if children.is_empty() {
+                        "-".to_string()
+                    } else {
+                        children.join(",")
+                    };
+                    println!(
+                        "{}\t{}\t{}:{}-{}\t{}\tfrom:[{}]\tto:[{}]",
+                        item.id,
+                        item.item_type,
+                        item.file_path.display(),
+                        item.line_range.start,
+                        item.line_range.end,
+                        item.title,
+                        from_str,
+                        to_str
+                    );
+                }
+            }
+            if *json {
+                println!("{}", serde_json::to_string_pretty(&json_items)?);
             }
         }
         Commands::Show {
             ids,
             upstream,
             downstream,
-            snippets,
+            no_snippets,
+            full,
+            max_lines,
+            json,
         } => {
             let graph = load_or_build_graph(&config)?;
             let children_map = build_children_map(&graph);
@@ -268,33 +300,90 @@ pub async fn run() -> Result<()> {
                 }
             }
 
+            let mut json_items = Vec::new();
             for id in selected {
                 if let Some(item) = graph.items.get(&id) {
                     let children = children_map.get(&item.id).cloned().unwrap_or_default();
-                    println!(
-                        "{} [{}] {} ({}:{}-{})",
-                        item.id,
-                        item.item_type,
-                        item.title,
-                        item.file_path.display(),
-                        item.line_range.start,
-                        item.line_range.end
-                    );
-                    if !item.derived_from.is_empty() {
-                        println!("  from: {}", item.derived_from.join(", "));
-                    }
-                    if !children.is_empty() {
-                        println!("  to:   {}", children.join(", "));
-                    }
-                    if *snippets && let Ok(content) = std::fs::read_to_string(&item.file_path) {
+                    let is_spec =
+                        item.item_type == "Requirement" || item.item_type == "Architecture";
+                    let mut snippet_lines: Option<Vec<(usize, String)>> = None;
+                    let mut truncated_lines: usize = 0;
+
+                    if !*no_snippets && let Ok(content) = std::fs::read_to_string(&item.file_path) {
                         let lines: Vec<&str> = content.lines().collect();
                         let start = item.line_range.start.saturating_sub(1);
                         let end = item.line_range.end.min(lines.len());
-                        for (idx, line) in lines.iter().enumerate().take(end).skip(start) {
-                            println!("  {:>4} | {}", idx + 1, line);
+                        let total_span = end.saturating_sub(start);
+                        let cap = if *full || is_spec {
+                            total_span
+                        } else {
+                            (*max_lines).min(total_span)
+                        };
+                        truncated_lines = total_span.saturating_sub(cap);
+                        let collected: Vec<(usize, String)> = lines
+                            .iter()
+                            .enumerate()
+                            .skip(start)
+                            .take(cap)
+                            .map(|(idx, line)| (idx + 1, (*line).to_string()))
+                            .collect();
+                        snippet_lines = Some(collected);
+                    }
+
+                    if *json {
+                        let snippet_text = snippet_lines.as_ref().map(|ls| {
+                            ls.iter()
+                                .map(|(_, l)| l.as_str())
+                                .collect::<Vec<_>>()
+                                .join("\n")
+                        });
+                        json_items.push(serde_json::json!({
+                            "id": item.id,
+                            "item_type": item.item_type,
+                            "title": item.title,
+                            "file_path": item.file_path,
+                            "line_range": item.line_range,
+                            "derived_from": item.derived_from,
+                            "derived_by": children,
+                            "snippet": snippet_text,
+                            "truncated_lines": truncated_lines,
+                        }));
+                    } else {
+                        println!(
+                            "{} [{}] {} ({}:{}-{})",
+                            item.id,
+                            item.item_type,
+                            item.title,
+                            item.file_path.display(),
+                            item.line_range.start,
+                            item.line_range.end
+                        );
+                        if !item.derived_from.is_empty() {
+                            println!("  from: {}", item.derived_from.join(", "));
+                        }
+                        if !children.is_empty() {
+                            println!("  to:   {}", children.join(", "));
+                        }
+                        if let Some(ls) = snippet_lines {
+                            for (ln, line) in &ls {
+                                println!("  {:>4} | {}", ln, line);
+                            }
+                            if truncated_lines > 0 {
+                                let next_line = item.line_range.start + ls.len();
+                                println!(
+                                    "  ... ({} more lines; pass --full or read_file {}:{}-{})",
+                                    truncated_lines,
+                                    item.file_path.display(),
+                                    next_line,
+                                    item.line_range.end
+                                );
+                            }
                         }
                     }
                 }
+            }
+            if *json {
+                println!("{}", serde_json::to_string_pretty(&json_items)?);
             }
         }
     }
@@ -347,7 +436,7 @@ mod tests {
     #[test]
     fn test_cli_list_and_show_parsing() {
         let list_cli = Cli::try_parse_from([
-            "reqtrace", "list", "--type", "req", "--search", "auth", "--gaps",
+            "reqtrace", "list", "--type", "req", "--search", "auth", "--gaps", "--json",
         ])
         .unwrap();
         match list_cli.command {
@@ -355,28 +444,44 @@ mod tests {
                 item_type,
                 search,
                 gaps,
+                json,
             } => {
                 assert_eq!(item_type.as_deref(), Some("req"));
                 assert_eq!(search.as_deref(), Some("auth"));
                 assert!(gaps);
+                assert!(json);
             }
             _ => panic!("Expected List"),
         }
 
-        let show_cli =
-            Cli::try_parse_from(["reqtrace", "show", "REQ-aaaaa", "--upstream", "--snippets"])
-                .unwrap();
+        let show_cli = Cli::try_parse_from([
+            "reqtrace",
+            "show",
+            "REQ-aaaaa",
+            "--upstream",
+            "--full",
+            "--max-lines",
+            "40",
+            "--json",
+        ])
+        .unwrap();
         match show_cli.command {
             Commands::Show {
                 ids,
                 upstream,
                 downstream,
-                snippets,
+                no_snippets,
+                full,
+                max_lines,
+                json,
             } => {
                 assert_eq!(ids, vec!["REQ-aaaaa"]);
                 assert!(upstream);
                 assert!(!downstream);
-                assert!(snippets);
+                assert!(!no_snippets);
+                assert!(full);
+                assert_eq!(max_lines, 40);
+                assert!(json);
             }
             _ => panic!("Expected Show"),
         }

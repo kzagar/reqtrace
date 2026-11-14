@@ -349,8 +349,8 @@
       "title": "run",
       "file_path": "src/cli.rs",
       "line_range": {
-        "start": 70,
-        "end": 303
+        "start": 82,
+        "end": 392
       },
       "derived_from": [
         "ARC-mozum"
@@ -461,8 +461,8 @@
       "title": "load_or_build_graph",
       "file_path": "src/cli.rs",
       "line_range": {
-        "start": 306,
-        "end": 315
+        "start": 395,
+        "end": 404
       },
       "derived_from": [
         "ARC-kitir"
@@ -1063,8 +1063,8 @@
       "title": "tests",
       "file_path": "src/cli.rs",
       "line_range": {
-        "start": 341,
-        "end": 384
+        "start": 430,
+        "end": 489
       },
       "derived_from": [
         "REQ-polaf"
