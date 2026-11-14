@@ -8,6 +8,7 @@ use clap::{Parser, Subcommand};
 // @IMP-rulad@ (FROM: ARC-siris)
 #[derive(Parser)]
 #[command(name = "reqtrace")]
+#[command(version)]
 #[command(about = "Systems and software engineering tooling for establishing traceability to requirements", long_about = None)]
 pub struct Cli {
     #[command(subcommand)]
