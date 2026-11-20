@@ -50,7 +50,77 @@ It achieves this by:
 
 - `src/` — Rust source code.
 
+## Installation
+
+Install the CLI (with all default features enabled) to `~/.cargo/bin/reqtrace`:
+
+```bash
+cargo install --path .
+```
+
+## Configuration (`.reqtrace/config.toml`)
+
+`reqtrace` looks for `.reqtrace/config.toml` in the current working directory:
+
+```toml
+[paths]
+scan = ["src", "docs", "tests"]
+ignore = ["target", ".git", "node_modules", "dist"]
+db = ".reqtrace/db.json"
+
+[[types]]
+prefix = "REQ-"
+item_type = "Requirement"
+requirement_type = "Functional"
+
+[[types]]
+prefix = "ARC-"
+item_type = "Architecture"
+
+[[types]]
+prefix = "IMP-"
+item_type = "Implementation"
+
+[[types]]
+prefix = "UT-"
+item_type = "Test"
+
+[[types]]
+prefix = "IT-"
+item_type = "Test"
+```
+
+- **Strict TOML schema**: `[paths]` requires `scan` and `db` (`ignore` is optional). Each `[[types]]` entry requires `prefix` and `item_type` (plus optional `requirement_type`). Unrecognized or differently named keys (such as `name` or `path`) fail deserialization.
+- **Fallback behavior**: If `.reqtrace/config.toml` is missing **or fails to parse**, `reqtrace` prints `Warning: .reqtrace/config.toml not found, using defaults` and falls back to `scan = ["src", "docs"]`, `ignore = ["target", ".git"]`, `db = ".reqtrace/db.json"`, and only `REQ-` (`Requirement`) and `ARC-` (`Architecture`) types (leaving `tests/` unscanned and `IMP-`/`UT-`/`IT-` tags typed as `Unknown`).
+- **Ignore patterns**: Single-component names (e.g., `"target"`) and directory globs (`"target/**"`, `"**/__pycache__/**"`) are expanded to match both relative paths and directory/file basenames.
+
+## Tag Syntax & Supported Languages
+
+Traceability tags use the form `@PREFIX-id@` (matching `@[a-zA-Z0-9][a-zA-Z0-9.-]*@`) and declare upstream links with `(FROM: @PARENT1@, @PARENT2@)` (trailing `@` on parent IDs is optional; multiple parents are comma-separated).
+
+- **Code files with symbol-scoped AST/regex parsers**:
+  - Rust (`.rs`): `//` or `/*` comments
+  - Python (`.py`): `#` comments
+  - TypeScript / JavaScript (`.ts`, `.tsx`, `.js`, `.jsx`, `.mts`, `.cts`, `.mjs`, `.cjs`): `//` or `/*` comments
+  - Tags are matched to the enclosing or nearest following function/class/test symbol to compute exact `line_range` and `title`.
+- **Markdown and other non-parsed files**:
+  - Place `<!-- @PREFIX-id@ -->` or `<!-- @PREFIX-id@ (FROM: @PARENT@) -->` immediately **above** the section heading (`### Title`). The scanner takes the next non-empty line (stripping leading `#`, `*`, `-`) as the item's `title` and extends `line_range` until the next `<!--`, `//`, or `/*` tag definition. (Lines starting directly with `@PREFIX-id@` or `#` containing `@PREFIX-id@` are also detected as definitions.)
+  - Visible metadata-only blocks (`- **ID**: REQ-...` without `<!-- @REQ-...@ -->`) are not yet supported in v0.1.6.
+- **Raw string guard**: Lines between `r#"` and `"#` are skipped while scanning so embedded test fixtures or templates are not indexed as tags.
+
+## CLI Commands
+
+- `reqtrace update` — Scans `paths.scan` and writes a key-sorted JSON graph to `paths.db` (creating parent directories if needed).
+- `reqtrace validate` — Checks the live scanned graph for `BrokenLink`, `DuplicateId`, `Orphan` (non-`Requirement` item with empty `derived_from`), and `UntestedRequirement` (no direct or transitive `Test` child). Exits `1` if any issue is found.
+- `reqtrace list [--type <TYPE>] [--search <TEXT>] [--gaps] [--json]` — Reads `.reqtrace/db.json` if present (otherwise scans on the fly). `--type` accepts `req`/`requirement`, `arc`/`arch`/`architecture`, `imp`/`impl`/`implementation`, and `ut`/`it`/`test`. `--gaps` lists `Requirement` items missing a **direct** `Architecture` or `Test` child.
+- `reqtrace show <ID>... [--upstream] [--downstream] [--no-snippets] [--full] [--max-lines <N>] [--json]` — Reads `.reqtrace/db.json` if present. By default shows immediate parents and children; pass `--upstream` and/or `--downstream` for transitive traversal. Displays full sections for `Requirement`/`Architecture` items and caps `Implementation`/`Test` snippets at `--max-lines` (`25` by default) unless `--full` is passed.
+- `reqtrace gen-id [-p|--prefix <PREFIX>] [-c|-n|--count <N>]` — Scans `paths.scan` for existing IDs and outputs collision-free 16-bit proquints. Deterministic sequence seed is derived from the project name (`Cargo.toml` `package.name` → `pyproject.toml` `project.name` → current directory name).
+- `reqtrace export -o|--output <FILE>` — Generates a standalone HTML graph visualization.
+- `reqtrace server` — Starts the file watcher, web UI, and HTTP/SSE MCP server (requires `server` feature).
+
 ## Cargo Features & Binary Size
+
+Default features enabled in `Cargo.toml`: `cli`, `server`, `mcp` (implies `server`), `rust`, `python`, `typescript`.
 
 `reqtrace` supports conditional compilation using Cargo feature flags to reduce dependencies and binary size. The following measurements are for the release Windows build (`x86_64-pc-windows-msvc` built with `cargo build --release`):
 
@@ -59,7 +129,7 @@ It achieves this by:
 | **None** (Stub) | None | 1.50 MB | Pure stub binary. Excludes CLI, Server, MCP, and all language support. |
 | **CLI Only (Rust + Python)** | `cli`, `rust`, `python` | 5.76 MB | Standard CLI commands (`validate`, `update`, `export`) with Rust & Python AST parsing. |
 | **CLI + Server (Rust + Python)** | `cli`, `rust`, `python`, `server` | 5.73 MB | Adds the background server and file watcher (`server` subcommand). |
-| **All Features** (Default) | `cli`, `rust`, `python`, `server`, `mcp` | 5.79 MB | Full capabilities including Model Context Protocol (MCP) server endpoints. |
+| **All Features** (Measured Baseline) | `cli`, `rust`, `python`, `server`, `mcp` | 5.79 MB | Capabilities including Model Context Protocol (MCP) server endpoints (prior to `typescript` parser). |
 
 ### Generating IDs
 
